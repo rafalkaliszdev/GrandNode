@@ -157,6 +157,11 @@ namespace Grand.Services.Shipping
         /// <returns>Shipping rate computation methods</returns>
         public virtual IList<IShippingRateComputationMethod> LoadActiveShippingRateComputationMethods(string storeId = "", IList<ShoppingCartItem> cart = null)
         {
+
+            //boulder
+
+
+
             return LoadAllShippingRateComputationMethods(storeId)
                    .Where(provider => _shippingSettings.ActiveShippingRateComputationMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.OrdinalIgnoreCase))
                    .Where(provider => !provider.HideShipmentMethods(cart))
