@@ -1,0 +1,13 @@
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Web.Framework.deps.json
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Web.Framework.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Web.Framework.pdb
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Core.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Data.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Services.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Core.pdb
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Services.pdb
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\bin\x86\Debug\netcoreapp1.1\Grand.Data.pdb
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\obj\x86\Debug\netcoreapp1.1\Grand.Web.Framework.csprojResolveAssemblyReference.cache
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\obj\x86\Debug\netcoreapp1.1\Grand.Web.Framework.AssemblyInfo.cs
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\obj\x86\Debug\netcoreapp1.1\Grand.Web.Framework.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Presentation\Grand.Web.Framework\obj\x86\Debug\netcoreapp1.1\Grand.Web.Framework.pdb

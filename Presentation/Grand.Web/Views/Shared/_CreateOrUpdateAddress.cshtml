@@ -1,0 +1,128 @@
+﻿@model AddressModel
+@using Grand.Web.Models.Common;
+@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#@Html.FieldIdFor(model => model.CountryId)").change(function () {
+                var selectedItem = $(this).val();
+                var ddlStates = $("#@Html.FieldIdFor(model => model.StateProvinceId)");
+                var statesProgress = $("#states-loading-progress");
+                statesProgress.show();
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    url: "@(Url.RouteUrl("GetStatesByCountryId"))",
+                    data: { "countryId": selectedItem, "addSelectStateItem": "true" },
+                    success: function (data) {
+                        ddlStates.html('');
+                        $.each(data, function (id, option) {
+                            ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        });
+                        statesProgress.hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Failed to retrieve states.');
+                        statesProgress.hide();
+                    }
+                });
+            });
+        });
+    </script>
+}
+@Html.HiddenFor(model => model.Id)
+<div class="edit-address row">
+    <div class="form-group col-sm-12 col-md-6">
+        @Html.LabelFor(model => model.FirstName, new { @class = "col-form-label" }, ":")
+            @Html.GrandEditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+    <div class="form-group col-sm-12 col-md-6">
+        @Html.LabelFor(model => model.LastName, new { @class = "col-form-label" }, ":")
+            @Html.GrandEditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+    <div class="form-group col-sm-12">
+        @Html.LabelFor(model => model.Email, new { @class = "col-form-label" }, ":")
+            @Html.GrandEditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    @if (Model.CompanyEnabled)
+    {
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(model => model.Company, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.Company)
+                @Html.ValidationMessageFor(model => model.Company)
+        </div>
+    }
+    @if (Model.CountryEnabled)
+    {
+        <div class="form-group col-sm-12 col-md-6">
+            @Html.LabelFor(model => model.CountryId, new { @class = "col-form-label" }, ":")
+                @Html.DropDownListFor(model => model.CountryId, Model.AvailableCountries, new { @class = "custom-select form-control" })
+                @Html.ValidationMessageFor(model => model.CountryId)
+        </div>
+    }
+
+    @if (Model.CountryEnabled && Model.StateProvinceEnabled)
+    {
+        <div class="form-group col-sm-12 col-md-6">
+            @Html.LabelFor(model => model.StateProvinceId, new { @class = "col-form-label" }, ":")
+                @Html.DropDownListFor(model => model.StateProvinceId, Model.AvailableStates, new { @class = "custom-select form-control" })
+                <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+                @Html.ValidationMessageFor(model => model.StateProvinceId)
+        </div>
+    }
+    @if (Model.CityEnabled)
+    {
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(model => model.City, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.City)
+                @Html.ValidationMessageFor(model => model.City)
+        </div>
+    }
+    @if (Model.StreetAddressEnabled)
+    {
+        <div class="form-group col-sm-12 col-md-6">
+            @Html.LabelFor(model => model.Address1, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.Address1)
+                @Html.ValidationMessageFor(model => model.Address1)
+        </div>
+    }
+    @if (Model.StreetAddress2Enabled)
+    {
+        <div class="form-group col-sm-12 col-md-6">
+            @Html.LabelFor(model => model.Address2, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.Address2)
+                @Html.ValidationMessageFor(model => model.Address2)
+            </div>
+    }
+    @if (Model.ZipPostalCodeEnabled)
+    {
+        <div class="form-group col-sm-12">
+            @Html.LabelFor(model => model.ZipPostalCode, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.ZipPostalCode)
+                @Html.ValidationMessageFor(model => model.ZipPostalCode)
+        </div>
+    }
+    @if (Model.PhoneEnabled)
+    {
+        <div class="form-group col-sm-12 col-md-6">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.PhoneNumber)
+                @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+    }
+    @if (Model.FaxEnabled)
+    {
+        <div class="form-group col-sm-12 col-md-6">
+            @Html.LabelFor(model => model.FaxNumber, new { @class = "col-form-label" }, ":")
+                @Html.GrandEditorFor(model => model.FaxNumber)
+                @Html.ValidationMessageFor(model => model.FaxNumber)
+        </div>
+    }
+    @if (Model.CustomAddressAttributes.Count > 0)
+    {
+        @Html.Partial("_AddressAttributes", Model.CustomAddressAttributes)
+    }
+</div>

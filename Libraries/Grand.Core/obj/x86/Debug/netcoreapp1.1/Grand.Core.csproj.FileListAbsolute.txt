@@ -1,0 +1,7 @@
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\bin\x86\Debug\netcoreapp1.1\Grand.Core.deps.json
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\bin\x86\Debug\netcoreapp1.1\Grand.Core.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\bin\x86\Debug\netcoreapp1.1\Grand.Core.pdb
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\obj\x86\Debug\netcoreapp1.1\Grand.Core.AssemblyInfo.cs
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\obj\x86\Debug\netcoreapp1.1\Grand.Core.dll
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\obj\x86\Debug\netcoreapp1.1\Grand.Core.pdb
+C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Core\obj\x86\Debug\netcoreapp1.1\Grand.Core.csprojResolveAssemblyReference.cache
