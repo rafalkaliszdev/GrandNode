@@ -169,19 +169,19 @@ namespace Grand.Web.Services
             int pictureSize, bool showDefaultPicture, string productName)
         {
             var pictureCacheKey = string.Format(ModelCacheEventConsumer.CART_PICTURE_MODEL_KEY, sci.Id, sci.ProductId, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured(), _storeContext.CurrentStore.Id);
-            var model = _cacheManager.Get(pictureCacheKey,
+            //var model = _cacheManager.Get(pictureCacheKey,
                 //as we cache per user (shopping cart item identifier)
                 //let's cache just for 3 minutes
-                3, () =>
-                {
-                    var sciPicture = _productService.GetProductById(sci.ProductId).GetProductPicture(sci.AttributesXml, _pictureService, _productAttributeParser);
-                    return new PictureModel
+                //3, () =>
+                //{
+                    //var sciPicture = _productService.GetProductById(sci.ProductId).GetProductPicture(sci.AttributesXml, _pictureService, _productAttributeParser);
+                    var model = /*return */new PictureModel
                     {
-                        ImageUrl = _pictureService.GetPictureUrl(sciPicture, _mediaSettings.ApplyWatermarkForProduct, pictureSize, showDefaultPicture),
+                        ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg", // _pictureService.GetPictureUrl(sciPicture, _mediaSettings.ApplyWatermarkForProduct, pictureSize, showDefaultPicture),
                         Title = string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat"), productName),
                         AlternateText = string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat"), productName),
                     };
-                });
+                //});
 
             return model;
         }
@@ -841,7 +841,7 @@ namespace Grand.Web.Services
             {
                 var cart = _workContext.CurrentCustomer.ShoppingCartItems
                     .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-                    //.LimitPerStore(_storeContext.CurrentStore.Id)
+                    .LimitPerStore(_storeContext.CurrentStore.Id)
                     .ToList();
                 model.TotalProducts = cart.GetTotalProducts();
                 if (cart.Any())
@@ -867,19 +867,20 @@ namespace Grand.Web.Services
                     //1. "terms of service" are enabled
                     //2. min order sub-total is OK
                     //3. we have at least one checkout attribute
-                    //var checkoutAttributesExistCacheKey = string.Format(ModelCacheEventConsumer.CHECKOUTATTRIBUTES_EXIST_KEY,
-                    //    _storeContext.CurrentStore.Id, requiresShipping);
+                    var checkoutAttributesExistCacheKey = string.Format(ModelCacheEventConsumer.CHECKOUTATTRIBUTES_EXIST_KEY,
+                        _storeContext.CurrentStore.Id, requiresShipping);
                     //var checkoutAttributesExist = _cacheManager.Get(checkoutAttributesExistCacheKey,
                     //    () =>
                     //    {
-                    //        var checkoutAttributes = _checkoutAttributeService.GetAllCheckoutAttributes(_storeContext.CurrentStore.Id, !requiresShipping);
-                    //        return checkoutAttributes.Any();
-                    //    });
+                            var checkoutAttributes = _checkoutAttributeService.GetAllCheckoutAttributes(_storeContext.CurrentStore.Id, !requiresShipping);
+                    //return checkoutAttributes.Any();
+                    var checkoutAttributesExist = checkoutAttributes.Any();
+                        //});
 
-                    //bool minOrderSubtotalAmountOk = _orderProcessingService.ValidateMinOrderSubtotalAmount(cart);
-                    model.DisplayCheckoutButton = true;// !_orderSettings.TermsOfServiceOnShoppingCartPage &&
-                        //minOrderSubtotalAmountOk &&
-                        //!checkoutAttributesExist;
+                    bool minOrderSubtotalAmountOk = _orderProcessingService.ValidateMinOrderSubtotalAmount(cart);
+                    model.DisplayCheckoutButton = !_orderSettings.TermsOfServiceOnShoppingCartPage &&
+                        minOrderSubtotalAmountOk &&
+                        !checkoutAttributesExist;
 
                     //products. sort descending (recently added products)
                     foreach (var sci in cart
@@ -914,8 +915,8 @@ namespace Grand.Web.Services
                         //picture
                         if (_shoppingCartSettings.ShowProductImagesInMiniShoppingCart)
                         {
-                            //cartItemModel.Picture = PrepareCartItemPicture(sci,
-                            //    _mediaSettings.MiniCartThumbPictureSize, true, cartItemModel.ProductName);
+                            cartItemModel.Picture = PrepareCartItemPicture(sci,
+                                _mediaSettings.MiniCartThumbPictureSize, true, cartItemModel.ProductName);
                         }
 
                         model.Items.Add(cartItemModel);

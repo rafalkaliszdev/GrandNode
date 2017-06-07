@@ -1,36 +1,3 @@
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.deps.json
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.pdb
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.pdb
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.pdb
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.csprojResolveAssemblyReference.cache
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.AssemblyInfo.cs
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.pdb
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.deps.json
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.dll
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.pdb
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.dll
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.dll
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.pdb
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.pdb
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.csprojResolveAssemblyReference.cache
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.AssemblyInfo.cs
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.dll
-C:\DONT REMOVE\gn_migration\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.pdb
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.deps.json
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.dll
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.pdb
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.dll
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.dll
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.pdb
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.pdb
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.csprojResolveAssemblyReference.cache
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.AssemblyInfo.cs
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.dll
-C:\DONT REMOVE\gn_migration_github\GrandNode-test-.net-core\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.pdb
 C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.deps.json
 C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.dll
 C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.pdb

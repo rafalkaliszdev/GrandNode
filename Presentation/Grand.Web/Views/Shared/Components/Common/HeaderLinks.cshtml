@@ -12,21 +12,21 @@
     <li class="nav-item">
         <a class="nav-link ico-logout" href="@Url.RouteUrl("Logout")">
             <span class=""><span class="fa fa-sign-out"></span></span>
-            <span class="hidden-sm-down">@*T*@("Account.Logout")</span>
+            <span class="hidden-sm-down">@T("Account.Logout")</span>
         </a>
     </li>
 }
 else
 {
-    <li class="nav-item"><a class="nav-link ico-register" href="@Url.RouteUrl("Register")"><span class="fa fa-user-plus"></span><span class="hidden-sm-down">@*T*@("Account.Register")</span></a></li>
-    <li class="nav-item"><a class="nav-link ico-login" href="@Url.RouteUrl("Login")"><span class="fa fa-sign-in"></span><span class="hidden-sm-down">@*T*@("Account.Login")</span></a></li>
+    <li class="nav-item"><a class="nav-link ico-register" href="@Url.RouteUrl("Register")"><span class="fa fa-user-plus"></span><span class="hidden-sm-down">@T("Account.Register")</span></a></li>
+    <li class="nav-item"><a class="nav-link ico-login" href="@Url.RouteUrl("Login")"><span class="fa fa-sign-in"></span><span class="hidden-sm-down">@T("Account.Login")</span></a></li>
 }
 @if (Model.AllowPrivateMessages)
 {
     <li class="nav-item">
         <a class="nav-link ico-inbox" href="@Url.RouteUrl("PrivateMessages", new { tab = "" })">
             <span class="fa fa-envelope-o"></span>
-            <span class="inbox-label hidden-sm-down">@*T*@("PrivateMessages.Inbox")</span>
+            <span class="inbox-label hidden-sm-down">@T("PrivateMessages.Inbox")</span>
             <span class="inbox-unread hidden-md-down">@Model.UnreadPrivateMessages</span>
         </a>
     </li>
@@ -39,9 +39,9 @@ else
                 <span class="fa fa-heart-o"></span>
             </span>
             <span class="hidden-sm-down">
-                @*T*@("Wishlist")
+                @T("Wishlist")
             </span>
-            <span class="wishlist-qty hidden-sm-down">@*T*@("Wishlist.HeaderQuantity", Model.WishlistItems)</span>
+            <span class="wishlist-qty hidden-sm-down">@T("Wishlist.HeaderQuantity", Model.WishlistItems)</span>
         </a>
     </li>
 }
@@ -54,9 +54,11 @@ else
                     <span class="fa fa-shopping-cart"></span>
                 </span>
                 <span class="hidden-sm-down">
-                    @*T*@("ShoppingCart")
+                    @*@T("ShoppingCart")*@
+                    @T("ShoppingCart")
                 </span>
-                <span class="cart-qty">@*T*@("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
+                <span class="cart-qty">@*@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)*@</span>
+                <span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 @await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })

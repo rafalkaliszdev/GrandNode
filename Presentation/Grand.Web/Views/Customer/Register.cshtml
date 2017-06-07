@@ -42,7 +42,7 @@
 {
     @Html.AntiForgeryToken()
     <div class="page registration-page">
-        <h2 class="generalTitle text-center mt-2 mb-3">@*T*@("Account.Register")</h2>
+        <h2 class="generalTitle text-center mt-2 mb-3">@T("Account.Register")</h2>
         @{
             var validationSummary = Html.ValidationSummary(true);
         }
@@ -56,18 +56,18 @@
 
 
         <div class="card mb-3">
-            <h3 class="h4 card-header">@*T*@("Account.YourPersonalDetails")</h3>
+            <h3 class="h4 card-header">@T("Account.YourPersonalDetails")</h3>
             <div class="card-block">
 
                 @if (Model.GenderEnabled)
                 {
                     <div class="col-lg-3 col-sm-12">
                         <div class="d-flex row">
-                            <span>@*T*@("Account.Fields.Gender"):</span>
+                            <span>@T("Account.Fields.Gender"):</span>
                         </div>
                     </div>
                         <fieldset class="col-lg-9 col-sm-12 gender">
-                            <legend class="sr-only">@*T*@("plugins.feed.froogle.products.gender")</legend>
+                            <legend class="sr-only">@T("plugins.feed.froogle.products.gender")</legend>
                             <div class="d-flex row">
                                 <label class="male custom-control custom-radio">
                                     <input id="gender-male" name="Gender" type="radio" value="M" class="custom-control-input">
@@ -83,13 +83,13 @@
                         </fieldset>
                 }
                 <fieldset class="col-12 px-0 form-group">
-                    <legend class="sr-only">@*T*@("account.fields.firstname")</legend>
+                    <legend class="sr-only">@T("account.fields.firstname")</legend>
                     @Html.LabelFor(model => model.FirstName, new { @class = "col-form-label" }, ":")
                     @Html.GrandEditorFor(model => model.FirstName)
                     @Html.ValidationMessageFor(model => model.FirstName)
                 </fieldset>
                 <fieldset class="col-12 px-0 form-group">
-                    <legend class="sr-only">@*T*@("account.fields.lastname")</legend>
+                    <legend class="sr-only">@T("account.fields.lastname")</legend>
                     @Html.LabelFor(model => model.LastName, new { @class = "col-form-label" }, ":")
                     @Html.GrandEditorFor(model => model.LastName)
                     @Html.ValidationMessageFor(model => model.LastName)
@@ -98,9 +98,9 @@
                 @if (Model.DateOfBirthEnabled)
                 {
                     <fieldset class="form-group date-of-birth col-sm-12">
-                        <legend class="sr-only">@*T*@("Account.Fields.DateOfBirth")</legend>
+                        <legend class="sr-only">@T("Account.Fields.DateOfBirth")</legend>
                         <div class="row">
-                            <span class="col-form-label col-12 py-0 px-0">@*T*@("Account.Fields.DateOfBirth"):</span>
+                            <span class="col-form-label col-12 py-0 px-0">@T("Account.Fields.DateOfBirth"):</span>
                             @Html.DatePickerDropDowns(Html.FieldNameFor(x => x.DateOfBirthDay),
                                             Html.FieldNameFor(x => x.DateOfBirthMonth),
                                             Html.FieldNameFor(x => x.DateOfBirthYear),
@@ -118,7 +118,7 @@
                     </fieldset>
                 }
                 <fieldset class="form-group col-md-12 mail">
-                    <legend class="sr-only">@*T*@("account.fields.email")</legend>
+                    <legend class="sr-only">@T("account.fields.email")</legend>
                     <div class="row">
                         @Html.LabelFor(model => model.Email, new { @class = "col-form-label" }, ":")
                         @Html.GrandEditorFor(model => model.Email)
@@ -146,7 +146,7 @@
         @if (Model.CompanyEnabled)
                 {
             <div class="card mb-3">
-                <h3 class="h5 card-header">@*T*@("Account.CompanyDetails")</h3>
+                <h3 class="h5 card-header">@T("Account.CompanyDetails")</h3>
                 <div class="card-block">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Company, new { @class = "col-form-label" }, ":")
@@ -164,7 +164,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.VatNumber, new { }, ":")
                         @Html.GrandEditorFor(model => model.VatNumber)
-                        <span class="vat-note"><em>@*T*@("Account.Fields.VatNumber.Note")</em></span>
+                        <span class="vat-note"><em>@T("Account.Fields.VatNumber.Note")</em></span>
                     </div>
                 </div>
             </div>
@@ -177,14 +177,14 @@
         {
             <div class="card mb-3">
                 <h3 class="h5 card-header">
-                    @*T*@("Account.YourAddress")
+                    @T("Account.YourAddress")
                 </h3>
                 <div class="card-block">
                     <div class="form-fields d-flex row">
                         @if (Model.StreetAddressEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.streetaddress")</legend>
+                                <legend class="sr-only">@T("account.fields.streetaddress")</legend>
                                 @Html.LabelFor(model => model.StreetAddress, new { @class = "col-form-label" }, ":")
                                 @Html.GrandEditorFor(model => model.StreetAddress)
                                 @Html.ValidationMessageFor(model => model.StreetAddress)
@@ -193,7 +193,7 @@
                         @if (Model.StreetAddress2Enabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.streetaddress2")</legend>
+                                <legend class="sr-only">@T("account.fields.streetaddress2")</legend>
                                 @Html.LabelFor(model => model.StreetAddress2, new { @class = "col-form-label" }, ":")
                                 @Html.GrandEditorFor(model => model.StreetAddress2)
                                 @Html.ValidationMessageFor(model => model.StreetAddress2)
@@ -202,7 +202,7 @@
                         @if (Model.ZipPostalCodeEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.zippostalcode")</legend>
+                                <legend class="sr-only">@T("account.fields.zippostalcode")</legend>
                                 @Html.LabelFor(model => model.ZipPostalCode, new { @class = "col-form-label" }, ":")
                                 @Html.GrandEditorFor(model => model.ZipPostalCode)
                                 @Html.ValidationMessageFor(model => model.ZipPostalCode)
@@ -211,7 +211,7 @@
                         @if (Model.CityEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.city")</legend>
+                                <legend class="sr-only">@T("account.fields.city")</legend>
                                 @Html.LabelFor(model => model.City, new { @class = "col-form-label" }, ":")
                                 @Html.GrandEditorFor(model => model.City)
                                 @Html.ValidationMessageFor(model => model.City)
@@ -220,7 +220,7 @@
                         @if (Model.CountryEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.country")</legend>
+                                <legend class="sr-only">@T("account.fields.country")</legend>
                                 @Html.LabelFor(model => model.CountryId, new { @class = "col-form-label" }, ":")
                                 @Html.DropDownList("CountryId", Model.AvailableCountries, new { @class = "custom-select form-control" })
                                 @Html.ValidationMessageFor(model => model.CountryId)
@@ -229,11 +229,11 @@
                         @if (Model.CountryEnabled && Model.StateProvinceEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.stateprovince")</legend>
+                                <legend class="sr-only">@T("account.fields.stateprovince")</legend>
                                 @Html.LabelFor(model => model.StateProvinceId, new { @class = "col-form-label" }, ":")
                                 @Html.DropDownList("StateProvinceId", Model.AvailableStates, new { @class = "custom-select form-control" })
                                 @Html.ValidationMessageFor(model => model.StateProvinceId)
-                                <span id="states-loading-progress" style="display: none;" class="please-wait">@*T*@("Common.Wait...")</span>
+                                <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
                             </fieldset>
                         }
                     </div>
@@ -244,13 +244,13 @@
         @if (Model.PhoneEnabled || Model.FaxEnabled)
         {
             <div class="card mb-3">
-                <h3 class="h5 card-header">@*T*@("Account.YourContactInformation")</h3>
+                <h3 class="h5 card-header">@T("Account.YourContactInformation")</h3>
                 <div class="card-block">
                     <div class="d-flex row">
                         @if (Model.PhoneEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.phone")</legend>
+                                <legend class="sr-only">@T("account.fields.phone")</legend>
                                 @Html.LabelFor(model => model.Phone, new { @class = "col-form-label" }, ":")
                                 @Html.GrandEditorFor(model => model.Phone)
                                 @Html.ValidationMessageFor(model => model.Phone)
@@ -259,7 +259,7 @@
                         @if (Model.FaxEnabled)
                     {
                             <fieldset class="form-group col-12 col-sm-6">
-                                <legend class="sr-only">@*T*@("account.fields.fax")</legend>
+                                <legend class="sr-only">@T("account.fields.fax")</legend>
                                 @Html.LabelFor(model => model.Fax, new { @class = "col-form-label" }, ":")
                                 @Html.GrandEditorFor(model => model.Fax)
                                 @Html.ValidationMessageFor(model => model.Fax)
@@ -273,17 +273,17 @@
         @if (Model.NewsletterEnabled || Model.CustomerAttributes.Count > 0)
         {
             <div class="card mb-3">
-                <h3 class="h5 card-header">@*T*@("Account.Options")</h3>
+                <h3 class="h5 card-header">@T("Account.Options")</h3>
                 <div class="card-block">
                     @if (Model.NewsletterEnabled)
                     {
                         <div class="form-group">
-                            <span class="col-form-label">@*T*@("account.fields.newsletter")</span>
+                            <span class="col-form-label">@T("account.fields.newsletter")</span>
                             <label for="Newsletter" class="ml-1 custom-control custom-checkbox">
                                 <input checked="checked" type="checkbox" class="custom-control-input" data-val="true" data-val-required="'Newsletter' must not be empty." id="Newsletter" name="Newsletter" value="true">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">&nbsp;</span>
-                                <span class="sr-only">@*T*@("account.fields.newsletter")</span>
+                                <span class="sr-only">@T("account.fields.newsletter")</span>
                             </label>
                             @Html.ValidationMessageFor(model => model.Newsletter)
                         </div>
@@ -298,7 +298,7 @@
         @if (Model.AllowCustomersToSetTimeZone)
         {
             <div class="card mb-3">
-                <h3 class="h5 card-header">@*T*@("Account.Preferences")</h3>
+                <h3 class="h5 card-header">@T("Account.Preferences")</h3>
                 <div class="card-block">
                     @if (Model.AllowCustomersToSetTimeZone)
                     {
@@ -312,7 +312,7 @@
             </div>
         }
         <div class="card mb-3">
-            <h3 class="h5 card-header">@*T*@("Account.YourPassword")</h3>
+            <h3 class="h5 card-header">@T("Account.YourPassword")</h3>
             <div class="card-block">
                 <div class="form-group col-12">
                     <div class="row">
@@ -364,10 +364,10 @@
             <label class="custom-control custom-checkbox">
                 <input id="accept-privacy-policy" name="accept-privacy-policy" type="checkbox" class="custom-control-input">
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">@*T*@("Account.Fields.AcceptPrivacyPolicy")</span>
-                <span class="read" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "privacyinfo" })', 450, 500, true)">@*T*@("Account.Fields.AcceptPrivacyPolicy.Read")</span>
+                <span class="custom-control-description">@T("Account.Fields.AcceptPrivacyPolicy")</span>
+                <span class="read" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "privacyinfo" })', 450, 500, true)">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
             </label>
         }
     </div>
-    <input type="submit" id="register-button" class="btn btn-secondary register-next-step-button mt-3 mb-3" value="@*T*@(" Account.Register.Button")" name="register-button" />
+    <input type="submit" id="register-button" class="btn btn-secondary register-next-step-button mt-3 mb-3" value="@T(" Account.Register.Button")" name="register-button" />
             }

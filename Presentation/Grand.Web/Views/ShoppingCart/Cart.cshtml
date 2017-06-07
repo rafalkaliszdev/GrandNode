@@ -14,7 +14,7 @@
     @*Html.Action("CheckoutProgress", "Checkout", new {step = CheckoutProgressStep.Cart})*@
 }
 <div class="page shopping-cart-page">
-    <h2 class="generalTitle text-sm-center mt-3">@*T*@("ShoppingCart")</h2>
+    <h2 class="generalTitle text-sm-center mt-3">@T("ShoppingCart")</h2>
     <div class="page-body">
         @Html.Partial("OrderSummary", Model)
     </div>

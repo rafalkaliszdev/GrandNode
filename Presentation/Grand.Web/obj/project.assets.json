@@ -4331,8 +4331,8 @@
       "type": "package",
       "path": "fluentvalidation/6.4.1",
       "files": [
-        "FluentValidation.6.4.1.nupkg.sha512",
-        "FluentValidation.nuspec",
+        "fluentvalidation.6.4.1.nupkg.sha512",
+        "fluentvalidation.nuspec",
         "lib/Net45/FluentValidation.XML",
         "lib/Net45/FluentValidation.dll",
         "lib/Net45/FluentValidation.pdb",
@@ -5787,12 +5787,12 @@
       "path": "mongodb.bson/2.4.3",
       "files": [
         "License.rtf",
-        "MongoDB.Bson.2.4.3.nupkg.sha512",
-        "MongoDB.Bson.nuspec",
         "lib/net45/MongoDB.Bson.XML",
         "lib/net45/MongoDB.Bson.dll",
         "lib/netstandard1.5/MongoDB.Bson.dll",
-        "lib/netstandard1.5/MongoDB.Bson.xml"
+        "lib/netstandard1.5/MongoDB.Bson.xml",
+        "mongodb.bson.2.4.3.nupkg.sha512",
+        "mongodb.bson.nuspec"
       ]
     },
     "MongoDB.Driver/2.4.3": {
@@ -5801,12 +5801,12 @@
       "path": "mongodb.driver/2.4.3",
       "files": [
         "License.rtf",
-        "MongoDB.Driver.2.4.3.nupkg.sha512",
-        "MongoDB.Driver.nuspec",
         "lib/net45/MongoDB.Driver.XML",
         "lib/net45/MongoDB.Driver.dll",
         "lib/netstandard1.5/MongoDB.Driver.dll",
-        "lib/netstandard1.5/MongoDB.Driver.xml"
+        "lib/netstandard1.5/MongoDB.Driver.xml",
+        "mongodb.driver.2.4.3.nupkg.sha512",
+        "mongodb.driver.nuspec"
       ]
     },
     "MongoDB.Driver.Core/2.4.3": {
@@ -5815,12 +5815,12 @@
       "path": "mongodb.driver.core/2.4.3",
       "files": [
         "License.rtf",
-        "MongoDB.Driver.Core.2.4.3.nupkg.sha512",
-        "MongoDB.Driver.Core.nuspec",
         "lib/net45/MongoDB.Driver.Core.XML",
         "lib/net45/MongoDB.Driver.Core.dll",
         "lib/netstandard1.5/MongoDB.Driver.Core.dll",
-        "lib/netstandard1.5/MongoDB.Driver.Core.xml"
+        "lib/netstandard1.5/MongoDB.Driver.Core.xml",
+        "mongodb.driver.core.2.4.3.nupkg.sha512",
+        "mongodb.driver.core.nuspec"
       ]
     },
     "NETStandard.Library/1.6.1": {
@@ -5839,8 +5839,6 @@
       "type": "package",
       "path": "newtonsoft.json/9.0.1",
       "files": [
-        "Newtonsoft.Json.9.0.1.nupkg.sha512",
-        "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -5855,6 +5853,8 @@
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.9.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
         "tools/install.ps1"
       ]
     },
@@ -9395,8 +9395,6 @@
       "type": "package",
       "path": "system.runtime.interopservices.runtimeinformation/4.3.0",
       "files": [
-        "System.Runtime.InteropServices.RuntimeInformation.4.3.0.nupkg.sha512",
-        "System.Runtime.InteropServices.RuntimeInformation.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -9420,7 +9418,9 @@
         "runtimes/unix/lib/netstandard1.1/System.Runtime.InteropServices.RuntimeInformation.dll",
         "runtimes/win/lib/net45/System.Runtime.InteropServices.RuntimeInformation.dll",
         "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll",
-        "runtimes/win/lib/netstandard1.1/System.Runtime.InteropServices.RuntimeInformation.dll"
+        "runtimes/win/lib/netstandard1.1/System.Runtime.InteropServices.RuntimeInformation.dll",
+        "system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
+        "system.runtime.interopservices.runtimeinformation.nuspec"
       ]
     },
     "System.Runtime.Loader/4.3.0": {

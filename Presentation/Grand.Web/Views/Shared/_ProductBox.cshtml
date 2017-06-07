@@ -102,22 +102,22 @@
                 @*<input type="button" value="@T("Products.Details")" class="button-1 product-box-detail-button" onclick="setLocation('@Url.RouteUrl("Product", new { SeName = Model.SeName })')" />*@
                 @if (!Model.ProductPrice.DisableBuyButton)
                 {
-                    //var addToCartText = T("ShoppingCart.AddToCart").Text;
-                    //if (Model.ProductPrice.IsRental)
-                    //{
-                    //    addToCartText = T("ShoppingCart.Rent").Text;
-                    //}
-                    //if (Model.ProductPrice.AvailableForPreOrder)
-                    //{
-                    //    addToCartText = T("ShoppingCart.PreOrder").Text;
-                    //}
+                    var addToCartText = T("ShoppingCart.AddToCart").Text;
+                    if (Model.ProductPrice.IsRental)
+                    {
+                        addToCartText = T("ShoppingCart.Rent").Text;
+                    }
+                    if (Model.ProductPrice.AvailableForPreOrder)
+                    {
+                        addToCartText = T("ShoppingCart.PreOrder").Text;
+                    }
 
 
-                    
 
-                  
+
+
                         <button type="button" class="btn btn-primary" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">
-                            <span class="fa fa fa-shopping-cart"></span> <span class="hidden-lg-down">@**@(addToCartText)</span>
+                            <span class="fa fa fa-shopping-cart"></span> <span class="hidden-lg-down">@(addToCartText)</span>
                             <span class="sr-only">AddToCart</span>
                         </button>
                         }

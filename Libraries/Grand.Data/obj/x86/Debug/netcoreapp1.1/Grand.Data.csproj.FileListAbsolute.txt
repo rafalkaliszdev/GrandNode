@@ -1,9 +1,0 @@
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\bin\x86\Debug\netcoreapp1.1\Grand.Data.deps.json
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\bin\x86\Debug\netcoreapp1.1\Grand.Data.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\bin\x86\Debug\netcoreapp1.1\Grand.Data.pdb
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\bin\x86\Debug\netcoreapp1.1\Grand.Core.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\bin\x86\Debug\netcoreapp1.1\Grand.Core.pdb
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\obj\x86\Debug\netcoreapp1.1\Grand.Data.csprojResolveAssemblyReference.cache
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\obj\x86\Debug\netcoreapp1.1\Grand.Data.AssemblyInfo.cs
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\obj\x86\Debug\netcoreapp1.1\Grand.Data.dll
-C:\Users\Programista\Documents\Visual Studio 2017\Projects\GrandNode\Libraries\Grand.Data\obj\x86\Debug\netcoreapp1.1\Grand.Data.pdb

@@ -6,6 +6,7 @@
 
 @using Grand.Web.Framework.UI;
 @using Grand.Web.Framework;
+@using Grand.Web.Extensions;
 @using Microsoft.AspNetCore.Html;
 @using Microsoft.AspNetCore.DiagnosticsViewPage.Views;
 @using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -16,3 +17,4 @@
 @using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 @using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+@inherits Grand.Web.Framework.Localization.RazorPage<TModel>
