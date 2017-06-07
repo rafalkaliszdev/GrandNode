@@ -11070,15 +11070,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rafał\\.nuget\\packages\\": {}
+    "C:\\Users\\Programmer\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web\\Grand.Web.csproj",
+      "projectUniqueName": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web\\Grand.Web.csproj",
       "projectName": "Grand.Web",
-      "projectPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web\\Grand.Web.csproj",
-      "outputPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web\\obj\\",
+      "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web\\Grand.Web.csproj",
+      "outputPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -11086,17 +11086,17 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj": {
-              "projectPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj"
+            "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj"
             },
-            "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web\\Administration\\Grand.Admin\\Grand.Admin.csproj": {
-              "projectPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web\\Administration\\Grand.Admin\\Grand.Admin.csproj"
+            "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web\\Administration\\Grand.Admin\\Grand.Admin.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web\\Administration\\Grand.Admin\\Grand.Admin.csproj"
             },
-            "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj": {
-              "projectPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj"
+            "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj"
             },
-            "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web.Framework\\Grand.Web.Framework.csproj": {
-              "projectPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Presentation\\Grand.Web.Framework\\Grand.Web.Framework.csproj"
+            "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web.Framework\\Grand.Web.Framework.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Presentation\\Grand.Web.Framework\\Grand.Web.Framework.csproj"
             }
           }
         }
