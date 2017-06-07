@@ -1,6 +1,12 @@
 .config
 .suo
 .bin
+<<<<<<< HEAD
 .vs/GrandNode/v15/.suo
 *.cache
 *.props
+=======
+.cache
+>>>>>>> c95e4c77116460096078e33d4f671b0ae576dc4b
+.vs/GrandNode/v15/.suo
+*.cache
