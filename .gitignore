@@ -2,3 +2,5 @@
 .suo
 .bin
 .vs/GrandNode/v15/.suo
+*.cache
+*.props

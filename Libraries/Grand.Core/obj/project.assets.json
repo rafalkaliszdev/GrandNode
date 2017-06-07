@@ -10116,15 +10116,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Programmer\\.nuget\\packages\\": {}
+    "C:\\Users\\Rafał\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
+      "projectUniqueName": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
       "projectName": "Grand.Core",
-      "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
-      "outputPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\obj\\",
+      "projectPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
+      "outputPath": "C:\\Users\\Rafał\\Documents\\GitHub\\GrandNode\\Libraries\\Grand.Core\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
