@@ -1,161 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc.Localization;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Grand.Core;
+using Grand.Core.Data;
 using Grand.Core.Infrastructure;
 using Grand.Services.Localization;
-//using Orchard.DisplayManagement.Layout;
-//using Orchard.DisplayManagement.Shapes;
-//using Orchard.DisplayManagement.Title;
-using Grand.Web.Framework.Localization;
-using System.Diagnostics;
+using Grand.Web.Framework.Themes;
+using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Grand.Web.Framework.Localization
 {
     public abstract class RazorPage<TModel> : Microsoft.AspNetCore.Mvc.Razor.RazorPage<TModel>
     {
-        //private dynamic _displayHelper;
-        ////private IShapeFactory _shapeFactory;
-
-        //private void EnsureDisplayHelper()
-        //{
-        //    if (_displayHelper == null)
-        //    {
-        //        //IDisplayHelperFactory _factory = ViewContext.HttpContext.RequestServices.GetService<IDisplayHelperFactory>();
-        //        //_displayHelper = _factory.CreateHelper(ViewContext);
-        //    }
-        //}
-
-        ////private void EnsureShapeFactory()
-        ////{
-        ////    if (_shapeFactory == null)
-        ////    {
-        ////        _shapeFactory = ViewContext.HttpContext.RequestServices.GetService<IShapeFactory>();
-        ////    }
-        ////}
-
-        ///// <summary>
-        ///// Gets a dynamic shape factory to create new shapes.
-        ///// </summary>
-        ///// <example>
-        ///// Usage:
-        ///// <code>
-        ///// New.MyShape()
-        ///// New.MyShape(A: 1, B: "Some text")
-        ///// New.MyShape().A(1).B("Some text")
-        ///// </code>
-        ///// </example>
-        ////public dynamic New
-        ////{
-        ////    get
-        ////    {
-        ////        return Factory;
-        ////    }
-        ////}
-
-        ///// <summary>
-        ///// Gets an <see cref="IShapeFactory"/> to create new shapes.
-        ///// </summary>
-        ////public IShapeFactory Factory
-        ////{
-        ////    get
-        ////    {
-        ////        EnsureShapeFactory();
-        ////        return _shapeFactory;
-        ////    }
-        ////}
-
-        ///// <summary>
-        ///// Renders a shape.
-        ///// </summary>
-        ///// <param name="shape">The shape.</param>
-        //public Task<IHtmlContent> DisplayAsync(dynamic shape)
-        //{
-        //    EnsureDisplayHelper();
-        //    return (Task<IHtmlContent>)_displayHelper(shape);
-        //}
-
-        //private dynamic _themeLayout;
-        //public dynamic ThemeLayout
-        //{
-        //    get
-        //    {
-        //        if (_themeLayout == null)
-        //        {
-        //            var layoutAccessor = ViewContext.HttpContext.RequestServices.GetService<>();
-
-        //            if (layoutAccessor == null)
-        //            {
-        //                throw new InvalidOperationException("Could not find a valid layout accessor");
-        //            }
-
-        //            _themeLayout = layoutAccessor.GetLayout();
-        //        }
-
-        //        return _themeLayout;
-        //    }
-
-        //    set
-        //    {
-        //        _themeLayout = value;
-        //    }
-        //}
-
-        //private IPageTitleBuilder _pageTitleBuilder;
-        //public IPageTitleBuilder Title
-        //{
-        //    get
-        //    {
-        //        if (_pageTitleBuilder == null)
-        //        {
-        //            _pageTitleBuilder = ViewContext.HttpContext.RequestServices.GetRequiredService<IPageTitleBuilder>();
-        //        }
-
-        //        return _pageTitleBuilder;
-        //    }
-        //}
-
-        private IViewLocalizer _t;
-
-
-
-        //doesnt work well 
-        //public IViewLocalizer T
-        //{
-        //    get
-        //    {
-        //        if (_t == null)
-        //        {
-        //            var test01 = _t.GetAllStrings();
-        //            var test02 = _t.GetHtml("raz.dwa.trzy");
-        //            var test03 = _t.ToString();
-        //            var test04 = _t.WithCulture(new System.Globalization.CultureInfo("en-us"));
-
-        //            var _localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
-        //            var result = _localizationService.GetResource(/*format*/_t.ToString());
-
-        //            _t = ViewContext.HttpContext.RequestServices.GetRequiredService<IViewLocalizer>();
-        //            ((IViewContextAware)_t).Contextualize(this.ViewContext);
-        //        }
-
-        //        return _t;
-        //    }
-        //}
-
-
-
-
-
-        //[Inject]
+        private ILocalizationService _localizationService;
         private Localizer _localizer;
+        private IWorkContext _workContext;
+
+        /// <summary>
+        /// Get a localized resources
+        /// </summary>
+        /// 
         public Localizer T
         {
             get
             {
+
+                //InitHelpers();
 
                 if (_localizer == null)
                 {
@@ -165,10 +36,10 @@ namespace Grand.Web.Framework.Localization
                     //default localizer
                     _localizer = (format, args) =>
                     {
+                        //workaround
+                        if (_localizationService == null)
+                            _localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
 
-                        Debug.WriteLine("locale\t\t" + format);
-
-                        var _localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
                         var resFormat = _localizationService.GetResource(format);
                         if (string.IsNullOrEmpty(resFormat))
                         {
@@ -181,156 +52,105 @@ namespace Grand.Web.Framework.Localization
                     };
                 }
                 return _localizer;
-
-                if (_localizer == null)
-                {
-
-                }
-
-                if (_t == null)
-                {
-                    var test01 = _t.GetAllStrings();
-                    var test02 = _t.GetHtml("raz.dwa.trzy");
-                    var test03 = _t.ToString();
-                    var test04 = _t.WithCulture(new System.Globalization.CultureInfo("en-us"));
-
-                    var _localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
-                    var result = _localizationService.GetResource(/*format*/_t.ToString());
-
-                    _t = ViewContext.HttpContext.RequestServices.GetRequiredService<IViewLocalizer>();
-                    ((IViewContextAware)_t).Contextualize(this.ViewContext);
-                }
-                return null;
-
-                //return _t;
             }
         }
 
+        public IWorkContext WorkContext
+        {
+            get
+            {
+                return _workContext;
+            }
+        }
+
+        public /*override*/ void InitHelpers()
+        {
+            //nothing to override in RazorPage..
+            //base.InitHelpers();
+
+            //if (DataSettingsHelper.DatabaseIsInstalled())
+            //{
+            //    _localizationService = EngineContext.Current.Resolve<ILocalizationService>();
+            //    _workContext = EngineContext.Current.Resolve<IWorkContext>();
+            //}
+        }
+
+        public /*override*/ string Layout
+        {
+            get
+            {
+                var layout = base.Layout;
+
+                //if (!string.IsNullOrEmpty(layout))
+                //{
+                //    var filename = Path.GetFileNameWithoutExtension(layout);
+                //    ViewEngineResult viewResult = System.Web.Mvc.ViewEngines.Engines.FindView(ViewContext.Controller.ControllerContext, filename, "");
+
+                //    if (viewResult.View != null && viewResult.View is RazorView)
+                //    {
+                //        layout = (viewResult.View as RazorView).ViewPath;
+                //    }
+                //}
+
+                return layout;
+            }
+            set
+            {
+                base.Layout = value;
+            }
+        }
+
+        /// <summary>
+        /// Return a value indicating whether the working language and theme support RTL (right-to-left)
+        /// </summary>
+        /// <returns></returns>
+        public bool ShouldUseRtlTheme()
+        {
+            var supportRtl = _workContext.WorkingLanguage.Rtl;
+            if (supportRtl)
+            {
+                //ensure that the active theme also supports it
+                var themeProvider = EngineContext.Current.Resolve<IThemeProvider>();
+                var themeContext = EngineContext.Current.Resolve<IThemeContext>();
+                supportRtl = themeProvider.GetThemeConfiguration(themeContext.WorkingThemeName).SupportRtl;
+            }
+            return supportRtl;
+        }
+
+        public string WorkingLanguage()
+        {
+            return _workContext.WorkingLanguage.UniqueSeoCode;
+        }
 
 
+        /// <summary>
+        /// Gets a selected tab index (used in admin area to store selected tab index)
+        /// </summary>
+        /// <returns>Index</returns>
+        public int GetSelectedTabIndex()
+        {
+            //keep this method synchornized with
+            //"SetSelectedTabIndex" method of \Administration\Controllers\BaseNopController.cs
+            int index = 0;
+            string dataKey = "Grand.selected-tab-index";
+            if (ViewData[dataKey] is int)
+            {
+                index = (int)ViewData[dataKey];
+            }
+            if (TempData[dataKey] is int)
+            {
+                index = (int)TempData[dataKey];
+            }
 
+            //ensure it's not negative
+            if (index < 0)
+                index = 0;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ///// <summary>
-        ///// Adds a segment to the title and returns all segments.
-        ///// </summary>
-        ///// <param name="segment">The segment to add to the title.</param>
-        ///// <param name="position">Optional. The position of the segment in the title.</param>
-        ///// <param name="separator">The html string that should separate all segments.</param>
-        ///// <returns>And <see cref="IHtmlContent"/> instance representing the full title.</returns>
-        ////public IHtmlContent RenderTitleSegments(IHtmlContent segment, string position = "0", IHtmlContent separator = null)
-        ////{
-        ////    Title.AddSegment(segment, position);
-        ////    return Title.GenerateTitle(separator);
-        ////}
-
-        ///// <summary>
-        ///// Adds some segments to the title and returns all segments.
-        ///// </summary>
-        ///// <param name="segments">The segments to add to the title.</param>
-        ///// <param name="position">Optional. The position of the segments in the title.</param>
-        ///// <returns>And <see cref="IHtmlContent"/> instance representing the full title.</returns>
-        ////public IHtmlContent RenderTitleSegments(IEnumerable<IHtmlContent> segments, string position = "0", IHtmlContent separator = null)
-        ////{
-        ////    Title.AddSegments(segments, position);
-        ////    return Title.GenerateTitle(separator);
-        ////}
-
-        ///// <summary>
-        ///// Renders the content zone of the layout.
-        ///// </summary>
-        //protected IHtmlContent RenderLayoutBody()
-        //{
-        //    var result = base.RenderBody();
-        //    return result;
-        //}
-
-        ///// <summary>
-        ///// Creates a <see cref="TagBuilder"/> to render a shape.
-        ///// </summary>
-        ///// <param name="shape">The shape.</param>
-        ///// <returns>A new <see cref="TagBuilder"/>.</returns>
-        ////protected TagBuilder Tag(dynamic shape)
-        ////{
-        ////    return Shape.GetTagBuilder(shape);
-        ////}
-
-        ////protected TagBuilder Tag(dynamic shape, string tag)
-        ////{
-        ////    return Shape.GetTagBuilder(shape, tag);
-        ////}
-
-        //protected Task<IHtmlContent> RenderBodyAsync()
-        //{
-        //    return DisplayAsync(ThemeLayout.Content);
-        //}
-
-        ///// <summary>
-        ///// Renders a zone from the layout.
-        ///// </summary>
-        ///// <param name="name">The name of the zone to render.</param>
-        ///// <param name="required">Whether the zone is required or not.</param>
-        //public new Task<IHtmlContent> RenderSectionAsync(string name, bool required)
-        //{
-        //    if (name == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(name));
-        //    }
-
-        //    var zone = ThemeLayout[name];
-
-        //    if (required && zone != null && !zone.Items.Any())
-        //    {
-        //        throw new InvalidOperationException("Zone not found: " + name);
-        //    }
-
-        //    return DisplayAsync(zone);
-        //}
-
-        //public object OrDefault(object text, object other)
-        //{
-        //    if (text == null || Convert.ToString(text) == "")
-        //    {
-        //        return other;
-        //    }
-
-        //    return text;
-        //}
-
-        ///// <summary>
-        ///// Returns the full path of the current request.
-        ///// </summary>
-        //public string FullRequestPath => Context.Request.PathBase + Context.Request.Path + Context.Request.QueryString;
+            return index;
+        }
     }
 
-    //public abstract class RazorPage : RazorPage<dynamic>
-    //{
-    //}
+    public abstract class RazorPage : RazorPage<dynamic>
+    {
+    }
 }

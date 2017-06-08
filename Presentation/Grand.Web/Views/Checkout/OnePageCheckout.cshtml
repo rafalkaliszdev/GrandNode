@@ -36,14 +36,14 @@
     }
 }
 <div class="page checkout-page">
-    <h1 class="generalTitle h2">@*@T*@("Checkout")</h1>
+    <h1 class="generalTitle h2">@T("Checkout")</h1>
     @Html.Widget("opc_content_before")
     <ol class="opc pl-0" id="checkout-steps">
         <li id="opc-billing" class="tab-section allow">
             <div class="step-title card card-grey mb-1 text-left p-0 col-12 rounded-0">
                 <div class="card-block p-2">
                     <blockquote class="card-blockquote">
-                        <span>1. @*@T*@("Checkout.BillingAddress")</span>
+                        <span>1. @T("Checkout.BillingAddress")</span>
                     </blockquote>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 @*this redirects to /cart*@
                 <div class="col-12 buttons pb-2 pt-2 px-0 my-0" id="billing-buttons-container">
                     <input type="button" title="C/ommon.Continue" class="btn btn-success new-address-next-step-button" onclick="Billing.save()" value="CommoXn.Continue" />
-                    <span class="please-wait" id="billing-please-wait" style="display: none;">@*@T*@("Common.LoadingNextStep")</span>
+                    <span class="please-wait" id="billing-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                 </div>
  
                 @*this redirects to /cart too*@
@@ -183,7 +183,7 @@
                 <div class="step-title card card-grey mb-1 text-left p-0 col-12 rounded-0">
                     <div class="card-block p-2">
                         <blockquote class="card-blockquote">
-                            <span>2. @*@T*@("Checkout.ShippingAddress")</span>
+                            <span>2. @T("Checkout.ShippingAddress")</span>
                         </blockquote>
                     </div>
                 </div>
@@ -202,11 +202,11 @@
                     <div class="col-12 buttons pt-1 pb-1 px-0 my-3" id="shipping-buttons-container">
                         @if (!Model.DisableBillingAddressCheckoutStep)
                         {
-                            <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false; ">@*@T*@("Common.Back")</a>
+                            <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false; ">@T("Common.Back")</a>
 
                         }
                         <input type="button" class="btn btn-success new-address-next-step-button" title="Common.Continue" onclick="Shipping.save()" value="Common.Continue" />
-                        <span id="shipping-please-wait" class="please-wait" style="display: none;"> @*@T*@("Common.LoadingNextStep")</span>
+                        <span id="shipping-please-wait" class="please-wait" style="display: none;"> @T("Common.LoadingNextStep")</span>
                     </div>
                 </div>
             </li>
@@ -215,7 +215,7 @@
                 <div class="step-title card card-grey mb-1 text-left p-0 col-12 rounded-0">
                     <div class="card-block p-2">
                         <blockquote class="card-blockquote">
-                            <span>3. @*@T*@("Checkout.ShippingMethod")</span>
+                            <span>3. @T("Checkout.ShippingMethod")</span>
                         </blockquote>
                     </div>
                 </div>
@@ -228,9 +228,9 @@
                                 ShippingMethod.init('#co-shipping-method-form', '@(storeLocation)checkout/OpcSaveShippingMethod/');
                         </script>
                         <div class="col-12 buttons pt-1 pb-1 px-0 my-3" id="shipping-method-buttons-container">
-                            <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@*@T*@("Common.Back")</a>
+                            <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
                             <input type="button" class="btn btn-success shipping-method-next-step-button" onclick="ShippingMethod.save()" value="Common.Continue" />
-                            <span id="shipping-method-please-wait" class="please-wait" style="display: none;">@*@T*@("Common.LoadingNextStep")</span>
+                            <span id="shipping-method-please-wait" class="please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                         </div>
                     </form>
                 </div>
@@ -240,7 +240,7 @@
             <div class="step-title card card-grey mb-1 text-left p-0 col-12 rounded-0">
                 <div class="card-block p-2">
                     <blockquote class="card-blockquote">
-                        <span>4. @*@T*@("Checkout.PaymentMethod")</span>
+                        <span>4. @T("Checkout.PaymentMethod")</span>
                     </blockquote>
                 </div>
             </div>
@@ -254,9 +254,9 @@
                         PaymentMethod.init('#co-payment-method-form', '@(storeLocation)checkout/OpcSavePaymentMethod/');
                 </script>
                 <div class="col-12 buttons pt-1 pb-1 my-3 px-0" id="payment-method-buttons-container">
-                    <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@*@T*@("Common.Back")</a>
+                    <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
                     <input type="button" class="btn btn-success payment-method-next-step-button" onclick="PaymentMethod.save()" value="Common.Continue" />
-                    <span class="please-wait" id="payment-method-please-wait" style="display: none;">@*@T*@("Common.LoadingNextStep")</span>
+                    <span class="please-wait" id="payment-method-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                 </div>
             </div>
         </li>
@@ -264,7 +264,7 @@
             <div class="step-title card card-grey mb-1 text-left p-0 col-12 rounded-0">
                 <div class="card-block p-2">
                     <blockquote class="card-blockquote">
-                        <span>5. @*@T*@("Checkout.PaymentInfo")</span>
+                        <span>5. @T("Checkout.PaymentInfo")</span>
                     </blockquote>
                 </div>
             </div>
@@ -278,9 +278,9 @@
                         PaymentInfo.init('#co-payment-info-form', '@(storeLocation)checkout/OpcSavePaymentInfo/');
                 </script>
                 <div class="col-12 buttons pt-1 pb-1 my-3 px-0" id="payment-info-buttons-container">
-                    <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@*@T*@("Common.Back")</a>
+                    <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
                     <input type="button" class="btn btn-success payment-info-next-step-button" onclick="PaymentInfo.save()" value="Common.Continue" />
-                    <span class="please-wait" id="payment-info-please-wait" style="display: none;">@*@T*@("Common.LoadingNextStep")</span>
+                    <span class="please-wait" id="payment-info-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                 </div>
             </div>
         </li>
@@ -288,7 +288,7 @@
             <div class="step-title card card-grey mb-1 text-left p-0 col-12 rounded-0">
                 <div class="card-block p-2">
                     <blockquote class="card-blockquote">
-                        <span>6. @*@T*@("Checkout.ConfirmOrder")</span>
+                        <span>6. @T("Checkout.ConfirmOrder")</span>
                     </blockquote>
                 </div>
             </div>
@@ -300,9 +300,9 @@
                         ConfirmOrder.init('@(storeLocation)checkout/OpcConfirmOrder/', '@(storeLocation)checkout/completed/');
                 </script>
                 <div class="col-12 buttons pt-1 pb-1 px-0 my-3" id="confirm-order-buttons-container">
-                    <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@*@T*@("Common.Back")</a>
-                    <input type="button" class="btn btn-success confirm-order-next-step-button" onclick="ConfirmOrder.save()" value="@*@T*@(" Common.Confirm")" />
-                    <span class="please-wait" id="confirm-order-please-wait" style="display: none;">@*@T*@("Checkout.SubmittingOrder")</span>
+                    <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
+                    <input type="button" class="btn btn-success confirm-order-next-step-button" onclick="ConfirmOrder.save()" value="@T(" Common.Confirm")" />
+                    <span class="please-wait" id="confirm-order-please-wait" style="display: none;">@T("Checkout.SubmittingOrder")</span>
                 </div>
             </div>
         </li>

@@ -30,14 +30,12 @@
     <div class="card-block">
         <h3 class="h6 card-title">
             <strong><a href="@Url.RouteUrl("Product", new { SeName = Model.SeName })">@Model.Name</a></strong>
-            @*if (EngineContextExperimental.Current.Resolve<CatalogSettings>().ShowSkuOnCatalogPages && !string.IsNullOrEmpty(Model.Sku))
-                {
-                        <span class="d-block py-1">@Model.Sku</span>
-                }*@
+            @if (EngineContextExperimental.Current.Resolve<CatalogSettings>().ShowSkuOnCatalogPages && !string.IsNullOrEmpty(Model.Sku))
+            {
+                <span class="d-block py-1">@Model.Sku</span>
+            }
         </h3>
         @*Html.Widget("productbox_addinfo_before", Model.Id)*@
-
-
         @if (Model.ReviewOverviewModel.AllowCustomerReviews)
             {
                 int ratingPercent = 0;
@@ -46,8 +44,7 @@
                     ratingPercent = ((Model.ReviewOverviewModel.RatingSum * 100) / Model.ReviewOverviewModel.TotalReviews) / 5;
                 }
                 <div class="col-12 px-0">
-                    <div class="product-rating-box">
-                        @*title="@string.Format(T("Reviews.TotalReviews").Text, Model.ReviewOverviewModel.TotalReviews)">*@
+                    <div class="product-rating-box" title="@string.Format(T("Reviews.TotalReviews").Text, Model.ReviewOverviewModel.TotalReviews)">
                         <div class="rating rating_@Model.Id">
                         </div>
                         <script type="text/javascript">
@@ -85,11 +82,11 @@
 
         @if (Model.ProductPrice.DisplayTaxShippingInfo)
         {
-            //var inclTax = EngineContextExperimental.Current.Resolve<IWorkContext>().TaxDisplayType == TaxDisplayType.IncludingTax;
+            var inclTax = EngineContextExperimental.Current.Resolve<IWorkContext>().TaxDisplayType == TaxDisplayType.IncludingTax;
             //tax info is already included in the price (incl/excl tax). that's why we display only shipping info here
             //of course, you can modify appropriate locales to include VAT info there
             <div class="col-12 tax-shipping-info mt-2 mb-2 px-0">
-                @* @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))*@
+                @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
             </div>
         }
         <p class="card-text hidden-xl-down">
@@ -111,36 +108,27 @@
                     {
                         addToCartText = T("ShoppingCart.PreOrder").Text;
                     }
-
-
-
-
-
-                        <button type="button" class="btn btn-primary" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">
-                            <span class="fa fa fa-shopping-cart"></span> <span class="hidden-lg-down">@(addToCartText)</span>
-                            <span class="sr-only">AddToCart</span>
-                        </button>
-                        }
-                        @*if (!Model.ProductPrice.DisableAddToCompareListButton)
-                            {
-                                            <button type="button" value="@T("ShoppingCart.AddToCompareList")" title="@T("ShoppingCart.AddToCompareList")" class="btn btn-secondary" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;">
-                                                <span class="sr-only">AddToCompareList</span>
-                                                <span class="fa fa-retweet"></span>
-                                            </button>
-                                        }
-                                        @if (!Model.ProductPrice.DisableWishlistButton)
-                            {
-                                            <button type="button" value="@T("ShoppingCart.AddToWishlist")" title="@T("ShoppingCart.AddToWishlist")" class="btn btn-secondary" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;">
-                                                <span class="fa fa-heart-o"></span>
-                                                <span class="sr-only">AddToWishlist</span>
-                                            </button>
-
-                                        }*@
-
-</div>
+                    <button type="button" class="btn btn-primary" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">
+                        <span class="fa fa fa-shopping-cart"></span> <span class="hidden-lg-down">@(addToCartText)</span>
+                        <span class="sr-only">AddToCart</span>
+                    </button>
+                }
+                @if (!Model.ProductPrice.DisableAddToCompareListButton)
+                {
+                    <button type="button" value="@T("ShoppingCart.AddToCompareList")" title="@T("ShoppingCart.AddToCompareList")" class="btn btn-secondary" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;">
+                        <span class="sr-only">AddToCompareList</span>
+                        <span class="fa fa-retweet"></span>
+                    </button>
+                }
+                @if (!Model.ProductPrice.DisableWishlistButton)
+                {
+                    <button type="button" value="@T("ShoppingCart.AddToWishlist")" title="@T("ShoppingCart.AddToWishlist")" class="btn btn-secondary" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;">
+                        <span class="fa fa-heart-o"></span>
+                        <span class="sr-only">AddToWishlist</span>
+                    </button>
+                }
+            </div>
         </div>
     </div>
-
     @*Html.Widget("productbox_addinfo_middle", Model.Id)*@
-
 </div>
