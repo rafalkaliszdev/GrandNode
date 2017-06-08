@@ -1,7 +1,27 @@
 .config
 .suo
 .bin
+<<<<<<< HEAD
+.vs/GrandNode/v15/.suo
+*.cache
+*.props
+=======
 .cache
+<<<<<<< HEAD
 .vs/GrandNode/v15/.suo
 *.pdb
 *.dll
+=======
+>>>>>>> c95e4c77116460096078e33d4f671b0ae576dc4b
+.vs/GrandNode/v15/.suo
+*.cache
+*.pdb
+*.cache
+*.props
+*.json
+*.dll
+.vs/GrandNode/v15/.suo
+*.cache
+>>>>>>> 10eb59053362d4de9a87e3b9410d63af1c5265f0
+*.cache
+.vs/GrandNode/v15/.suo
