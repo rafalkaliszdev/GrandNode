@@ -55,7 +55,7 @@ namespace Grand.Web.Services
 
             //        string actionName;
             //        string controllerName;
-            //        /*RouteValueDictionary*/object routeValues;
+            //        RouteValueDictionary routeValues;
             //        widget.GetDisplayWidgetRoute(widgetZone, out actionName, out controllerName, out routeValues);
             //        widgetModel.ActionName = actionName;
             //        widgetModel.ControllerName = controllerName;
@@ -80,12 +80,12 @@ namespace Grand.Web.Services
             //    clonedWidgetModel.ActionName = widgetModel.ActionName;
             //    clonedWidgetModel.ControllerName = widgetModel.ControllerName;
             //    if (widgetModel.RouteValues != null)
-            //        clonedWidgetModel.RouteValues = new /*RouteValueDictionary*/object(widgetModel.RouteValues);
+            //        clonedWidgetModel.RouteValues = new RouteValueDictionary(widgetModel.RouteValues);
 
             //    if (additionalData != null)
             //    {
             //        if (clonedWidgetModel.RouteValues == null)
-            //            clonedWidgetModel.RouteValues = new /*RouteValueDictionary*/object();
+            //            clonedWidgetModel.RouteValues = new RouteValueDictionary();
             //        clonedWidgetModel.RouteValues.Add("additionalData", additionalData);
             //    }
 

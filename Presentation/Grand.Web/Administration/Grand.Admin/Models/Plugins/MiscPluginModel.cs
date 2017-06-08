@@ -1,5 +1,6 @@
 ﻿/*using System.Web.Routing;*/
 using Grand.Web.Framework.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Admin.Models.Plugins
 {
@@ -9,6 +10,6 @@ namespace Grand.Admin.Models.Plugins
 
         public string ConfigurationActionName { get; set; }
         public string ConfigurationControllerName { get; set; }
-        public /*RouteValueDictionary*/object ConfigurationRouteValues { get; set; }
+        public RouteValueDictionary ConfigurationRouteValues { get; set; }
     }
 }

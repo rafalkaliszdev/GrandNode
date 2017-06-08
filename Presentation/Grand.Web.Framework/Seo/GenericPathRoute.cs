@@ -36,7 +36,7 @@ namespace Grand.Web.Framework.Seo
         ///// <param name="url">The URL pattern for the route.</param>
         ///// <param name="defaults">The values to use if the URL does not contain all the parameters.</param>
         ///// <param name="routeHandler">The object that processes requests for the route.</param>
-        //public GenericPathRoute(string url, /*RouteValueDictionary*/object defaults, IRouteHandler routeHandler)
+        //public GenericPathRoute(string url, RouteValueDictionary defaults, IRouteHandler routeHandler)
         //    : base(url, defaults, routeHandler)
         //{
         //}
@@ -48,7 +48,7 @@ namespace Grand.Web.Framework.Seo
         ///// <param name="defaults">The values to use if the URL does not contain all the parameters.</param>
         ///// <param name="constraints">A regular expression that specifies valid values for a URL parameter.</param>
         ///// <param name="routeHandler">The object that processes requests for the route.</param>
-        //public GenericPathRoute(string url, /*RouteValueDictionary*/object defaults, /*RouteValueDictionary*/object constraints, IRouteHandler routeHandler)
+        //public GenericPathRoute(string url, RouteValueDictionary defaults, RouteValueDictionary constraints, IRouteHandler routeHandler)
         //    : base(url, defaults, constraints, routeHandler)
         //{
         //}
@@ -62,7 +62,7 @@ namespace Grand.Web.Framework.Seo
         ///// <param name="constraints">A regular expression that specifies valid values for a URL parameter.</param>
         ///// <param name="dataTokens">Custom values that are passed to the route handler, but which are not used to determine whether the route matches a specific URL pattern. The route handler might need these values to process the request.</param>
         ///// <param name="routeHandler">The object that processes requests for the route.</param>
-        //public GenericPathRoute(string url, /*RouteValueDictionary*/object defaults, /*RouteValueDictionary*/object constraints, /*RouteValueDictionary*/object dataTokens, IRouteHandler routeHandler)
+        //public GenericPathRoute(string url, RouteValueDictionary defaults, RouteValueDictionary constraints, RouteValueDictionary dataTokens, IRouteHandler routeHandler)
         //    : base(url, defaults, constraints, dataTokens, routeHandler)
         //{
         //}

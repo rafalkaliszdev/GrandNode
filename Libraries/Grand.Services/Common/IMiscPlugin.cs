@@ -1,5 +1,6 @@
 ///*using System.Web.Routing;*/
 using Grand.Core.Plugins;
+using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Services.Common
 {
@@ -15,6 +16,6 @@ namespace Grand.Services.Common
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller name</param>
         /// <param name="routeValues">Route values</param>
-        void GetConfigurationRoute(out string actionName, out string controllerName, out /*RouteValueDictionary*/object routeValues);
+        void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues);
     }
 }

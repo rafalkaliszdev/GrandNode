@@ -40,9 +40,9 @@
 
 //            var route = new LocalizedRoute(url, new MvcRouteHandler())
 //            {
-//                Defaults = new /*RouteValueDictionary*/object(defaults),
-//                Constraints = new /*RouteValueDictionary*/object(constraints),
-//                DataTokens = new /*RouteValueDictionary*/object()
+//                Defaults = new RouteValueDictionary(defaults),
+//                Constraints = new RouteValueDictionary(constraints),
+//                DataTokens = new RouteValueDictionary()
 //            };
 
 //            if ((namespaces != null) && (namespaces.Length > 0))
