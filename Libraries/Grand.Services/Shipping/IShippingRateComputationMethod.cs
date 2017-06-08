@@ -4,6 +4,7 @@ using Grand.Services.Shipping.Tracking;
 using System;
 using Grand.Core.Domain.Orders;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Services.Shipping
 {
@@ -49,7 +50,7 @@ namespace Grand.Services.Shipping
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller name</param>
         /// <param name="routeValues">Route values</param>
-        void GetConfigurationRoute(out string actionName, out string controllerName, out /*RouteValueDictionary*/object routeValues);
+        void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues);
 
         /// <summary>
         /// Gets controller type

@@ -2,6 +2,7 @@
 /*using System.Web.Routing;*/
 using Grand.Web.Framework;
 using Grand.Web.Framework.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Admin.Models.ExternalAuthentication
 {
@@ -25,6 +26,6 @@ namespace Grand.Admin.Models.ExternalAuthentication
 
         public string ConfigurationActionName { get; set; }
         public string ConfigurationControllerName { get; set; }
-        public /*RouteValueDictionary*/object ConfigurationRouteValues { get; set; }
+        public RouteValueDictionary ConfigurationRouteValues { get; set; }
     }
 }

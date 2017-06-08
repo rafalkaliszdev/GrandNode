@@ -1,5 +1,6 @@
 ﻿/*using System.Web.Routing;*/
 using Grand.Web.Framework.Mvc;
+using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Web.Models.Checkout
 {
@@ -7,7 +8,7 @@ namespace Grand.Web.Models.Checkout
     {
         public string PaymentInfoActionName { get; set; }
         public string PaymentInfoControllerName { get; set; }
-        public /*RouteValueDictionary*/object PaymentInfoRouteValues { get; set; }
+        public RouteValueDictionary PaymentInfoRouteValues { get; set; }
 
         /// <summary>
         /// Used on one-page checkout page

@@ -43,28 +43,28 @@
                         {
                             <th scope="col" class="remove-from-cart hidden-sm-down">
                                 <span class="fa fa-times"></span>
-                                <span class="sr-only">@*T*@("Remove")</span>
+                                <span class="sr-only">@T("Remove")</span>
                             </th>
                         }
                         <th class="product">
                             <div class="d-flex flex-row row">
                                 @if (Model.ShowProductImages)
                                 {
-                                    <div class="col-2 hidden-md-down">@*T*@("ShoppingCart.Image")</div>
+                                    <div class="col-2 hidden-md-down">@T("ShoppingCart.Image")</div>
                                 }
                                 <div class="col-12 col-md text-center text-md-left">
-                                    @*T*@("ShoppingCart.Product(s)")
+                                    @T("ShoppingCart.Product(s)")
                                 </div>
 
                                 <div class="@(Model.IsEditable ? "col" : "col") d-flex flex-row justify-content-between ml-auto">
                                     <div class="col-sm-4 hidden-md-down pl-0">
-                                        @*T*@("ShoppingCart.UnitPrice")
+                                        @T("ShoppingCart.UnitPrice")
                                     </div>
                                     <div class="col-sm-4 hidden-md-down text-sm-center">
-                                        @*T*@("ShoppingCart.Quantity")
+                                        @T("ShoppingCart.Quantity")
                                     </div>
                                     <div class="col-sm-4 hidden-md-down text-sm-right pl-2 pr-0">
-                                        @*T*@("ShoppingCart.ItemTotal")
+                                        @T("ShoppingCart.ItemTotal")
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                                 var editCartItemUrl = Url.RouteUrl("Product", new { SeName = item.ProductSeName });
                                                 editCartItemUrl = webHelper.ModifyQueryString(editCartItemUrl, "updatecartitemid=" + item.Id, null);
                                                 <div class="edit-item mb-1 mt-1">
-                                                    <a class="btn btn-sm btn-secondary" href="@editCartItemUrl">@*T*@("Common.Edit")</a>
+                                                    <a class="btn btn-sm btn-secondary" href="@editCartItemUrl">@T("Common.Edit")</a>
                                                 </div>
                                             }
                                             @if (item.Warnings.Count > 0)
@@ -163,7 +163,7 @@
                                             <div class="flex-row subrow justify-content-center justify-content-md-between row">
                                                 <div class="col-lg-4 col unit-price text-center text-sm-left">
                                                         <span class="td-title product-unit-price hidden-lg-up">
-                                                            @*T*@("ShoppingCart.UnitPrice"):
+                                                            @T("ShoppingCart.UnitPrice"):
                                                         </span>
                                                         @item.UnitPrice
                                                 </div>
@@ -175,7 +175,7 @@
 
                                                             <div class="d-flex flex-md-row flex-sm-column qtyRvd">
                                                                 <div class="col-5 text-sm-right hidden-lg-up">
-                                                                    <span class="td-title">@*T*@("ShoppingCart.Quantity"):</span>
+                                                                    <span class="td-title">@T("ShoppingCart.Quantity"):</span>
                                                                 </div>
                                                                 <div class="col">
                                                                     <select id="itemqty@(item.Id)" name="itemqty@(item.Id)" class="custom-select form-control qty-dropdown">
@@ -192,7 +192,7 @@
                                                         {
                                                             <div class="d-flex flex-row">
                                                                 <div class="col-5 col-lg-12 hidden-lg-up px-0">
-                                                                    <span class="td-title">@*T*@("ShoppingCart.Quantity"):</span>
+                                                                    <span class="td-title">@T("ShoppingCart.Quantity"):</span>
                                                                 </div>
                                                                 <div class="col-7 col-lg-8 offset-lg-2 pl-0 pr-0">
                                                                     <label class="sr-only" for="itemquantity@(item.Id)">itemquantity@(item.Id)</label>
@@ -206,7 +206,7 @@
                                                     {
                                                         <div class="d-flex flex-row">
                                                             <div class="col-5 col-lg-12 text-center hidden-lg-up">
-                                                                <span class="td-title hidden-lg-up">@*T*@("ShoppingCart.Quantity"):</span>
+                                                                <span class="td-title hidden-lg-up">@T("ShoppingCart.Quantity"):</span>
                                                             </div>
                                                             <div class="col-7 col-lg-8 offset-lg-2 pl-0 pr-0">
                                                                 <label class="sr-only" for="itemquantity@(item.Id)">itemquantity@(item.Id)</label>
@@ -217,12 +217,12 @@
                                                 </div>
                                                 <div class="col-lg-4 col subtotal text-sm-right d-flex flex-column justify-content-center">
                                                     <span class="product-subtotal">
-                                                        <span class="td-title hidden-lg-up">@*T*@("ShoppingCart.ItemTotal"):</span> @item.SubTotal
+                                                        <span class="td-title hidden-lg-up">@T("ShoppingCart.ItemTotal"):</span> @item.SubTotal
                                                     </span>
                                                     @if (!String.IsNullOrEmpty(item.Discount))
                                                     {
                                                         <div class="discount text-success text-center text-md-right">
-                                                            <span>@*T*@("ShoppingCart.ItemYouSave"): </span> 
+                                                            <span>@T("ShoppingCart.ItemYouSave"): </span> 
                                                             <span>@item.Discount</span>
                                                         </div>
                                                     }
@@ -238,8 +238,8 @@
             @if (Model.IsEditable)
             {
                 <div class="common-buttons btn-group btn-group-sm text-sm-right d-flex justify-content-end">
-                    <input type="submit" name="updatecart" value="@*T*@("ShoppingCart.UpdateCart")" class="btn btn-secondary update-cart-button" />
-                    <input type="submit" name="continueshopping" value="@*T*@("ShoppingCart.ContinueShopping")" class="btn btn-secondary continue-shopping-button" />
+                    <input type="submit" name="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-secondary update-cart-button" />
+                    <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="btn btn-secondary continue-shopping-button" />
                 </div>
             }
         </div>
@@ -265,7 +265,7 @@
             //of course, you can modify appropriate locales to include VAT info there
             <div class="tax-shipping-info d-flex justify-content-end mt-2 mb-2">
                 <span class="taxHelper">
-                @*T*@(inclTax ? "ShoppingCart.TaxShipping.InclTax" : "ShoppingCart.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
+                @T(inclTax ? "ShoppingCart.TaxShipping.InclTax" : "ShoppingCart.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
                 </span> 
             </div>
         }
@@ -303,20 +303,20 @@
                                     <input class="custom-control-input" id="termsofservice" type="checkbox" name="termsofservice" />
                                     <span class="sr-only">checkbox</span>
                                     <span class="custom-control-indicator"></span>
-                                    <span>@*T*@("Checkout.TermsOfService.IAccept")<a class="custom-control-description read pl-1 font-weight-bold" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "conditionsofuse" })', 450, 500, true)">@*T*@("Checkout.TermsOfService.Read")</a></span>
+                                    <span>@T("Checkout.TermsOfService.IAccept")<a class="custom-control-description read pl-1 font-weight-bold" onclick="javascript:OpenWindow('@Url.RouteUrl("TopicPopup", new { SystemName = "conditionsofuse" })', 450, 500, true)">@T("Checkout.TermsOfService.Read")</a></span>
                                 </label>
                             </div>
                             <div class="modal fade" id="grandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">@*T*@("Checkout.TermsOfService")</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">@T("Checkout.TermsOfService")</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span>&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            @*T*@("Checkout.TermsOfService.PleaseAccept")
+                                            @T("Checkout.TermsOfService.PleaseAccept")
                                         </div>
                                     </div>
                                 </div>
@@ -346,7 +346,7 @@
                                     });
                                 </script>
                                 <button type="submit" id="checkout" name="checkout" value="checkout" class="float-sm-right btn btn-success checkout-button">
-                                    @*T*@("Checkout.Button")
+                                    @T("Checkout.Button")
                                 </button>
                             }
                         </div>
@@ -367,7 +367,7 @@
     else
     {
         <div class="no-data">
-            @*T*@("ShoppingCart.CartIsEmpty")
+            @T("ShoppingCart.CartIsEmpty")
         </div>
     }
     @*Html.Widget("order_summary_content_after")*@

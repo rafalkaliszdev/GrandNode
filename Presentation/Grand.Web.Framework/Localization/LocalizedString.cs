@@ -3,7 +3,7 @@
 
 namespace Grand.Web.Framework.Localization
 {
-    public class LocalizedString : MarshalByRefObject, IHtmlString
+    public class LocalizedString// : MarshalByRefObject, IHtmlString
     {
         private readonly string _localized;
         private readonly string _scope;

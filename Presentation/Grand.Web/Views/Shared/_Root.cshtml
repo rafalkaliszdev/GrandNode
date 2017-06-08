@@ -1,13 +1,11 @@
-﻿<h2 style="font-family: Consolas; color:lawngreen; background-color:#202020">gn_migration</h2>
-
-@{
+﻿@{
     Layout = "~/Views/Shared/_Root.Head.cshtml";
 }
+
 @*Html.Widget("body_start_html_tag_after")*@
 @Html.Partial("_Notifications")
 @*Html.Action("JavaScriptDisabledWarning", "Common")*@
 @Html.Partial("OldInternetExplorerWarning")
-
 
 <div class="container" style="background-color: lightcyan">
     @Html.Partial("Header")
@@ -15,7 +13,7 @@
         <button class="navbar-toggler hidden-lg-up text-white" type="button" data-toggle="collapse" data-target="#collapsing-navbar-2">
             <span>&#9776;</span>
             <span class="text-white hidden-lg-up pl-2">
-                @*T("Categories")*@
+                @T("Categories")
             </span>
         </button>
         <div class="collapse navbar-collapse" id="collapsing-navbar-2">
@@ -30,6 +28,14 @@
             {
         @RenderSection("Breadcrumb")
     }
+
+
+
+    <h2 style="font-family: Consolas; color:lawngreen; background-color:#202020">gn_migration</h2>
+
+
+
+
     @RenderBody()
     @*Html.Widget("content_after")*@
 </div>

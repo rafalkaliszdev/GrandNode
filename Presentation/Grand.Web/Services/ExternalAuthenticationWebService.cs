@@ -1,6 +1,7 @@
 ﻿using Grand.Core;
 using Grand.Services.Authentication.External;
 using Grand.Web.Models.Customer;
+using Microsoft.AspNetCore.Routing;
 using System.Collections.Generic;
 ///*using System.Web.Routing;*/
 
@@ -31,11 +32,11 @@ namespace Grand.Web.Services
                 //tbh
                 string actionName;
                 string controllerName;
-                ///*RouteValueDictionary*/object routeValues;
-                //eam.GetPublicInfoRoute(out actionName, out controllerName, out routeValues);
-                //eamModel.ActionName = actionName;
-                //eamModel.ControllerName = controllerName;
-                //eamModel.RouteValues = routeValues;
+                RouteValueDictionary routeValues;
+                eam.GetPublicInfoRoute(out actionName, out controllerName, out routeValues);
+                eamModel.ActionName = actionName;
+                eamModel.ControllerName = controllerName;
+                eamModel.RouteValues = routeValues;
 
                 model.Add(eamModel);
             }
