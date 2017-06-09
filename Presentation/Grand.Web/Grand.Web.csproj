@@ -6,6 +6,10 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" />
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\netcoreapp1.1\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Administration\**" />
     <Compile Remove="Scripts\**" />

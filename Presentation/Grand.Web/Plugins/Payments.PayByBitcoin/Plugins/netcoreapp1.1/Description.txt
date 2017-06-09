@@ -1,0 +1,8 @@
+﻿Group: Payment methods
+FriendlyName: Pay In Store
+SystemName: Payments.PayByBitcoin
+Version: 1.07
+SupportedVersions: 4.00
+Author: grandnode team
+DisplayOrder: 1
+FileName: Grand.Plugin.Payments.PayByBitcoin.dll

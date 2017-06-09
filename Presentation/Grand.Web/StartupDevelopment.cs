@@ -35,7 +35,7 @@ using Grand.Core.Infrastructure;
 //using Grand.Core.Infrastructure.Extensions;
 //using Grand.Web.Framework.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Grand.Core.Plugins;
 
 namespace Grand.Web
 {
@@ -79,7 +79,15 @@ namespace Grand.Web
                 options.ViewLocationExpanders.Add(new ThemeableViewLocationExpander());
             });
 
-            services.AddMvc();
+
+
+
+
+            //init plugins
+            var mvcCoreBuilder = services.AddMvc();
+            //services.AddMvcCore();         
+            PluginManager.Initialize(mvcCoreBuilder.PartManager);
+
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();

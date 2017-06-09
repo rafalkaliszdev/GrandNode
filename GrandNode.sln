@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grand.Data", "Libraries\Gra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grand.Admin", "Presentation\Grand.Web\Administration\Grand.Admin\Grand.Admin.csproj", "{D29708F6-AEB8-478F-946D-D19ED866FC81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grand.Plugin.Payments.PayByBitcoin", "Plugins\Grand.Plugin.Payments.PayByBitcon\Grand.Plugin.Payments.PayByBitcoin.csproj", "{C1BA5A39-7677-48BE-A07A-363ED03A7486}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,14 @@ Global
 		{D29708F6-AEB8-478F-946D-D19ED866FC81}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D29708F6-AEB8-478F-946D-D19ED866FC81}.Release|x86.ActiveCfg = Release|x86
 		{D29708F6-AEB8-478F-946D-D19ED866FC81}.Release|x86.Build.0 = Release|x86
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Debug|x86.Build.0 = Debug|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +100,6 @@ Global
 		{019FDC46-96EA-4AFE-A438-96DE05CA16EE} = {3D45C45B-7A5B-49A1-B8C0-01EB3888731C}
 		{988439D1-6E14-4E29-992F-B60EC179B4F7} = {2495D6DF-8449-417F-AA50-7021FD82BE54}
 		{D29708F6-AEB8-478F-946D-D19ED866FC81} = {3D45C45B-7A5B-49A1-B8C0-01EB3888731C}
+		{C1BA5A39-7677-48BE-A07A-363ED03A7486} = {38A566C9-F490-4F65-B8D3-C4DA67B541CF}
 	EndGlobalSection
 EndGlobal
