@@ -10121,10 +10121,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
+      "projectUniqueName": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
       "projectName": "Grand.Core",
-      "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
-      "outputPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\obj\\",
+      "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj",
+      "outputPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

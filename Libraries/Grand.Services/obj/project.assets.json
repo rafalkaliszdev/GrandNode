@@ -10174,10 +10174,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj",
+      "projectUniqueName": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj",
       "projectName": "Grand.Services",
-      "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj",
-      "outputPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Services\\obj\\",
+      "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj",
+      "outputPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Services\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -10185,11 +10185,11 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj": {
-              "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj"
+            "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj"
             },
-            "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Data\\Grand.Data.csproj": {
-              "projectPath": "C:\\DONT REMOVE\\gn_migration_github\\GrandNode\\Libraries\\Grand.Data\\Grand.Data.csproj"
+            "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Data\\Grand.Data.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Data\\Grand.Data.csproj"
             }
           }
         }

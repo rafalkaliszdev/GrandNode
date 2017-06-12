@@ -9,3 +9,14 @@ C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\obj\Debug\
 C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.AssemblyInfo.cs
 C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.dll
 C:\DONT REMOVE\gn_migration_github\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.pdb
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.deps.json
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.dll
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Services.pdb
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.dll
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.dll
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Core.pdb
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\bin\Debug\netcoreapp1.1\Grand.Data.pdb
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.csprojResolveAssemblyReference.cache
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.AssemblyInfo.cs
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.dll
+C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Services\obj\Debug\netcoreapp1.1\Grand.Services.pdb

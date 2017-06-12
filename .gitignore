@@ -25,3 +25,10 @@
 >>>>>>> 10eb59053362d4de9a87e3b9410d63af1c5265f0
 *.cache
 .vs/GrandNode/v15/.suo
+*.cache
+*.props
+*.pdb
+*.dll
+.vs/GrandNode/v15/.suo
+*.config
+*.txt
