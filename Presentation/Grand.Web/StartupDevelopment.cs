@@ -36,6 +36,7 @@ using Grand.Core.Infrastructure;
 //using Grand.Web.Framework.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Grand.Core.Plugins;
+using System.Reflection;
 
 namespace Grand.Web
 {
@@ -63,8 +64,17 @@ namespace Grand.Web
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+
+
+            //just some testing, didnt want to make new vs project
+
+            var qwq = Assembly.GetEntryAssembly();
+
+            
+
             //asp.net core mvc creates an instance of this class
             //so there is no need to make singleton
+
 
 
             //LoggerFactory service

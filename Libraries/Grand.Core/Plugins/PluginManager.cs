@@ -407,33 +407,29 @@ namespace Grand.Core.Plugins
 
 
 
+            //2017_06_12
+
             //'Plugin 'Pay In Store'. The given assembly name or codebase was invalid. (Exception from HRESULT: 0x80131047)
             //The given assembly name or codebase was invalid. (Exception from HRESULT: 0x80131047)
             var shadowCopiedAssembly0 = Assembly.Load(new AssemblyName(shadowCopiedPlug.FullName));
 
             //{System.IO.FileNotFoundException: Could not load file or assembly 'Grand.Plugin.Payments.PayByBitcoin.dll, Culture=neutral, PublicKeyToken=null'. Nie można odnaleźć określonego pliku.
             //File name: 'Grand.Plugin.Payments.PayByBitcoin.dll, Culture=neutral, PublicKeyToken=null'
-            //var shadowCopiedAssembly2 = Assembly.Load(new AssemblyName(shadowCopiedPlug.Name));
+            var shadowCopiedAssembly2 = Assembly.Load(new AssemblyName(shadowCopiedPlug.Name));
 
             //{System.IO.FileLoadException: The given assembly name or codebase was invalid. (Exception from HRESULT: 0x80131047)
-            //var shadowCopiedAssembly3 = Assembly.Load(new AssemblyName(shadowCopiedPlug.DirectoryName));
+            var shadowCopiedAssembly3 = Assembly.Load(new AssemblyName(shadowCopiedPlug.DirectoryName));
 
             //{System.IO.FileNotFoundException: Could not load file or assembly 'qweqqeqw, Culture=neutral, PublicKeyToken=null'. Nie można odnaleźć określonego pliku.
-
-
-            var qwwq = shadowCopiedPlug.FullName;
-
             var shadowCopiedAssembly4 = Assembly.Load(new AssemblyName("qweqqeqw"));
 
-
-
-
-
-
-
-
+            //origin from nopCommerce 
             //var shadowCopiedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(shadowCopiedPlug.FullName));
             var shadowCopiedAssembly = Assembly.Load(new AssemblyName(shadowCopiedPlug.FullName));
+
+
+
+
             Debug.WriteLine("Adding to ApplicationParts: '{0}'", shadowCopiedAssembly.FullName);
             applicationPartManager.ApplicationParts.Add(new AssemblyPart(shadowCopiedAssembly));
             return shadowCopiedAssembly;
