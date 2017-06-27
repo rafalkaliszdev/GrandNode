@@ -59,6 +59,7 @@ namespace Grand.Web.Framework.Localization
         {
             get
             {
+                InitHelpers();
                 return _workContext;
             }
         }
@@ -68,11 +69,11 @@ namespace Grand.Web.Framework.Localization
             //nothing to override in RazorPage..
             //base.InitHelpers();
 
-            //if (DataSettingsHelper.DatabaseIsInstalled())
-            //{
-            //    _localizationService = EngineContext.Current.Resolve<ILocalizationService>();
-            //    _workContext = EngineContext.Current.Resolve<IWorkContext>();
-            //}
+            if (DataSettingsHelper.DatabaseIsInstalled())
+            {
+                _localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
+                _workContext = EngineContextExperimental.Current.Resolve<IWorkContext>();
+            }
         }
 
         public /*override*/ string Layout

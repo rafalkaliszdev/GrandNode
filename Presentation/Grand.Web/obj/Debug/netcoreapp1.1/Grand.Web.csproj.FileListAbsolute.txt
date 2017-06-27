@@ -22,7 +22,6 @@ C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netc
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Web.runtimeconfig.dev.json
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Web.dll
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Web.pdb
-C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Admin.dll
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Core.dll
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Data.dll
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Services.dll
@@ -30,7 +29,6 @@ C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netc
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Core.pdb
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Services.pdb
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Web.Framework.pdb
-C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Admin.pdb
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\bin\Debug\netcoreapp1.1\netcoreapp1.1\Grand.Data.pdb
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\obj\Debug\netcoreapp1.1\Grand.Web.csprojResolveAssemblyReference.cache
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Presentation\Grand.Web\obj\Debug\netcoreapp1.1\Grand.Web.AssemblyInfo.cs

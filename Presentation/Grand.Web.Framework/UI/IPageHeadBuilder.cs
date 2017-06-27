@@ -36,6 +36,20 @@ namespace Grand.Web.Framework.UI
         string GenerateHeadCustom();
         void AddEditPageUrl(string url);
         string GetEditPageUrl();
-    }
 
+        void AddPageCssClassParts(string part);
+        void AppendPageCssClassParts(string part);
+        string GeneratePageCssClasses();
+
+        /// <summary>
+        /// Specify system name of admin menu item that should be selected (expanded)
+        /// </summary>
+        /// <param name="systemName">System name</param>
+        void SetActiveMenuItemSystemName(string systemName);
+        /// <summary>
+        /// Get system name of admin menu item that should be selected (expanded)
+        /// </summary>
+        /// <returns>System name</returns>
+        string GetActiveMenuItemSystemName();
+    }
 }

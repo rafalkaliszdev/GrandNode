@@ -67,7 +67,7 @@ namespace Grand.Web.Framework
                     foreach (var locale in helper.ViewData.Model.Locales)
                     {
                         //languages
-                        var language = EngineContext.Current.Resolve<ILanguageService>().GetLanguageById(locale.LanguageId);
+                        var language = EngineContextExperimental.Current.Resolve<ILanguageService>().GetLanguageById(locale.LanguageId);
 
                         tabStrip.AppendLine("<li>");
                         //var urlHelper = new UrlHelper(helper.ViewContext.RequestContext);
@@ -149,7 +149,7 @@ namespace Grand.Web.Framework
             //window.AppendLine("if (!window.data('kendoWindow')) {");
             //window.AppendLine("window.kendoWindow({");
             //window.AppendLine("modal: true,");
-            //window.AppendLine(string.Format("title: '{0}',", EngineContext.Current.Resolve<ILocalizationService>().GetResource("Admin.Common.AreYouSure")));
+            //window.AppendLine(string.Format("title: '{0}',", EngineContextExperimental.Current.Resolve<ILocalizationService>().GetResource("Admin.Common.AreYouSure")));
             //window.AppendLine("actions: ['Close']");
             //window.AppendLine("});");
             //window.AppendLine("}");
@@ -187,8 +187,8 @@ namespace Grand.Web.Framework
             //    var resourceDisplayName = value as GrandResourceDisplayName;
             //    if (resourceDisplayName != null)
             //    {
-            //        var langId = EngineContext.Current.Resolve<IWorkContext>().WorkingLanguage.Id;
-            //        hintResource = EngineContext.Current.Resolve<ILocalizationService>()
+            //        var langId = EngineContextExperimental.Current.Resolve<IWorkContext>().WorkingLanguage.Id;
+            //        hintResource = EngineContextExperimental.Current.Resolve<ILocalizationService>()
             //            .GetResource(resourceDisplayName.ResourceKey + ".Hint", langId);
             //        if (!String.IsNullOrEmpty(hintResource))
             //        {
@@ -550,7 +550,7 @@ namespace Grand.Web.Framework
             string dayLocale, monthLocale, yearLocale;
             if (localizeLabels)
             {
-                var locService = EngineContext.Current.Resolve<ILocalizationService>();
+                var locService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
 
                 dayLocale = locService.GetResource("Common.Day");
                 labeldays.InnerHtml.SetContent(locService.GetResource("Common.Day"));

@@ -11024,6 +11024,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
       "Grand.Core >= 1.0.0",
+      "Grand.Data >= 1.0.0",
+      "Grand.Services >= 1.0.0",
       "Grand.Web.Framework >= 1.0.0",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.0.0",
       "Microsoft.AspNetCore >= 1.1.1",
@@ -11053,6 +11055,12 @@
           "projectReferences": {
             "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Presentation\\Grand.Web.Framework\\Grand.Web.Framework.csproj": {
               "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Presentation\\Grand.Web.Framework\\Grand.Web.Framework.csproj"
+            },
+            "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Data\\Grand.Data.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Data\\Grand.Data.csproj"
+            },
+            "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj": {
+              "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Services\\Grand.Services.csproj"
             },
             "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj": {
               "projectPath": "C:\\DONT REMOVE\\gnmigrationgithub\\GrandNode\\Libraries\\Grand.Core\\Grand.Core.csproj"

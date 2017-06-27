@@ -344,5 +344,16 @@ namespace Grand.Web.Framework.UI
 
             return new HtmlString(html.Encode(pageHeadBuilder.GenerateHeadCustom()));
         }
+
+        /// <summary>
+        /// Get system name of admin menu item that should be selected (expanded)
+        /// </summary>
+        /// <param name="html">HTML helper</param>
+        /// <returns>System name</returns>
+        public static string GetActiveMenuItemSystemName(this IHtmlHelper html)
+        {
+            var pageHeadBuilder = EngineContextExperimental.Current.Resolve<IPageHeadBuilder>();
+            return pageHeadBuilder.GetActiveMenuItemSystemName();
+        }
     }
 }

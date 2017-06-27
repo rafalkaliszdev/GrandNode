@@ -109,8 +109,21 @@ namespace Grand.Core.Configuration.Routes
                 //    );
 
 
+                //areas 
+                //previous
+                //routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+                //new
+                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                //nc 
+                /*routeBuilder*/
+                //routes.MapRoute(name: "areaRoute", template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
                 foreach (var route in routesToBeRegistered)
                 {
+
+
                     routes.MapRoute(
                         name: route.Name,
                         template: route.Template,

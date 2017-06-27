@@ -29,6 +29,7 @@ namespace Grand.Web.Framework.Controllers
         /// Render partial view to string
         /// </summary>
         /// <returns>Result</returns>
+        [NonAction]
         public virtual string RenderPartialViewToString()
         {
             return RenderPartialViewToString(null, null);
@@ -38,6 +39,7 @@ namespace Grand.Web.Framework.Controllers
         /// </summary>
         /// <param name="viewName">View name</param>
         /// <returns>Result</returns>
+        [NonAction]
         public virtual string RenderPartialViewToString(string viewName)
         {
             return RenderPartialViewToString(viewName, null);
@@ -47,6 +49,7 @@ namespace Grand.Web.Framework.Controllers
         /// </summary>
         /// <param name="model">Model</param>
         /// <returns>Result</returns>
+        [NonAction]
         public virtual string RenderPartialViewToString(object model)
         {
             return RenderPartialViewToString(null, model);
@@ -57,6 +60,7 @@ namespace Grand.Web.Framework.Controllers
         /// <param name="viewName">View name</param>
         /// <param name="model">Model</param>
         /// <returns>Result</returns>
+        [NonAction]
         public virtual string RenderPartialViewToString(string viewName, object model)
         {
             //Original source code: http://craftycodeblog.com/2010/05/15/asp-net-mvc-render-partial-view-to-string/
@@ -75,7 +79,7 @@ namespace Grand.Web.Framework.Controllers
 
             //    return sw.GetStringBuilder().ToString();
             //}
-            return "ayy lmao";
+            return "RenderPartialViewToString()";
         }
 
 
@@ -85,6 +89,7 @@ namespace Grand.Web.Framework.Controllers
         /// <param name="storeService">Store service</param>
         /// <param name="workContext">Work context</param>
         /// <returns>Store ID; 0 if we are in a shared mode</returns>
+        [NonAction]
         public virtual string GetActiveStoreScopeConfiguration(IStoreService storeService, IWorkContext workContext)
         {
             //ensure that we have 2 (or more) stores
@@ -102,6 +107,7 @@ namespace Grand.Web.Framework.Controllers
         /// Log exception
         /// </summary>
         /// <param name="exc">Exception</param>
+        [NonAction]
         protected void LogException(Exception exc)
         {
             var workContext = EngineContextExperimental.Current.Resolve<IWorkContext>();
@@ -115,6 +121,7 @@ namespace Grand.Web.Framework.Controllers
         /// </summary>
         /// <param name="message">Message</param>
         /// <param name="persistForTheNextRequest">A value indicating whether a message should be persisted for the next request</param>
+        [NonAction]
         protected virtual void SuccessNotification(string message, bool persistForTheNextRequest = true)
         {
             AddNotification(NotifyType.Success, message, persistForTheNextRequest);
@@ -124,6 +131,7 @@ namespace Grand.Web.Framework.Controllers
         /// </summary>
         /// <param name="message">Message</param>
         /// <param name="persistForTheNextRequest">A value indicating whether a message should be persisted for the next request</param>
+        [NonAction]
         protected virtual void ErrorNotification(string message, bool persistForTheNextRequest = true)
         {
             AddNotification(NotifyType.Error, message, persistForTheNextRequest);
@@ -134,6 +142,7 @@ namespace Grand.Web.Framework.Controllers
         /// <param name="exception">Exception</param>
         /// <param name="persistForTheNextRequest">A value indicating whether a message should be persisted for the next request</param>
         /// <param name="logException">A value indicating whether exception should be logged</param>
+        [NonAction]
         protected virtual void ErrorNotification(Exception exception, bool persistForTheNextRequest = true, bool logException = true)
         {
             if (logException)
@@ -146,6 +155,7 @@ namespace Grand.Web.Framework.Controllers
         /// <param name="type">Notification type</param>
         /// <param name="message">Message</param>
         /// <param name="persistForTheNextRequest">A value indicating whether a message should be persisted for the next request</param>
+        [NonAction]
         protected virtual void AddNotification(NotifyType type, string message, bool persistForTheNextRequest)
         {
             string dataKey = string.Format("Grand.notifications.{0}", type);
@@ -163,6 +173,7 @@ namespace Grand.Web.Framework.Controllers
             }
         }
 
+        [NonAction]
         protected virtual void DisplayEditLink(string editPageUrl)
         {
             //We cannot use ViewData because it works only for the current controller (and we pass and then render "Edit" link data in distinct controllers)
@@ -181,6 +192,7 @@ namespace Grand.Web.Framework.Controllers
         /// <typeparam name="TLocalizedModelLocal">Localizable model</typeparam>
         /// <param name="languageService">Language service</param>
         /// <param name="locales">Locales</param>
+        [NonAction]
         protected virtual void AddLocales<TLocalizedModelLocal>(ILanguageService languageService, IList<TLocalizedModelLocal> locales) where TLocalizedModelLocal : ILocalizedModelLocal
         {
             AddLocales(languageService, locales, null);
@@ -192,6 +204,7 @@ namespace Grand.Web.Framework.Controllers
         /// <param name="languageService">Language service</param>
         /// <param name="locales">Locales</param>
         /// <param name="configure">Configure action</param>
+        [NonAction]
         protected virtual void AddLocales<TLocalizedModelLocal>(ILanguageService languageService, IList<TLocalizedModelLocal> locales, Action<TLocalizedModelLocal, string> configure) where TLocalizedModelLocal : ILocalizedModelLocal
         {
             foreach (var language in languageService.GetAllLanguages(true))

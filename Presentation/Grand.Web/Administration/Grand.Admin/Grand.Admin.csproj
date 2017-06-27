@@ -22,7 +22,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libraries\Grand.Core\Grand.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\Libraries\Grand.Data\Grand.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\Libraries\Grand.Services\Grand.Services.csproj" />
     <ProjectReference Include="..\..\..\Grand.Web.Framework\Grand.Web.Framework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\" />
   </ItemGroup>
 
 </Project>

@@ -66,8 +66,8 @@
 
 //            if (DataSettingsHelper.DatabaseIsInstalled())
 //            {
-//                _localizationService = EngineContext.Current.Resolve<ILocalizationService>();
-//                _workContext = EngineContext.Current.Resolve<IWorkContext>();
+//                _localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
+//                _workContext = EngineContextExperimental.Current.Resolve<IWorkContext>();
 //            }
 //        }
 
@@ -106,8 +106,8 @@
 //            if (supportRtl)
 //            {
 //                //ensure that the active theme also supports it
-//                var themeProvider = EngineContext.Current.Resolve<IThemeProvider>();
-//                var themeContext = EngineContext.Current.Resolve<IThemeContext>();
+//                var themeProvider = EngineContextExperimental.Current.Resolve<IThemeProvider>();
+//                var themeContext = EngineContextExperimental.Current.Resolve<IThemeContext>();
 //                supportRtl = themeProvider.GetThemeConfiguration(themeContext.WorkingThemeName).SupportRtl;
 //            }
 //            return supportRtl;

@@ -2657,12 +2657,17 @@
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0-preview1-final" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Grand.Core\Grand.Core.csproj" />
     <ProjectReference Include="..\..\Libraries\Grand.Services\Grand.Services.csproj" />
     <ProjectReference Include="..\Grand.Web.Framework\Grand.Web.Framework.csproj" />
-    <ProjectReference Include="Administration\Grand.Admin\Grand.Admin.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Components\" />
+    <Folder Include="Areas\Admin\Helpers\" />
   </ItemGroup>
 
 </Project>

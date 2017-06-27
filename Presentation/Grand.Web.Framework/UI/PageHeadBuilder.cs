@@ -35,7 +35,9 @@ namespace Grand.Web.Framework.UI
         private readonly Dictionary<ResourceLocation, List<CssReferenceMeta>> _cssParts;
         private readonly List<string> _canonicalUrlParts;
         private readonly List<string> _headCustomParts;
+        private readonly List<string> _pageCssClassParts;
         private string _editPageUrl;
+        private string _activeAdminMenuSystemName;
 
         #endregion
 
@@ -524,6 +526,43 @@ namespace Grand.Web.Framework.UI
         public virtual void AddEditPageUrl(string url)
         {
             _editPageUrl = url;
+        }
+
+        public virtual void AddPageCssClassParts(string part)
+        {
+            if (string.IsNullOrEmpty(part))
+                return;
+
+            _pageCssClassParts.Add(part);
+        }
+        public virtual void AppendPageCssClassParts(string part)
+        {
+            if (string.IsNullOrEmpty(part))
+                return;
+
+            _pageCssClassParts.Insert(0, part);
+        }
+        public virtual string GeneratePageCssClasses()
+        {
+            string result = string.Join(" ", _pageCssClassParts.AsEnumerable().Reverse().ToArray());
+            return result;
+        }
+
+        /// <summary>
+        /// Specify system name of admin menu item that should be selected (expanded)
+        /// </summary>
+        /// <param name="systemName">System name</param>
+        public virtual void SetActiveMenuItemSystemName(string systemName)
+        {
+            _activeAdminMenuSystemName = systemName;
+        }
+        /// <summary>
+        /// Get system name of admin menu item that should be selected (expanded)
+        /// </summary>
+        /// <returns>System name</returns>
+        public virtual string GetActiveMenuItemSystemName()
+        {
+            return _activeAdminMenuSystemName;
         }
 
 

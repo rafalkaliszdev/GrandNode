@@ -24,6 +24,8 @@
       "grand.admin/1.0.0": {
         "dependencies": {
           "Grand.Core": "1.0.0",
+          "Grand.Data": "1.0.0",
+          "Grand.Services": "1.0.0",
           "Grand.Web.Framework": "1.0.0",
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
           "Microsoft.AspNetCore": "1.1.1",
