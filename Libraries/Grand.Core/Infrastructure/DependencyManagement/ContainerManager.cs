@@ -45,6 +45,11 @@ namespace Grand.Core.Infrastructure.DependencyManagement
         /// <returns>Resolved service</returns>
         public virtual T Resolve<T>(string key = "", ILifetimeScope scope = null) where T : class
         {
+
+            return _container.Resolve<T>();
+
+            //tbh
+            //this below somehow doesnt work, calling Resolve via scope makes app 'HTTP Error 502.3 - Bad Gateway'
             if (scope == null)
             {
                 //no scope specified

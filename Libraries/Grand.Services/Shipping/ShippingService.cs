@@ -160,7 +160,12 @@ namespace Grand.Services.Shipping
 
             //boulder
 
+            var test01 = LoadAllShippingRateComputationMethods(storeId)
+                   //.Where(provider => _shippingSettings.ActiveShippingRateComputationMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.OrdinalIgnoreCase))
+                   .Where(provider => !provider.HideShipmentMethods(cart))
+                   .ToList();
 
+            return test01;
 
             return LoadAllShippingRateComputationMethods(storeId)
                    .Where(provider => _shippingSettings.ActiveShippingRateComputationMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.OrdinalIgnoreCase))
@@ -189,6 +194,9 @@ namespace Grand.Services.Shipping
         /// <returns>Shipping rate computation methods</returns>
         public virtual IList<IShippingRateComputationMethod> LoadAllShippingRateComputationMethods(string storeId = "")
         {
+
+            var test01 = _pluginFinder.GetPlugins<IShippingRateComputationMethod>(storeId: storeId).ToList(); 
+
             return _pluginFinder.GetPlugins<IShippingRateComputationMethod>(storeId: storeId).ToList();
         }
 

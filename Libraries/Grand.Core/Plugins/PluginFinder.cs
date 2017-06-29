@@ -77,7 +77,7 @@ namespace Grand.Core.Plugins
         }
 
         #endregion
-        
+
         #region Methods
 
         /// <summary>
@@ -118,9 +118,17 @@ namespace Grand.Core.Plugins
         /// <param name="storeId">Load records allowed only in a specified store; pass 0 to load all records</param>
         /// <param name="group">Filter by plugin group; pass null to load all records</param>
         /// <returns>Plugins</returns>
-        public virtual IEnumerable<T> GetPlugins<T>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly, 
+        public virtual IEnumerable<T> GetPlugins<T>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
             string storeId = "", string group = null) where T : class, IPlugin
         {
+            //16:10
+            var test01 = GetPluginDescriptors<T>(loadMode, storeId, group).Select(p => p.Instance<T>());
+
+            //16:23
+            var test02 = GetPluginDescriptors<T>(loadMode, storeId, group);
+
+
+
             return GetPluginDescriptors<T>(loadMode, storeId, group).Select(p => p.Instance<T>());
         }
 
@@ -137,6 +145,8 @@ namespace Grand.Core.Plugins
             //ensure plugins are loaded
             EnsurePluginsAreLoaded();
 
+            var test01 = _plugins.Where(p => CheckLoadMode(p, loadMode) && AuthenticateStore(p, storeId) && CheckGroup(p, group));
+
             return _plugins.Where(p => CheckLoadMode(p, loadMode) && AuthenticateStore(p, storeId) && CheckGroup(p, group));
         }
 
@@ -149,9 +159,28 @@ namespace Grand.Core.Plugins
         /// <param name="group">Filter by plugin group; pass null to load all records</param>
         /// <returns>Plugin descriptors</returns>
         public virtual IEnumerable<PluginDescriptor> GetPluginDescriptors<T>(LoadPluginsMode loadMode = LoadPluginsMode.InstalledOnly,
-            string storeId = "", string group = null) 
+            string storeId = "", string group = null)
             where T : class, IPlugin
         {
+
+
+            var test01 = GetPluginDescriptors(loadMode, storeId, group)
+                .Where(p => typeof(T).IsAssignableFrom(p.PluginType));
+
+            var test02 = GetPluginDescriptors(loadMode, storeId, group);
+
+            var test03 = test02.Where(p => typeof(T).IsAssignableFrom(p.PluginType));
+
+            var result1 = typeof(T).IsAssignableFrom(test02.ElementAt(0).PluginType);
+            var result2 = typeof(T).IsAssignableFrom(test02.ElementAt(1).PluginType);
+
+            var pluginBitcoin = test02.ElementAt(0);
+            var pluginDrone = test02.ElementAt(1);
+
+            var result11 = typeof(T).IsAssignableFrom(pluginBitcoin.PluginType);
+            var result21 = typeof(T).IsAssignableFrom(pluginDrone.PluginType);
+
+
             return GetPluginDescriptors(loadMode, storeId, group)
                 .Where(p => typeof(T).IsAssignableFrom(p.PluginType));
         }
@@ -181,7 +210,7 @@ namespace Grand.Core.Plugins
             return GetPluginDescriptors<T>(loadMode)
                 .SingleOrDefault(p => p.SystemName.Equals(systemName, StringComparison.OrdinalIgnoreCase));
         }
-        
+
         /// <summary>
         /// Reload plugins
         /// </summary>

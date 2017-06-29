@@ -62,6 +62,7 @@
                 </div>
                 <div class="portlet-body">
                     <div id="plugins-grid"></div>
+                    <div id="plugins-grid222"></div>
                 </div>
             </div>
         </div>
@@ -89,11 +90,22 @@
 
                 <script>
                     $(document).ready(function () {
-                        console.log("so it gets here? + 11:38");
-                        console.log("@Html.Raw(Url.Action("ListSelect", "Plugin"))");
+
+                        //small test with ajax
+                        //var qq = 'http://localhost:33781/admin/plugin/ListSelect';   
+                        //$.ajax({
+                        //    url: qq,
+                        //    type: 'POST',
+                        //    success: function (data) {
+                        //        document.getElementById("plugins-grid222").innerHTML = data;
+                        //        alert(data);
+                        //        console.log(data);
+                        //    },
+                        //});
+                        //return;
 
 
-                       
+
 
                         //
                         $("#plugins-grid").kendoGrid({

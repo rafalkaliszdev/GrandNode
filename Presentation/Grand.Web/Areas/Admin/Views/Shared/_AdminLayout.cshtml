@@ -81,6 +81,8 @@
 
     var webHelper = EngineContextExperimental.Current.Resolve<IWebHelper>();
 }
+
+@*test. remove later
 <!DOCTYPE html>
 <html @if (supportRtl) { <text> dir="rtl" </text> }>    
 <head>
@@ -90,12 +92,12 @@
 <body>
     @RenderBody()
 </body>
-</html>
+</html>*@
 
 
 
 
-    @*<!DOCTYPE html>
+    <!DOCTYPE html>
         <html @if (supportRtl) {<text>dir="rtl"</text>}>
         <head>
             <title>@adminPageTitle</title>
@@ -129,7 +131,7 @@
                         </a>
                         <div class="top-menu">
                             <ul class="nav navbar-nav pull-right">
-                                @Html.Action("LanguageSelector", "Common", new { area = "Admin" })
+                                @*@Html.Action("LanguageSelector", "Common", new { area = "Admin" })*@
                                 <li class="dropdown" id="header_inbox_bar">
                                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                         <i class="icon-settings"></i>
@@ -139,16 +141,16 @@
                                         {
                                             <text>see _AdminLayout.cshtml > canManageMaintenance</text>
                                             <li>
-                                                <a href="@webHelper.ModifyQueryString(Url.Action("ClearCache", "Common", new RouteValueDictionary { { "area", "Admin" } }), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)">
+                                                @*<a href="@webHelper.ModifyQueryString(Url.Action("ClearCache", "Common", new RouteValueDictionary { { "area", "Admin" } }), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)">
                                                     <i class="icon-refresh"></i>
                                                     @T("Admin.Header.ClearCache")
-                                                </a>
+                                                </a>*@
                                             </li>
                                             <li>
-                                                <a href="@webHelper.ModifyQueryString(Url.Action("RestartApplication", "Common", new RouteValueDictionary { { "area", "Admin" } }), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)" id="restart-application">
+                                                @*<a href="@webHelper.ModifyQueryString(Url.Action("RestartApplication", "Common", new RouteValueDictionary { { "area", "Admin" } }), "returnurl=" + HttpUtility.UrlEncode(HttpContext.Current.Request.RawUrl), null)" id="restart-application">
                                                     <i class="icon-reload"></i>
                                                     @T("Admin.Header.RestartApplication")
-                                                </a>
+                                                </a>*@
                                             </li>
                                         }
                                     </ul>
@@ -264,14 +266,13 @@
                 </div>
             </div>
 
-            <script type="text/javascript">
+            @*<script type="text/javascript">
                                 $(document).ready(function () {
                                     $("#restart-application").click(function (e) {
                                         showThrobber('@Html.Raw(HttpUtility.JavaScriptStringEncode(T("Admin.Header.RestartApplication.Progress").Text))');
                                     });
                                 });
-            </script>
+            </script>*@
 
         </body>
-        </html>*@
-
+        </html>

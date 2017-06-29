@@ -44,14 +44,8 @@ namespace Grand.Web
     {
         public static IContainer _container { get; private set; } //cns in gn_origin it is ContainerManger + maybe static or readonly ?
 
-
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ILoggerFactory _loggerFactory;
-
-
-
-
-
 
         public StartupDevelopment(
             IHostingEnvironment hostingEnvironment,
@@ -64,24 +58,14 @@ namespace Grand.Web
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-
-
-            //just some testing, didnt want to make new vs project
-
-            var qwq = Assembly.GetEntryAssembly();
-
-            
-
             //asp.net core mvc creates an instance of this class
             //so there is no need to make singleton
-
-
 
             //LoggerFactory service
             _loggerFactory.AddDebug();
 
-
-
+            //kendo UI
+            //services.AddKendo;
 
             //Themeable Razor View Engine
             services.Configure<RazorViewEngineOptions>(options =>
@@ -89,19 +73,13 @@ namespace Grand.Web
                 options.ViewLocationExpanders.Add(new ThemeableViewLocationExpander());
             });
 
-
-
-
-
             //init plugins
             var mvcCoreBuilder = services.AddMvc();
             //services.AddMvcCore();         
             PluginManager.Initialize(mvcCoreBuilder.PartManager);
 
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
 
             //ctl make it from appSettings.json
             var config = new GrandConfig();
@@ -116,24 +94,12 @@ namespace Grand.Web
             if (false)//!config.IgnoreStartupTasks)
                 this.RunStartupTasks();
 
-
-
-
-
-
-
-
-
-
-
             //new
             //return new AutofacServiceProvider(applicationContainer);
             //return autofacServiceProvider;
             //previous
             return autofacServiceProvider;
         }
-
-
 
         public AutofacServiceProvider RegisterDependencies(IServiceCollection services, GrandConfig config)
         {
@@ -142,7 +108,7 @@ namespace Grand.Web
             //not cut, just copied into GrandEngine and commented
 
             //code below should be inside GrandEngine.RegisterDependencies() but i need autofac object here
-
+            //managers doiesnt see what is level of 
 
             var typeFinder = new WebAppTypeFinder();
             var builder = new ContainerBuilder();
@@ -180,7 +146,7 @@ namespace Grand.Web
             /*var*/ _container = builder.Build();
 
             //so it is done here, because i really only need this EngineContextExperimental and GrandEngine for IContainer
-            EngineContextExperimental.Initialize(_container);
+            EngineContextExperimental.Initialize(new ContainerManager(_container));
 
 
             //var test01 = EngineContextExperimental.Current.ContainerManager.Resolve<IThemeProvider>();

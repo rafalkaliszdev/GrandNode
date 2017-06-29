@@ -19,3 +19,4 @@ Tax.CountryStateZip
 Widgets.Slider
 Widgets.GoogleAnalytics
 Payments.PayByBitcoin
+Shipping.ShipByDrone

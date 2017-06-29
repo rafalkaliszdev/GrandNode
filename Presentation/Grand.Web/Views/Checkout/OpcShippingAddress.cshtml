@@ -139,7 +139,8 @@
             @Html.Widget("op_checkout_shipping_address_middle")
             <div class="section new-shipping-address" id="shipping-new-address-form">
                 <div class="enter-address">
-                    @{
+                    //tbh OpcShippingAddress.cshtml
+                    @*@{
                         var validationSummary = Html.ValidationSummary(true);
                     }
                     @if (!HtmlString.IsNullOrEmpty(validationSummary))
@@ -152,7 +153,7 @@
                         dataDictAddress.ModelState.Merge(ViewData.ModelState);
                         dataDictAddress.TemplateInfo.HtmlFieldPrefix = "ShippingNewAddress";
                         @Html.Partial("_CreateOrUpdateAddress", Model.NewAddress, dataDictAddress)
-                    }
+                    }*@
                 </div>
             </div>
             @Html.Widget("op_checkout_shipping_address_bottom")

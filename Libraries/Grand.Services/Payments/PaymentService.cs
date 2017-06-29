@@ -61,8 +61,11 @@ namespace Grand.Services.Payments
         /// <returns>Payment methods</returns>
         public virtual IList<IPaymentMethod> LoadActivePaymentMethods(Customer filterByCustomer = null, string storeId = "", string filterByCountryId = "")
         {
+            //rtl
+            var qq01 = _paymentSettings.ActivePaymentMethodSystemNames;
+
             var pm = LoadAllPaymentMethods(storeId, filterByCountryId)
-                   .Where(provider => _paymentSettings.ActivePaymentMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.OrdinalIgnoreCase))
+                   //.Where(provider => _paymentSettings.ActivePaymentMethodSystemNames.Contains(provider.PluginDescriptor.SystemName, StringComparer.OrdinalIgnoreCase))
                    .ToList();
 
             if(filterByCustomer!=null)
@@ -104,23 +107,6 @@ namespace Grand.Services.Payments
         /// <returns>Found payment provider</returns>
         public virtual IPaymentMethod LoadPaymentMethodBySystemName(string systemName)
         {
-
-
-
-
-
-            //plugins are lled for now, return null
-            return null;
-
-
-
-
-
-
-
-
-
-
             var descriptor = _pluginFinder.GetPluginDescriptorBySystemName<IPaymentMethod>(systemName);
             if (descriptor != null)
                 return descriptor.Instance<IPaymentMethod>();
@@ -136,24 +122,6 @@ namespace Grand.Services.Payments
         /// <returns>Payment providers</returns>
         public virtual IList<IPaymentMethod> LoadAllPaymentMethods(string storeId = "", string filterByCountryId = "")
         {
-
-
-
-            //return new List<Grand.>();
-
-
-
-
-
-            //plugins are lled for now, return null
-            return null;
-
-
-
-
-
-
-
 
 
             var paymentMethods = _pluginFinder.GetPlugins<IPaymentMethod>(storeId: storeId).ToList();

@@ -91,16 +91,16 @@ namespace Grand.Core.Plugins
         public virtual T Instance<T>() where T : class, IPlugin
         {
             object instance;
-            //if (!EngineContextExperimental.Current.ContainerManager.TryResolve(PluginType, null, out instance))
+            if (!EngineContextExperimental.Current.ContainerManager.TryResolve(PluginType, null, out instance))
             {
                 //not resolved
-                //instance = EngineContextExperimental.Current.ContainerManager.ResolveUnregistered(PluginType);
+                instance = EngineContextExperimental.Current.ContainerManager.ResolveUnregistered(PluginType);
             }
-            //var typedInstance = instance as T;
-            //if (typedInstance != null)
-            //    typedInstance.PluginDescriptor = this;
-            //return typedInstance;
-            return default(T);
+            var typedInstance = instance as T;
+            if (typedInstance != null)
+                typedInstance.PluginDescriptor = this;
+            return typedInstance;
+            //return default(T);
         }
 
         public IPlugin Instance()

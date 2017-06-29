@@ -473,7 +473,18 @@ namespace Grand.Web.Controllers
                 throw new Exception("Shipping method is not selected");
             var shippingControllerType = shippingMethod.GetControllerType();
 
+            var one1 = EngineContextExperimental.Current.Resolve<IServiceProvider>().GetService(shippingControllerType);
+            var one2 = EngineContextExperimental.Current.Resolve<IServiceProvider>().GetService(shippingControllerType) as BaseShippingController;
+            var one3 = EngineContextExperimental.Current.Resolve<IServiceProvider>();
+
+            var qwqw = one3.GetService(shippingControllerType);
+
             //var shippingController = DependencyResolver.Current.GetService(shippingControllerType) as BaseShippingController;
+
+            //test
+            var shippingController1 = this.HttpContext.RequestServices.GetService(shippingControllerType);
+
+
             var shippingController = this.HttpContext.RequestServices.GetService(shippingControllerType) as BaseShippingController;
             shippingController.ControllerContext = this.ControllerContext;
             return shippingController;
@@ -482,6 +493,8 @@ namespace Grand.Web.Controllers
         [NonAction]
         protected void ValidateShippingForm(IFormCollection form, out List<string> warnings)
         {
+            warnings = new List<string>();
+            return;
             warnings = GetBaseShippingController(form["shippingoption"]).ValidateShippingForm(form).ToList();
             foreach (var warning in warnings)
                 ModelState.AddModelError("", warning);
@@ -2023,17 +2036,21 @@ namespace Grand.Web.Controllers
                 //var paymentController = DependencyResolver.Current.GetService(paymentControllerType) as BasePaymentController;
 
                 //tbh
-                var paymentController = this.HttpContext.RequestServices.GetService(paymentControllerType) as BasePaymentController;
-                if (paymentController == null)
-                    throw new Exception("Payment controller cannot be loaded");
+                //var paymentController = this.HttpContext.RequestServices.GetService(paymentControllerType) as BasePaymentController;
+                //if (paymentController == null)
+                //    throw new Exception("Payment controller cannot be loaded");
 
-                var warnings = paymentController.ValidatePaymentForm(form);
+                //woa
+                var paymentControllerWorkaround = Activator.CreateInstance(paymentControllerType) as BasePaymentController;
+
+
+                var warnings = paymentControllerWorkaround.ValidatePaymentForm(form);
                 foreach (var warning in warnings)
                     ModelState.AddModelError("", warning);
                 if (ModelState.IsValid)
                 {
                     //get payment info
-                    var paymentInfo = paymentController.GetPaymentInfo(form);
+                    var paymentInfo = paymentControllerWorkaround.GetPaymentInfo(form);
                     //session save
                     //tbh session//_httpContextAccessor.Session["OrderPaymentInfo"] = paymentInfo;
 

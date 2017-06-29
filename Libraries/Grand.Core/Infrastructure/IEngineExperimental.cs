@@ -19,7 +19,7 @@ namespace Grand.Core.Infrastructure
         /// <summary>
         /// Container manager
         /// </summary>
-        /*ContainerManager*/IContainer ContainerManager { get; }
+        /*IContainer*/ContainerManager ContainerManager { get; }
 
         /// <summary>
         /// Resolve dependency

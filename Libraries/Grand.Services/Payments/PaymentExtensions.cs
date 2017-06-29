@@ -33,6 +33,12 @@ namespace Grand.Services.Payments
 
             if (paymentSettings.ActivePaymentMethodSystemNames == null)
                 return false;
+
+            //ctl
+            return true;
+
+
+
             foreach (string activeMethodSystemName in paymentSettings.ActivePaymentMethodSystemNames)
                 if (paymentMethod.PluginDescriptor.SystemName.Equals(activeMethodSystemName, StringComparison.OrdinalIgnoreCase))
                     return true;

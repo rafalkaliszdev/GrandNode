@@ -1,7 +1,7 @@
 ﻿Group: Payment methods
-FriendlyName: Pay In Store
+FriendlyName: Pay By Bitcoin
 SystemName: Payments.PayByBitcoin
-Version: 1.07
+Version: 1.0
 SupportedVersions: 4.00
 Author: grandnode team
 DisplayOrder: 1

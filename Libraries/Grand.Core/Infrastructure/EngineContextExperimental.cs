@@ -6,6 +6,7 @@ using Autofac;
 using Grand.Core.Configuration.Routes;
 using System;
 using Autofac.Extensions.DependencyInjection;
+using Grand.Core.Infrastructure.DependencyManagement;
 
 namespace Grand.Core.Infrastructure
 {
@@ -21,7 +22,7 @@ namespace Grand.Core.Infrastructure
         /// </summary>
         /// <param name="forceRecreate">Creates a new factory instance even though the factory has been previously initialized.</param>
         [MethodImpl(MethodImplOptions.NoInlining/*Synchronized*/)]
-        public static IEngineExperimental Initialize(IContainer container)
+        public static IEngineExperimental Initialize(/*IContainer*/ContainerManager container)
         {
             if (Singleton<IEngineExperimental>.Instance == null)
             {
@@ -53,7 +54,7 @@ namespace Grand.Core.Infrastructure
             {
                 if (Singleton<IEngineExperimental>.Instance == null)
                 {
-                    throw new InvalidOperationException("the ll is this");
+                    throw new Exception("it should go here");
                     //Initialize();
                 }
                 return Singleton<IEngineExperimental>.Instance;

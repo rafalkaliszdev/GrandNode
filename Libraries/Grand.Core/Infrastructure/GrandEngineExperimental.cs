@@ -17,14 +17,12 @@ namespace Grand.Core.Infrastructure
     public class GrandEngineExperimental : IEngineExperimental
     {
         #region Fields
-
-        //private ContainerManager _containerManager;
-        private IContainer _containerManager;
+        private ContainerManager qq;
+        private /*IContainer*/ContainerManager _containerManager;
 
         #endregion
 
-
-        public GrandEngineExperimental(IContainer container)
+        public GrandEngineExperimental(/*IContainer*/ContainerManager container)
         {
             this._containerManager = container;
         }
@@ -59,22 +57,23 @@ namespace Grand.Core.Infrastructure
         /// <returns></returns>
         public T[] ResolveAll<T>()
         {
-            return new T[1];
-            //return ContainerManager.ResolveAll<T>();
+            return ContainerManager.ResolveAll<T>();
+            //return null;
         }
 
         #endregion
-
+        
         #region Properties
 
         /// <summary>
         /// Container manager
         /// </summary>
-        public virtual /*ContainerManager*/IContainer ContainerManager
+        public virtual /*IContainer*/ContainerManager ContainerManager
         {
             get { return _containerManager; }
         }
 
         #endregion
+
     }
 }

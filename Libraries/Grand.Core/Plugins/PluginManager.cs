@@ -295,6 +295,11 @@ namespace Grand.Core.Plugins
 
             //create list (<file info, parsed plugin descritor>)
             var result = new List<KeyValuePair<FileInfo, PluginDescriptor>>();
+
+
+            //test  2017_06_28
+            var test01 = pluginFolder.GetFiles("Description.txt", SearchOption.AllDirectories);
+
             //add display order and path to list
             foreach (var descriptionFile in pluginFolder.GetFiles("Description.txt", SearchOption.AllDirectories))
             {

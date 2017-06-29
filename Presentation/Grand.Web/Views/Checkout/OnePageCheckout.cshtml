@@ -7,10 +7,12 @@
     Html.AddScriptParts("~/Scripts/public.accordion.js");
     Html.AddScriptParts("~/Scripts/public.onepagecheckout.js");
     //woa
+    //dont change it, yeah it should get base URL from database but it has wrong number ('http://localhost:15540')
+    //and i dont want to fix it now
     var storeLocation = "http://localhost:33781/";// EngineContextExperimental.Current.Resolve<Grand.Core.IWebHelper>().GetStoreLocation();
 
     //title
-    Html.AddTitleParts(/*T*/("PageTitle.Checkout")/*.Text*/);
+    Html.AddTitleParts(@T("PageTitle.Checkout").Text);
 }
 @{
     //step numbers
@@ -55,10 +57,6 @@
                         @*billing address content will be loaded here*@
                     </div>
                 </form>
-
-                @*so this is constructor?*@
-
-
                 <script type="text/javascript">
                     Billing.init(
                         '#co-billing-form',
@@ -68,15 +66,22 @@
                         Billing.newAddress(!$('#billing-address-select').val());
                     }
                 </script>
-
-                @*this redirects to /cart*@
                 <div class="col-12 buttons pb-2 pt-2 px-0 my-0" id="billing-buttons-container">
                     <input type="button" title="C/ommon.Continue" class="btn btn-success new-address-next-step-button" onclick="Billing.save()" value="CommoXn.Continue" />
                     <span class="please-wait" id="billing-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                 </div>
  
-                @*this redirects to /cart too*@
-                <div>
+
+
+
+
+
+
+
+
+
+                @*rtl all below till end of div*@
+                @*<div>
                     <input type="button" onclick="testGetOpcSaveBilling()" value="testGetOpcSaveBilling" />
                 </div>
                 <script>
@@ -95,9 +100,6 @@
                         });
                     }
                 </script>
-
-
-
 
                 <div>
                     <input type="button" onclick="testPostOpcSaveBilling()" value="testPostOpcSaveBilling" />
@@ -118,10 +120,6 @@
                         });
                     }
                 </script>
-
-
-
-
 
                 <div>
                     <input type="button" onclick="testGetWhyItDoesntWork()" value="testGetWhyItDoesntWork" />
@@ -163,7 +161,9 @@
                             //error: alert('err')
                         });
                     }
-                </script>
+                </script>*@
+
+
 
 
 
@@ -205,7 +205,7 @@
                             <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false; ">@T("Common.Back")</a>
 
                         }
-                        <input type="button" class="btn btn-success new-address-next-step-button" title="Common.Continue" onclick="Shipping.save()" value="Common.Continue" />
+                        <input type="button" class="btn btn-success new-address-next-step-button" title="@T("Common.Continue")" onclick="Shipping.save()" value="@T("Common.Continue")" />
                         <span id="shipping-please-wait" class="please-wait" style="display: none;"> @T("Common.LoadingNextStep")</span>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
                         </script>
                         <div class="col-12 buttons pt-1 pb-1 px-0 my-3" id="shipping-method-buttons-container">
                             <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
-                            <input type="button" class="btn btn-success shipping-method-next-step-button" onclick="ShippingMethod.save()" value="Common.Continue" />
+                            <input type="button" class="btn btn-success shipping-method-next-step-button" onclick="ShippingMethod.save()" value="@T("Common.Continue")" />
                             <span id="shipping-method-please-wait" class="please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                         </div>
                     </form>
@@ -255,7 +255,7 @@
                 </script>
                 <div class="col-12 buttons pt-1 pb-1 my-3 px-0" id="payment-method-buttons-container">
                     <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
-                    <input type="button" class="btn btn-success payment-method-next-step-button" onclick="PaymentMethod.save()" value="Common.Continue" />
+                    <input type="button" class="btn btn-success payment-method-next-step-button" onclick="PaymentMethod.save()" value="@T("Common.Continue")" />
                     <span class="please-wait" id="payment-method-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                 </div>
             </div>
@@ -279,7 +279,7 @@
                 </script>
                 <div class="col-12 buttons pt-1 pb-1 my-3 px-0" id="payment-info-buttons-container">
                     <a class="btn btn-secondary" href="#" onclick="Checkout.back(); return false;">@T("Common.Back")</a>
-                    <input type="button" class="btn btn-success payment-info-next-step-button" onclick="PaymentInfo.save()" value="Common.Continue" />
+                    <input type="button" class="btn btn-success payment-info-next-step-button" onclick="PaymentInfo.save()" value="@T("Common.Continue")" />
                     <span class="please-wait" id="payment-info-please-wait" style="display: none;">@T("Common.LoadingNextStep")</span>
                 </div>
             </div>

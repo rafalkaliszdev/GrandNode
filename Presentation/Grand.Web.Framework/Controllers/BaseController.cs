@@ -13,6 +13,15 @@ using Grand.Web.Framework.Localization;
 using Grand.Web.Framework.UI;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Grand.Web.Framework.Controllers
 {
@@ -63,7 +72,54 @@ namespace Grand.Web.Framework.Controllers
         [NonAction]
         public virtual string RenderPartialViewToString(string viewName, object model)
         {
+            //get Razor view engine
+            var razorViewEngine = EngineContextExperimental.Current.Resolve<IRazorViewEngine>();
+
+            //create action context
+            var actionContext = new ActionContext(this.HttpContext, this.RouteData, this.ControllerContext.ActionDescriptor, this.ModelState);
+
+            //set view name as action name in case if not passed
+            if (string.IsNullOrEmpty(viewName))
+                viewName = this.ControllerContext.ActionDescriptor.ActionName;
+
+            //set model
+            ViewData.Model = model;
+            var viewResult = razorViewEngine.FindView(actionContext, viewName, false);
+            if (viewResult.View == null)
+                throw new ArgumentNullException($"{viewName} view was not found");
+
+            using (var stringWriter = new StringWriter())
+            {
+                var viewContext = new ViewContext(actionContext, viewResult.View, ViewData, TempData, stringWriter, new HtmlHelperOptions());
+
+                var t = viewResult.View.RenderAsync(viewContext);
+                t.Wait();
+                return stringWriter.GetStringBuilder().ToString();
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            string dupa = RenderToStringAsync(viewName, model).Result;
             //Original source code: http://craftycodeblog.com/2010/05/15/asp-net-mvc-render-partial-view-to-string/
+
 
             //tbh
             //if (string.IsNullOrEmpty(viewName))
@@ -81,6 +137,66 @@ namespace Grand.Web.Framework.Controllers
             //}
             return "RenderPartialViewToString()";
         }
+
+        public async Task<string> RenderToStringAsync(string viewName, object model)
+        {
+
+            var _razorViewEngine = EngineContextExperimental.Current.Resolve<IRazorViewEngine>();
+            var _tempDataProvider = EngineContextExperimental.Current.Resolve<ITempDataProvider>();
+            var _serviceProvider = EngineContextExperimental.Current.Resolve<IServiceProvider>();
+
+
+            var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
+            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+
+            //
+            //var actionContext1 = new ActionContext(this.ControllerContext.ActionDescriptor.ActionName, new RouteData(), new ActionDescriptor());
+            var actionContext2 = new ActionContext(ControllerContext.HttpContext, this.RouteData, this.ControllerContext.ActionDescriptor);
+            
+            using (var sw = new StringWriter())
+            {
+                var viewResult = _razorViewEngine.FindView(actionContext2, viewName, false);
+
+                if (viewResult.View == null)
+                {
+                    throw new ArgumentNullException($"{viewName} does not match any available view");
+                }
+
+                var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
+                {
+                    Model = model
+                };
+
+                var viewContext = new ViewContext(
+                    actionContext,
+                    viewResult.View,
+                    viewDictionary,
+                    new TempDataDictionary(actionContext.HttpContext, _tempDataProvider),
+                    sw,
+                    new HtmlHelperOptions()
+                );
+
+                await viewResult.View.RenderAsync(viewContext);
+                return sw.ToString();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         /// <summary>
