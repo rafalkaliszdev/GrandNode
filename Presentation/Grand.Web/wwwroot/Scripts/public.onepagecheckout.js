@@ -137,7 +137,7 @@ var Billing = {
 
         Checkout.setLoadWaiting('billing');
 
-        alert("gn_migration: " + this.saveUrl);
+        //alert("gn_migration: " + this.saveUrl);
 
         $.ajax({
             cache: false,

@@ -9,7 +9,7 @@
 <div class="page checkout-page order-completed-page text-xs-center">
     @if (!Model.OnePageCheckoutEnabled)
     {
-        @Html.Action("CheckoutProgress", "Checkout", new { step = CheckoutProgressStep.Complete })
+        @*@Html.Action("CheckoutProgress", "Checkout", new { step = CheckoutProgressStep.Complete })*@
     }
     <h2 class="generalTitle text-center">@T("Checkout.ThankYou")</h2>
     <div class="checkout-data">

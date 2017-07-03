@@ -482,7 +482,7 @@ namespace Grand.Services.Catalog
             }
 
             //cache
-            _cacheManager.RemoveByPattern(PRODUCTS_PATTERN_KEY);
+            //_cacheManager.RemoveByPattern(PRODUCTS_PATTERN_KEY);
                         
             //event notification
             _eventPublisher.EntityUpdated(product);
@@ -502,7 +502,7 @@ namespace Grand.Services.Catalog
             _productRepository.Collection.UpdateOneAsync(filter, update);
 
             //cache
-            _cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, product.Id));
+            //_cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, product.Id));
 
             //event notification
             _eventPublisher.EntityUpdated(product);
@@ -514,7 +514,7 @@ namespace Grand.Services.Catalog
             {
                 var update = new UpdateDefinitionBuilder<Product>().Inc(x => x.Viewed, qty);
                 var result = _productRepository.Collection.UpdateManyAsync(x => x.Id == productId, update).Result;
-                _cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, productId));
+                //_cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, productId));
             });
         }
 
@@ -524,7 +524,7 @@ namespace Grand.Services.Catalog
             {
                 var update = new UpdateDefinitionBuilder<Product>().Inc(x => x.Sold, qty);
                 var result = _productRepository.Collection.UpdateManyAsync(x => x.Id == productId, update).Result;
-                _cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, productId));
+                //_cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, productId));
             });
         }
 

@@ -6,6 +6,7 @@ using Grand.Services.Payments;
 using Grand.Web.Framework.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Grand.Core.Infrastructure;
 
 namespace Grand.Plugin.Payments.PayByBitcoin.Controllers
 {
@@ -14,12 +15,20 @@ namespace Grand.Plugin.Payments.PayByBitcoin.Controllers
         private readonly ISettingService _settingService;
         private readonly PayByBitcoinPaymentSettings _PayByBitcoinPaymentSettings;
 
+        //rtl need this because i need barameterless constructor
+        public PaymentPayByBitcoinController()
+        {
+            this._settingService = EngineContextExperimental.Current.Resolve<ISettingService>(); ;
+            this._PayByBitcoinPaymentSettings = EngineContextExperimental.Current.Resolve<PayByBitcoinPaymentSettings>();
+        }
+
         public PaymentPayByBitcoinController(ISettingService settingService, PayByBitcoinPaymentSettings PayByBitcoinPaymentSettings)
         {
             this._settingService = settingService;
             this._PayByBitcoinPaymentSettings = PayByBitcoinPaymentSettings;
         }
-        
+
+
         //[AdminAuthorize]
         //[ChildActionOnly]
         public ActionResult Configure()
@@ -39,7 +48,7 @@ namespace Grand.Plugin.Payments.PayByBitcoin.Controllers
         {
             if (!ModelState.IsValid)
                 return Configure();
-            
+
             //save settings
             _PayByBitcoinPaymentSettings.DescriptionText = model.DescriptionText;
             _PayByBitcoinPaymentSettings.AdditionalFee = model.AdditionalFee;
