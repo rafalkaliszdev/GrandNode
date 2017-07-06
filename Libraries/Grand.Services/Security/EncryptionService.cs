@@ -79,21 +79,38 @@ namespace Grand.Services.Security
         /// <returns>Encrypted text</returns>
         public virtual string EncryptText(string plainText, string encryptionPrivateKey = "")
         {
+#if NETCOREAPP1_1
             if (string.IsNullOrEmpty(plainText))
                 return plainText;
 
             if (String.IsNullOrEmpty(encryptionPrivateKey))
-                encryptionPrivateKey =  _securitySettings.EncryptionKey;
+                encryptionPrivateKey = _securitySettings.EncryptionKey; //valid example "019767712610986101976771"
 
             var tDESalg = TripleDES.Create();
-
-            var w = new ASCIIEncoding().GetBytes(encryptionPrivateKey.Substring(0, 24));
-
             tDESalg.Key = new ASCIIEncoding().GetBytes(encryptionPrivateKey.Substring(0, 24));
             tDESalg.IV = new ASCIIEncoding().GetBytes(encryptionPrivateKey.Substring(16, 8));
 
             byte[] encryptedBinary = EncryptTextToMemory(plainText, tDESalg.Key, tDESalg.IV);
             return Convert.ToBase64String(encryptedBinary);
+#endif
+
+#if NETCOREAPP2_0
+            //problem with not allowing 16 byte keys
+            //fixed in .NET Core 2.0
+            //see https://github.com/dotnet/corefx/issues/9966
+            if (string.IsNullOrEmpty(plainText))
+                return plainText;
+
+            if (String.IsNullOrEmpty(encryptionPrivateKey))
+                encryptionPrivateKey = _securitySettings.EncryptionKey; //valid example "0197677126109861"
+
+            var tDESalg = TripleDES.Create();
+            tDESalg.Key = new ASCIIEncoding().GetBytes(encryptionPrivateKey.Substring(0, 16));
+            tDESalg.IV = new ASCIIEncoding().GetBytes(encryptionPrivateKey.Substring(8, 8));
+
+            byte[] encryptedBinary = EncryptTextToMemory(plainText, tDESalg.Key, tDESalg.IV);
+            return Convert.ToBase64String(encryptedBinary);
+#endif
         }
 
         /// <summary>
@@ -108,7 +125,7 @@ namespace Grand.Services.Security
                 return cipherText;
 
             if (String.IsNullOrEmpty(encryptionPrivateKey))
-                encryptionPrivateKey =  _securitySettings.EncryptionKey;
+                encryptionPrivateKey = _securitySettings.EncryptionKey;
 
             var tDESalg = TripleDES.Create();
             tDESalg.Key = new ASCIIEncoding().GetBytes(encryptionPrivateKey.Substring(0, 24));
