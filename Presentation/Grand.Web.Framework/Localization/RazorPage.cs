@@ -107,12 +107,15 @@ namespace Grand.Web.Framework.Localization
         /// <returns></returns>
         public bool ShouldUseRtlTheme()
         {
+            //temp woa
+            var _workContext = EngineContextExperimental.Current.Resolve<IWorkContext>();
+
             var supportRtl = _workContext.WorkingLanguage.Rtl;
             if (supportRtl)
             {
                 //ensure that the active theme also supports it
-                var themeProvider = EngineContext.Current.Resolve<IThemeProvider>();
-                var themeContext = EngineContext.Current.Resolve<IThemeContext>();
+                var themeProvider = EngineContextExperimental.Current.Resolve<IThemeProvider>();
+                var themeContext = EngineContextExperimental.Current.Resolve<IThemeContext>();
                 supportRtl = themeProvider.GetThemeConfiguration(themeContext.WorkingThemeName).SupportRtl;
             }
             return supportRtl;
@@ -120,6 +123,9 @@ namespace Grand.Web.Framework.Localization
 
         public string WorkingLanguage()
         {
+            //temp woa
+            var _workContext = EngineContextExperimental.Current.Resolve<IWorkContext>();
+
             return _workContext.WorkingLanguage.UniqueSeoCode;
         }
 

@@ -1,0 +1,12 @@
+﻿@model ProductDetailsModel
+@using Grand.Web.Models.Catalog;
+@{
+    var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
+}
+@if (Model.CompareProductsEnabled)
+{
+    <button class="btn btn-secondary add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;">
+        <i class="fa fa-retweet"></i><span class="hidden-md-down"> @T("Products.Compare.AddToCompareList")</span>
+        <span class="sr-only">@T("Products.Compare.AddToCompareList")</span>
+    </button>
+}

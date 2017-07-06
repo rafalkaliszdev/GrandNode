@@ -54,7 +54,7 @@ namespace Grand.Core.Infrastructure
             {
                 if (Singleton<IEngineExperimental>.Instance == null)
                 {
-                    throw new Exception("it should go here");
+                    throw new Exception("it shouldn't go here");
                     //Initialize();
                 }
                 return Singleton<IEngineExperimental>.Instance;

@@ -72,12 +72,47 @@ namespace Grand.Core.Configuration.Routes
             }
             routeProviders = routeProviders.OrderByDescending(rp => rp.Priority).ToList();
 
-            var routesToBeRegistered = new List<NameTemplateDefaults>();
-            foreach (var routeProvider in routeProviders)
+
+            
+            app.UseMvc(routeBuilder =>
             {
-                routesToBeRegistered.Concat(routeProvider.CollectRoutes(/*app*/routesToBeRegistered));
-                //collectedRoutes.AddRange(dqwqqw.CollectRoutes(/*app*/collectedRoutes));
-            }
+                //should be only 2 elements in collection for now
+                foreach(var routeProvider in routeProviders)
+                {
+                    routeProvider.RegisterRoutes(routeBuilder);
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //2017_07_03 previous and working
+
+            //var routesToBeRegistered = new List<NameTemplateDefaults>();
+            //foreach (var routeProvider in routeProviders)
+            //{
+            //    routesToBeRegistered.Concat(routeProvider.CollectRoutes(/*app*/routesToBeRegistered));
+            //    //collectedRoutes.AddRange(dqwqqw.CollectRoutes(/*app*/collectedRoutes));
+            //}
 
             //this is default route
             //apparently it isnt needed, but can be left
@@ -87,51 +122,26 @@ namespace Grand.Core.Configuration.Routes
             //    defaults: new { controller = "Home", action = "Index" }
             //    ));
 
-            Debug.Write("");
+            ////2017_06_06
+            ////ad default route
+            //routesToBeRegistered.Add(new NameTemplateDefaults(
+            //    "Default", // Route name
+            //    "{controller}/{action}/{id?}", // URL with parameters
+            //     new { controller = "Home", action = "Index" }
+            //    ));
 
-
-            //2017_06_06
-            //ad default route
-            routesToBeRegistered.Add(new NameTemplateDefaults(
-                "Default", // Route name
-                "{controller}/{action}/{id?}", // URL with parameters
-                 new { controller = "Home", action = "Index" }
-                ));
-
-
-            //adds the routing middleware to the request pipeline and configures MVC as the default handler.
-            app.UseMvc(routes =>
-            {
-
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller=Home}/{action=Index}/{id?}"
-                //    );
-
-
-                //areas 
-                //previous
-                //routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
-                //new
-                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-                //nc 
-                /*routeBuilder*/
-                //routes.MapRoute(name: "areaRoute", template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-
-                foreach (var route in routesToBeRegistered)
-                {
-
-
-                    routes.MapRoute(
-                        name: route.Name,
-                        template: route.Template,
-                        defaults: route.Defaults
-                        );
-                }
-            });
-            //routeProviders.ForEach(rp => rp.RegisterRoutes(app));
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            //    foreach (var route in routesToBeRegistered)
+            //    {
+            //        routes.MapRoute(
+            //            name: route.Name,
+            //            template: route.Template,
+            //            defaults: route.Defaults
+            //            );
+            //    }
+            //});
         }
 
     }

@@ -4,29 +4,29 @@
 @{
     //current category ID
     string currentCategoryId = "";
-    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.OrdinalIgnoreCase) &&
-        Url.RequestContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.OrdinalIgnoreCase))
-    {
-        currentCategoryId = Url.RequestContext.RouteData.Values["categoryId"].ToString();
-    }
+    //if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.OrdinalIgnoreCase) &&
+    //    Url.RequestContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.OrdinalIgnoreCase))
+    //{
+    //    currentCategoryId = Url.RequestContext.RouteData.Values["categoryId"].ToString();
+    //}
 
 
     //current manufacturer ID
     string currentManufacturerId = "";
-    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.OrdinalIgnoreCase) &&
-        Url.RequestContext.RouteData.Values["action"].ToString().Equals("manufacturer", StringComparison.OrdinalIgnoreCase))
-    {
-        currentManufacturerId = Url.RequestContext.RouteData.Values["manufacturerId"].ToString();
-    }
+    //if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.OrdinalIgnoreCase) &&
+    //    Url.RequestContext.RouteData.Values["action"].ToString().Equals("manufacturer", StringComparison.OrdinalIgnoreCase))
+    //{
+    //    currentManufacturerId = Url.RequestContext.RouteData.Values["manufacturerId"].ToString();
+    //}
 
 
     //current product ID
     string currentProductId = "";
-    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("product", StringComparison.OrdinalIgnoreCase) &&
-        Url.RequestContext.RouteData.Values["action"].ToString().Equals("productdetails", StringComparison.OrdinalIgnoreCase))
-    {
-        currentProductId = Url.RequestContext.RouteData.Values["productId"].ToString();
-    }
+    //if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("product", StringComparison.OrdinalIgnoreCase) &&
+    //    Url.RequestContext.RouteData.Values["action"].ToString().Equals("productdetails", StringComparison.OrdinalIgnoreCase))
+    //{
+    //    currentProductId = Url.RequestContext.RouteData.Values["productId"].ToString();
+    //}
 }
 @if (IsSectionDefined("Breadcrumb"))
 {
@@ -49,13 +49,13 @@
             }
 
             @*Html.Widget("left_side_column_before")*@
-            @Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+            @*@Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })*@
             @*Html.Widget("left_side_column_after_category_navigation")*@
-            @Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })
+            @*@Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })
             @Html.Action("VendorNavigation", "Catalog")
             @Html.Action("RecentlyViewedProductsBlock", "Product", new { productThumbPictureSize = 64 })
             @Html.Action("PopularProductTags", "Catalog")
-            @Html.Action("PollBlock", "Poll", new { systemKeyword = "LeftColumnPoll" })
+            @Html.Action("PollBlock", "Poll", new { systemKeyword = "LeftColumnPoll" })*@
             @*Html.Widget("left_side_column_after")*@
         }
     </div>

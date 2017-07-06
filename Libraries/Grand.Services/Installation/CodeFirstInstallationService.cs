@@ -512,7 +512,7 @@ namespace Grand.Services.Installation
             foreach (var filePath in System.IO.Directory.EnumerateFiles(CommonHelper.MapPath("~/App_Data/Localization/"), "*.grandres.xml", SearchOption.TopDirectoryOnly))
             {
                 var localesXml = File.ReadAllText(filePath);
-                var localizationService = EngineContext.Current.Resolve<ILocalizationService>();
+                var localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
                 localizationService.ImportResourcesFromXmlInstall(language, localesXml);
             }
 
@@ -4252,7 +4252,7 @@ namespace Grand.Services.Installation
 
         protected virtual void HashDefaultCustomerPassword(string defaultUserEmail, string defaultUserPassword)
         {
-            var customerRegistrationService = EngineContext.Current.Resolve<ICustomerRegistrationService>();
+            var customerRegistrationService = EngineContextExperimental.Current.Resolve<ICustomerRegistrationService>();
             customerRegistrationService.ChangePassword(new ChangePasswordRequest(defaultUserEmail, false,
             PasswordFormat.Hashed, defaultUserPassword));
         }
@@ -4814,7 +4814,7 @@ namespace Grand.Services.Installation
 
         protected virtual void InstallSettings(bool installSampleData)
         {
-            var _settingService = EngineContext.Current.Resolve<ISettingService>();
+            var _settingService = EngineContextExperimental.Current.Resolve<ISettingService>();
 
             _settingService.SaveSetting(new MenuItemSettings
             {
@@ -5572,7 +5572,7 @@ namespace Grand.Services.Installation
 
         protected virtual void InstallCategories()
         {
-            var pictureService = EngineContext.Current.Resolve<IPictureService>();
+            var pictureService = EngineContextExperimental.Current.Resolve<IPictureService>();
 
             //sample pictures
             var sampleImagesPath = CommonHelper.MapPath("~/content/samples/");
@@ -5888,8 +5888,8 @@ namespace Grand.Services.Installation
 
         protected virtual void InstallManufacturers()
         {
-            var pictureService = EngineContext.Current.Resolve<IPictureService>();
-            var downloadService = EngineContext.Current.Resolve<IDownloadService>();
+            var pictureService = EngineContextExperimental.Current.Resolve<IPictureService>();
+            var downloadService = EngineContextExperimental.Current.Resolve<IDownloadService>();
 
             var sampleImagesPath = CommonHelper.MapPath("~/content/samples/");
 
@@ -5967,8 +5967,8 @@ namespace Grand.Services.Installation
 
         protected virtual void InstallProducts(string defaultUserEmail)
         {
-            var pictureService = EngineContext.Current.Resolve<IPictureService>();
-            var downloadService = EngineContext.Current.Resolve<IDownloadService>();
+            var pictureService = EngineContextExperimental.Current.Resolve<IPictureService>();
+            var downloadService = EngineContextExperimental.Current.Resolve<IDownloadService>();
 
             var productTemplateSimple = _productTemplateRepository.Table.FirstOrDefault(pt => pt.Name == "Simple product");
             if (productTemplateSimple == null)
@@ -7722,7 +7722,7 @@ namespace Grand.Services.Installation
 
             _productRepository.Insert(productAdidas);
 
-            var productAttribute = EngineContext.Current.Resolve<IProductAttributeService>().GetAllProductAttributes().Where(x => x.Name == "Color").FirstOrDefault();
+            var productAttribute = EngineContextExperimental.Current.Resolve<IProductAttributeService>().GetAllProductAttributes().Where(x => x.Name == "Color").FirstOrDefault();
 
             productAdidas.ProductAttributeMappings.Where(x => x.ProductAttributeId == productAttribute.Id).First().ProductAttributeValues.Where(x => x.Name == "Red").First().PictureId = productAdidas.ProductPictures.ElementAt(0).PictureId;
             productAdidas.ProductAttributeMappings.Where(x => x.ProductAttributeId == productAttribute.Id).First().ProductAttributeValues.Where(x => x.Name == "Blue").First().PictureId = productAdidas.ProductPictures.ElementAt(1).PictureId;

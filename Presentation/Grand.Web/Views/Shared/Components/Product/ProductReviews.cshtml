@@ -132,7 +132,7 @@
                         </div>
                         <div class="card-footer text-right">
                             @Html.Widget("productreviews_page_inside_review", review.Id)
-                            @Html.Partial("_ProductReviewHelpfulness", review.Helpfulness, new ViewDataDictionary())
+                            @Html.Partial("_ProductReviewHelpfulness", review.Helpfulness, new ViewDataDictionary(this.ViewData))
                         </div>
                     </div>
                 }

@@ -40,7 +40,6 @@ using Microsoft.AspNetCore.Routing;
 
 
 //woa
-using Grand.Web.EXPERIMENTAL_PLUGIN.Grand.Plugin.Payments.PayInStore;
 using Grand.Services.Configuration;
 
 namespace Grand.Web.Services
@@ -548,30 +547,30 @@ namespace Grand.Web.Services
 
 
             //woa
-            //var paymentMethods = _paymentService
-            //    .LoadActivePaymentMethods(_workContext.CurrentCustomer, _storeContext.CurrentStore.Id)
-            //    .Where(pm => pm.PaymentMethodType == PaymentMethodType.Button)
-            //    .Where(pm => !pm.HidePaymentMethod(cart))
-            //    .ToList();
+            var paymentMethods = _paymentService
+                .LoadActivePaymentMethods(_workContext.CurrentCustomer, _storeContext.CurrentStore.Id)
+                .Where(pm => pm.PaymentMethodType == PaymentMethodType.Button)
+                .Where(pm => !pm.HidePaymentMethod(cart))
+                .ToList();
 
 
-            var paymentSettings = new PayInStorePaymentSettings
-            {
-                AdditionalFee = 666,
-                AdditionalFeePercentage = false,
-                DescriptionText = "pej yn stor pejment sytins"
-            };
+            //var paymentSettings = new PayInStorePaymentSettings
+            //{
+            //    AdditionalFee = 666,
+            //    AdditionalFeePercentage = false,
+            //    DescriptionText = "pej yn stor pejment sytins"
+            //};
 
 
-            var paymentMethods = new List<IPaymentMethod>
-            {
-                new PayInStorePaymentProcessor(
-                    paymentSettings,
-                    Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<ISettingService>(),
-                    Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<IOrderTotalCalculationService>(),
-                    Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<ILocalizationService>()                    
-                    ),
-            };
+            //var paymentMethods = new List<IPaymentMethod>
+            //{
+            //    new PayInStorePaymentProcessor(
+            //        paymentSettings,
+            //        Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<ISettingService>(),
+            //        Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<IOrderTotalCalculationService>(),
+            //        Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<ILocalizationService>()                    
+            //        ),
+            //};
 
 
             //2017_05_29 15:15

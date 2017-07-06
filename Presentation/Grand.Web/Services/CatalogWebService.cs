@@ -34,7 +34,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Grand.Web.Services
 {
-    public partial class CatalogWebService: ICatalogWebService
+    public partial class CatalogWebService : ICatalogWebService
     {
         private readonly IWebHelper _webHelper;
         private readonly IProductWebService _productWebService;
@@ -50,7 +50,7 @@ namespace Grand.Web.Services
         private readonly IVendorService _vendorService;
         private readonly IProductTagService _productTagService;
         private readonly ICurrencyService _currencyService;
-        private readonly  IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ISearchTermService _searchTermService;
         private readonly IEventPublisher _eventPublisher;
         private readonly IAclService _aclService;
@@ -144,8 +144,8 @@ namespace Grand.Web.Services
                 parentCategoryId,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                 _storeContext.CurrentStore.Id);
-            return _cacheManager.Get(cacheKey, () =>
-            {
+            //return _cacheManager.Get(cacheKey, () =>
+            //{
                 var categoriesIds = new List<string>();
                 var categories = _categoryService.GetAllCategoriesByParentCategoryId(parentCategoryId);
                 foreach (var category in categories)
@@ -154,7 +154,7 @@ namespace Grand.Web.Services
                     categoriesIds.AddRange(GetChildCategoryIds(category.Id));
                 }
                 return categoriesIds;
-            });
+            //});
         }
 
         #endregion
@@ -182,7 +182,7 @@ namespace Grand.Web.Services
                 .OrderBy(x => x.Value);
             if (command.OrderBy == null)
                 command.OrderBy = allDisabled ? 0 : activeOptions.First().Key;
-            
+
             if (pagingFilteringModel.AllowProductSorting)
             {
                 foreach (var option in activeOptions)
@@ -410,15 +410,16 @@ namespace Grand.Web.Services
         public virtual string PrepareCategoryTemplateViewPath(string templateId)
         {
             var templateCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_TEMPLATE_MODEL_KEY, templateId);
-            var templateViewPath = _cacheManager.Get(templateCacheKey, () =>
-            {
+            //var templateViewPath = _cacheManager.Get(templateCacheKey, () =>
+            //{
                 var template = _categoryTemplateService.GetCategoryTemplateById(templateId);
                 if (template == null)
                     template = _categoryTemplateService.GetAllCategoryTemplates().FirstOrDefault();
                 if (template == null)
                     throw new Exception("No default template could be loaded");
-                return template.ViewPath;
-            });
+            //    return template.ViewPath;
+            var templateViewPath = template.ViewPath;
+            //});
 
             return templateViewPath;
         }
@@ -462,7 +463,7 @@ namespace Grand.Web.Services
                     string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                     _storeContext.CurrentStore.Id,
                     _workContext.WorkingLanguage.Id);
-                model.CategoryBreadcrumb = _cacheManager.Get(breadcrumbCacheKey, () =>
+                model.CategoryBreadcrumb =/* _cacheManager.Get(breadcrumbCacheKey, () =>*/
                     category
                     .GetCategoryBreadCrumb(_categoryService, _aclService, _storeMappingService)
                     .Select(catBr => new CategoryModel
@@ -471,50 +472,51 @@ namespace Grand.Web.Services
                         Name = catBr.GetLocalized(x => x.Name),
                         SeName = catBr.GetSeName()
                     })
-                    .ToList()
-                );
+                    .ToList();
+                //);
             }
 
             //subcategories
-            string subCategoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
-                category.Id,
-                string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
-                _storeContext.CurrentStore.Id,
-                _workContext.WorkingLanguage.Id,
-                _webHelper.IsCurrentConnectionSecured());
-            model.SubCategories = _cacheManager.Get(subCategoriesCacheKey, () =>
-                _categoryService.GetAllCategoriesByParentCategoryId(category.Id)
-                .Select(x =>
-                {
-                    var subCatModel = new CategoryModel.SubCategoryModel
-                    {
-                        Id = x.Id,
-                        Name = x.GetLocalized(y => y.Name),
-                        SeName = x.GetSeName(),
-                        Description = x.GetLocalized(y => y.Description)
-                    };
+            TemporaryWorkaround(category, model);
+            //string subCategoriesCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_SUBCATEGORIES_KEY,
+            //    category.Id,
+            //    string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
+            //    _storeContext.CurrentStore.Id,
+            //    _workContext.WorkingLanguage.Id,
+            //    _webHelper.IsCurrentConnectionSecured());
+            //model.SubCategories = _cacheManager.Get(subCategoriesCacheKey, () =>
+            //    _categoryService.GetAllCategoriesByParentCategoryId(category.Id)
+            //    .Select(x =>
+            //    {
+            //        var subCatModel = new CategoryModel.SubCategoryModel
+            //        {
+            //            Id = x.Id,
+            //            Name = x.GetLocalized(y => y.Name),
+            //            SeName = x.GetSeName(),
+            //            Description = x.GetLocalized(y => y.Description)
+            //        };
 
-                    //prepare picture model
-                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
-                    var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured(), _storeContext.CurrentStore.Id);
-                    subCatModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
-                    {
-                        var picture = _pictureService.GetPictureById(x.PictureId);
-                        var pictureModel = new PictureModel
-                        {
-                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
-                            ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
-                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), subCatModel.Name),
-                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), subCatModel.Name)
-                        };
-                        return pictureModel;
-                    });
+            //        //prepare picture model
+            //        int pictureSize = _mediaSettings.CategoryThumbPictureSize;
+            //        var categoryPictureCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_PICTURE_MODEL_KEY, x.Id, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured(), _storeContext.CurrentStore.Id);
+            //        subCatModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
+            //        {
+            //            var picture = _pictureService.GetPictureById(x.PictureId);
+            //            var pictureModel = new PictureModel
+            //            {
+            //                FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
+            //                ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
+            //                Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), subCatModel.Name),
+            //                AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), subCatModel.Name)
+            //            };
+            //            return pictureModel;
+            //        });
 
-                    return subCatModel;
-                })
-                .ToList()
-            );
-
+            //        return subCatModel;
+            //    })
+            //    .ToList()
+            //);
+            
             //featured products
             if (!_catalogSettings.IgnoreFeaturedProducts)
             {
@@ -522,7 +524,7 @@ namespace Grand.Web.Services
                 IPagedList<Product> featuredProducts = null;
                 string cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_HAS_FEATURED_PRODUCTS_KEY, category.Id,
                     string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()), _storeContext.CurrentStore.Id);
-                var hasFeaturedProductsCache = _cacheManager.Get<bool?>(cacheKey);
+                bool? hasFeaturedProductsCache = null;// _cacheManager.Get<bool?>(cacheKey);
                 if (!hasFeaturedProductsCache.HasValue)
                 {
                     //no value in the cache yet
@@ -534,7 +536,7 @@ namespace Grand.Web.Services
                        visibleIndividuallyOnly: true,
                        featuredProducts: true);
                     hasFeaturedProductsCache = featuredProducts.Any();
-                    _cacheManager.Set(cacheKey, hasFeaturedProductsCache, 60);
+                    //_cacheManager.Set(cacheKey, hasFeaturedProductsCache, 60);
                 }
                 if (hasFeaturedProductsCache.Value && featuredProducts == null)
                 {
@@ -587,17 +589,44 @@ namespace Grand.Web.Services
             return model;
         }
 
-        public virtual List<CategoryModel> PrepareHomepageCategory()
+        private void TemporaryWorkaround(Category category, CategoryModel model)
         {
 
 
 
+            model.SubCategories = _categoryService.GetAllCategoriesByParentCategoryId(category.Id)
+                .Select(x =>
+                {
+                    var subCatModel = new CategoryModel.SubCategoryModel
+                    {
+                        Id = x.Id,
+                        Name = x.GetLocalized(y => y.Name),
+                        SeName = x.GetSeName(),
+                        Description = x.GetLocalized(y => y.Description)
+                    };
 
+                    //prepare picture model
+                    int pictureSize = _mediaSettings.CategoryThumbPictureSize;
+
+
+                    //var picture = _pictureService.GetPictureById(x.PictureId);
+                    var pictureModel = new PictureModel
+                    {
+                        FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",// _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
+                        ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
+                        Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), subCatModel.Name),
+                        AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), subCatModel.Name)
+                    };
+                    subCatModel.PictureModel = pictureModel;
+
+                    return subCatModel;
+                })
+                .ToList();
+        }
+
+        public virtual List<CategoryModel> PrepareHomepageCategory()
+        {
             //return new List<CategoryModel>() { new CategoryModel { Name = "qqqqq1 zglaszam odbiur" } };
-
-
-
-
 
 
 

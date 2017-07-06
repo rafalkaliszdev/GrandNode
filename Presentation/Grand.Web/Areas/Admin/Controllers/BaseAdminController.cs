@@ -30,7 +30,7 @@ namespace Grand.Web.Areas.Admin.Controllers
         protected /*override*/ void Initialize(/*System.Web.Routing.RequestContext requestContext*/)
         {
             //set work context to admin mode
-            EngineContext.Current.Resolve<IWorkContext>().IsAdmin = true;
+            EngineContextExperimental.Current.Resolve<IWorkContext>().IsAdmin = true;
 
             //base.Initialize(requestContext);
         }
@@ -105,7 +105,7 @@ namespace Grand.Web.Areas.Admin.Controllers
         {
             //Json fix issue with dates in KendoUI grid
             //use json with IsoDateTimeConverter
-            //var result = EngineContext.Current.Resolve<AdminAreaSettings>().UseIsoDateTimeConverterInJson
+            //var result = EngineContextExperimental.Current.Resolve<AdminAreaSettings>().UseIsoDateTimeConverterInJson
             //    ? new ConverterJsonResult(new IsoDateTimeConverter()) : new JsonResult();
 
             //result.Data = data;

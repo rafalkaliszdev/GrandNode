@@ -17,7 +17,7 @@ namespace Grand.Core.Infrastructure
     public class GrandEngineExperimental : IEngineExperimental
     {
         #region Fields
-        private ContainerManager qq;
+
         private /*IContainer*/ContainerManager _containerManager;
 
         #endregion

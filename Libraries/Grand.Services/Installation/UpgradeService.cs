@@ -114,7 +114,7 @@ namespace Grand.Services.Installation
 
             #region MessageTemplates
 
-            var eaGeneral = EngineContext.Current.Resolve<IRepository<EmailAccount>>().Table.FirstOrDefault();
+            var eaGeneral = EngineContextExperimental.Current.Resolve<IRepository<EmailAccount>>().Table.FirstOrDefault();
             if (eaGeneral == null)
                 throw new Exception("Default email account cannot be loaded");
             var messageTemplates = new List<MessageTemplate>
@@ -146,12 +146,12 @@ namespace Grand.Services.Installation
                                            EmailAccountId = eaGeneral.Id,
                                        }
                                };
-            EngineContext.Current.Resolve<IRepository<MessageTemplate>>().Insert(messageTemplates);
+            EngineContextExperimental.Current.Resolve<IRepository<MessageTemplate>>().Insert(messageTemplates);
             #endregion
 
             #region Topics
 
-            var defaultTopicTemplate = EngineContext.Current.Resolve<IRepository<TopicTemplate>>().Table.FirstOrDefault(tt => tt.Name == "Default template");
+            var defaultTopicTemplate = EngineContextExperimental.Current.Resolve<IRepository<TopicTemplate>>().Table.FirstOrDefault(tt => tt.Name == "Default template");
             if (defaultTopicTemplate == null)
                 throw new Exception("Topic template cannot be loaded");
 
@@ -168,14 +168,14 @@ namespace Grand.Services.Installation
                     TopicTemplateId = defaultTopicTemplate.Id
                 },
             };
-            EngineContext.Current.Resolve<IRepository<Topic>>().Insert(topics);
+            EngineContextExperimental.Current.Resolve<IRepository<Topic>>().Insert(topics);
 
-            var ltopics = EngineContext.Current.Resolve<IRepository<Topic>>().Table.Where(x => x.SystemName == "ApplyVendor");
+            var ltopics = EngineContextExperimental.Current.Resolve<IRepository<Topic>>().Table.Where(x => x.SystemName == "ApplyVendor");
             //search engine names
             foreach (var topic in ltopics)
             {
                 var seName = topic.ValidateSeName("", !String.IsNullOrEmpty(topic.Title) ? topic.Title : topic.SystemName, true);
-                EngineContext.Current.Resolve<IRepository<UrlRecord>>().Insert(new UrlRecord
+                EngineContextExperimental.Current.Resolve<IRepository<UrlRecord>>().Insert(new UrlRecord
                 {
                     EntityId = topic.Id,
                     EntityName = "Topic",
@@ -184,7 +184,7 @@ namespace Grand.Services.Installation
                     Slug = seName
                 });
                 topic.SeName = seName;
-                EngineContext.Current.Resolve<IRepository<Topic>>().Update(topic);
+                EngineContextExperimental.Current.Resolve<IRepository<Topic>>().Update(topic);
             }
 
 
@@ -192,37 +192,37 @@ namespace Grand.Services.Installation
 
             #region Settings
 
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.AllowViewUnpublishedProductPage", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.DisplayDiscontinuedMessageForUnpublishedProducts", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.PublishBackProductWhenCancellingOrders", Value = "false", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.NewProductsNumber", Value = "6", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.NewProductsEnabled", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.AjaxProcessAttributeChange", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.DisplayTaxShippingInfoShoppingCart", Value = "false", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CustomerSettings.DateOfBirthRequired", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "MediaSettings.VendorThumbPictureSize", Value = "450", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "StoreInformationSettings.HidePoweredByGrandNode", Value = "false", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "RewardPointsSettings.PointsAccumulatedForAllStores", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "VendorSettings.AllowCustomersToApplyForVendorAccount", Value = "true", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "PaymentSettings.SkipPaymentInfoStepForRedirectionPaymentMethods", Value = "false", StoreId = "" });
-            EngineContext.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CommonSettings.SitemapCustomUrls", Value = "", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.AllowViewUnpublishedProductPage", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.DisplayDiscontinuedMessageForUnpublishedProducts", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.PublishBackProductWhenCancellingOrders", Value = "false", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.NewProductsNumber", Value = "6", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.NewProductsEnabled", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.AjaxProcessAttributeChange", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CatalogSettings.DisplayTaxShippingInfoShoppingCart", Value = "false", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CustomerSettings.DateOfBirthRequired", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "MediaSettings.VendorThumbPictureSize", Value = "450", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "StoreInformationSettings.HidePoweredByGrandNode", Value = "false", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "RewardPointsSettings.PointsAccumulatedForAllStores", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "VendorSettings.AllowCustomersToApplyForVendorAccount", Value = "true", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "PaymentSettings.SkipPaymentInfoStepForRedirectionPaymentMethods", Value = "false", StoreId = "" });
+            EngineContextExperimental.Current.Resolve<IRepository<Setting>>().Insert(new Setting() { Name = "CommonSettings.SitemapCustomUrls", Value = "", StoreId = "" });
 
             #endregion
 
             #region Product Template
 
-            var productTemplateGrouped = EngineContext.Current.Resolve<IRepository<ProductTemplate>>().Table.FirstOrDefault(pt => pt.Name == "Grouped product");
+            var productTemplateGrouped = EngineContextExperimental.Current.Resolve<IRepository<ProductTemplate>>().Table.FirstOrDefault(pt => pt.Name == "Grouped product");
             if (productTemplateGrouped != null)
             {
                 productTemplateGrouped.Name = "Grouped product (with variants)";
-                EngineContext.Current.Resolve<IRepository<ProductTemplate>>().Update(productTemplateGrouped);
+                EngineContextExperimental.Current.Resolve<IRepository<ProductTemplate>>().Update(productTemplateGrouped);
             }
 
             #endregion
 
             #region InstallReturnRequestReason
 
-            EngineContext.Current.Resolve<IRepository<ReturnRequestReason>>().Collection.Indexes.CreateOne(Builders<ReturnRequestReason>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
+            EngineContextExperimental.Current.Resolve<IRepository<ReturnRequestReason>>().Collection.Indexes.CreateOne(Builders<ReturnRequestReason>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             var returnRequestReasons = new List<ReturnRequestReason>
                                 {
                                     new ReturnRequestReason
@@ -241,13 +241,13 @@ namespace Grand.Services.Installation
                                             DisplayOrder = 3
                                         }
                                 };
-            EngineContext.Current.Resolve<IRepository<ReturnRequestReason>>().Insert(returnRequestReasons);
+            EngineContextExperimental.Current.Resolve<IRepository<ReturnRequestReason>>().Insert(returnRequestReasons);
 
             #endregion
 
             #region InstallReturnRequestAction
 
-            EngineContext.Current.Resolve<IRepository<ReturnRequestAction>>().Collection.Indexes.CreateOne(Builders<ReturnRequestAction>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
+            EngineContextExperimental.Current.Resolve<IRepository<ReturnRequestAction>>().Collection.Indexes.CreateOne(Builders<ReturnRequestAction>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
 
             var returnRequestActions = new List<ReturnRequestAction>
                                 {
@@ -267,7 +267,7 @@ namespace Grand.Services.Installation
                                             DisplayOrder = 3
                                         }
                                 };
-            EngineContext.Current.Resolve<IRepository<ReturnRequestAction>>().Insert(returnRequestActions);
+            EngineContextExperimental.Current.Resolve<IRepository<ReturnRequestAction>>().Insert(returnRequestActions);
 
             #endregion
 
@@ -292,7 +292,7 @@ namespace Grand.Services.Installation
             #endregion
 
             #region Install forum Vote
-            var _forumPostVote = Grand.Core.Infrastructure.EngineContext.Current.Resolve<IRepository<ForumPostVote>>();
+            var _forumPostVote = Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<IRepository<ForumPostVote>>();
             _forumPostVote.Collection.Indexes.DropAll();
             _forumPostVote.Collection.Indexes.CreateOneAsync(Builders<ForumPostVote>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _forumPostVote.Collection.Indexes.CreateOneAsync(Builders<ForumPostVote>.IndexKeys.Ascending(x => x.ForumPostId).Ascending(x => x.CustomerId), new CreateIndexOptions() { Name = "Vote", Unique = true });
@@ -318,7 +318,7 @@ namespace Grand.Services.Installation
                 MonthOptionChoice = MonthOptionChoice.ON_SPECIFIC_DAY,
                 DayOfMonth = 1
             };
-            EngineContext.Current.Resolve<IRepository<ScheduleTask>>().Insert(shtask1);
+            EngineContextExperimental.Current.Resolve<IRepository<ScheduleTask>>().Insert(shtask1);
 
             var shtask2 = new ScheduleTask
             {
@@ -337,13 +337,13 @@ namespace Grand.Services.Installation
                 MonthOptionChoice = MonthOptionChoice.ON_SPECIFIC_DAY,
                 DayOfMonth = 1
             };
-            EngineContext.Current.Resolve<IRepository<ScheduleTask>>().Insert(shtask2);
+            EngineContextExperimental.Current.Resolve<IRepository<ScheduleTask>>().Insert(shtask2);
 
             #endregion
 
             #region MessageTemplates
 
-            var emailAccount = EngineContext.Current.Resolve<IRepository<EmailAccount>>().Table.FirstOrDefault();
+            var emailAccount = EngineContextExperimental.Current.Resolve<IRepository<EmailAccount>>().Table.FirstOrDefault();
             if (emailAccount == null)
                 throw new Exception("Default email account cannot be loaded");
             var messageTemplates = new List<MessageTemplate>
@@ -374,14 +374,14 @@ namespace Grand.Services.Installation
                                 },
                             };
 
-            EngineContext.Current.Resolve<IRepository<MessageTemplate>>().Insert(messageTemplates);
+            EngineContextExperimental.Current.Resolve<IRepository<MessageTemplate>>().Insert(messageTemplates);
 
 
             #endregion
 
             #region Recently Viewed products
 
-            var _recentlyViewedProductRepository = Grand.Core.Infrastructure.EngineContext.Current.Resolve<IRepository<RecentlyViewedProduct>>();
+            var _recentlyViewedProductRepository = Grand.Core.Infrastructure.EngineContextExperimental.Current.Resolve<IRepository<RecentlyViewedProduct>>();
             _recentlyViewedProductRepository.Collection.Indexes.DropAll();
             _recentlyViewedProductRepository.Collection.Indexes.CreateOneAsync(Builders<RecentlyViewedProduct>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _recentlyViewedProductRepository.Collection.Indexes.CreateOneAsync(Builders<RecentlyViewedProduct>.IndexKeys.Ascending(x => x.CustomerId).Ascending(x => x.ProductId).Descending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "CustomerId.ProductId" });
@@ -391,7 +391,7 @@ namespace Grand.Services.Installation
             #region Rebuild index
 
             //customer
-            var _customerRepository = EngineContext.Current.Resolve<IRepository<Customer>>();
+            var _customerRepository = EngineContextExperimental.Current.Resolve<IRepository<Customer>>();
             _customerRepository.Collection.Indexes.DropAll();
             _customerRepository.Collection.Indexes.CreateOneAsync(Builders<Customer>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _customerRepository.Collection.Indexes.CreateOneAsync(Builders<Customer>.IndexKeys.Descending(x => x.CreatedOnUtc).Ascending(x => x.Deleted).Ascending("CustomerRoles._id"), new CreateIndexOptions() { Name = "CreatedOnUtc_1_CustomerRoles._id_1", Unique = false });
@@ -400,26 +400,26 @@ namespace Grand.Services.Installation
             _customerRepository.Collection.Indexes.CreateOneAsync(Builders<Customer>.IndexKeys.Ascending(x => x.Email), new CreateIndexOptions() { Name = "Email_1", Unique = false });
 
             //customer history password
-            var _customerHistoryPasswordRepository = EngineContext.Current.Resolve<IRepository<CustomerHistoryPassword>>();
+            var _customerHistoryPasswordRepository = EngineContextExperimental.Current.Resolve<IRepository<CustomerHistoryPassword>>();
             _customerHistoryPasswordRepository.Collection.Indexes.CreateOneAsync(Builders<CustomerHistoryPassword>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _customerHistoryPasswordRepository.Collection.Indexes.CreateOneAsync(Builders<CustomerHistoryPassword>.IndexKeys.Ascending(x => x.CustomerId).Descending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "CustomerId", Unique = false });
 
             //category
-            var _categoryRepository = EngineContext.Current.Resolve<IRepository<Category>>();
+            var _categoryRepository = EngineContextExperimental.Current.Resolve<IRepository<Category>>();
             _categoryRepository.Collection.Indexes.DropAll();
             _categoryRepository.Collection.Indexes.CreateOneAsync(Builders<Category>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _categoryRepository.Collection.Indexes.CreateOneAsync(Builders<Category>.IndexKeys.Ascending(x => x.DisplayOrder), new CreateIndexOptions() { Name = "DisplayOrder_1", Unique = false });
             _categoryRepository.Collection.Indexes.CreateOneAsync(Builders<Category>.IndexKeys.Ascending(x => x.ParentCategoryId).Ascending(x => x.DisplayOrder), new CreateIndexOptions() { Name = "ParentCategoryId_1_DisplayOrder_1", Unique = false });
 
             //manufacturer
-            var _manufacturerRepository = EngineContext.Current.Resolve<IRepository<Manufacturer>>();
+            var _manufacturerRepository = EngineContextExperimental.Current.Resolve<IRepository<Manufacturer>>();
             _manufacturerRepository.Collection.Indexes.DropAll();
             _manufacturerRepository.Collection.Indexes.CreateOneAsync(Builders<Manufacturer>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _manufacturerRepository.Collection.Indexes.CreateOneAsync(Builders<Manufacturer>.IndexKeys.Ascending(x => x.DisplayOrder), new CreateIndexOptions() { Name = "DisplayOrder_1", Unique = false });
             _manufacturerRepository.Collection.Indexes.CreateOneAsync(Builders<Manufacturer>.IndexKeys.Ascending("AppliedDiscounts"), new CreateIndexOptions() { Name = "AppliedDiscounts._id_1", Unique = false });
 
             //Product
-            var _productRepository = EngineContext.Current.Resolve<IRepository<Product>>();
+            var _productRepository = EngineContextExperimental.Current.Resolve<IRepository<Product>>();
             _productRepository.Collection.Indexes.DropAll();
             _productRepository.Collection.Indexes.CreateOneAsync(Builders<Product>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _productRepository.Collection.Indexes.CreateOneAsync(Builders<Product>.IndexKeys.Ascending(x => x.MarkAsNew).Ascending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "MarkAsNew_1_CreatedOnUtc_1", Unique = false });
@@ -444,26 +444,26 @@ namespace Grand.Services.Installation
             _productRepository.Collection.Indexes.CreateOneAsync(Builders<Product>.IndexKeys.Ascending(x => x.Published).Ascending(x => x.VisibleIndividually).Ascending("ProductSpecificationAttributes.SpecificationAttributeOptionId").Ascending("ProductSpecificationAttributes.AllowFiltering"), new CreateIndexOptions() { Name = "ProductSpecificationAttributes", Unique = false });
 
             //ProductReview
-            var _productReviewRepository = EngineContext.Current.Resolve<IRepository<ProductReview>>();
+            var _productReviewRepository = EngineContextExperimental.Current.Resolve<IRepository<ProductReview>>();
             _productReviewRepository.Collection.Indexes.DropAll();
             _productReviewRepository.Collection.Indexes.CreateOneAsync(Builders<ProductReview>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _productReviewRepository.Collection.Indexes.CreateOneAsync(Builders<ProductReview>.IndexKeys.Ascending(x => x.ProductId).Ascending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "ProductId", Unique = false });
 
 
             //topic
-            var _topicRepository = EngineContext.Current.Resolve<IRepository<Topic>>();
+            var _topicRepository = EngineContextExperimental.Current.Resolve<IRepository<Topic>>();
             _topicRepository.Collection.Indexes.DropAll();
             _topicRepository.Collection.Indexes.CreateOneAsync(Builders<Topic>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _topicRepository.Collection.Indexes.CreateOneAsync(Builders<Topic>.IndexKeys.Ascending(x => x.SystemName), new CreateIndexOptions() { Name = "SystemName", Unique = false });
 
             //news
-            var _newsItemRepository = EngineContext.Current.Resolve<IRepository<NewsItem>>();
+            var _newsItemRepository = EngineContextExperimental.Current.Resolve<IRepository<NewsItem>>();
             _newsItemRepository.Collection.Indexes.DropAll();
             _newsItemRepository.Collection.Indexes.CreateOneAsync(Builders<NewsItem>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _newsItemRepository.Collection.Indexes.CreateOneAsync(Builders<NewsItem>.IndexKeys.Descending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "CreatedOnUtc", Unique = false });
 
             //newsletter
-            var _newslettersubscriptionRepository = EngineContext.Current.Resolve<IRepository<NewsLetterSubscription>>();
+            var _newslettersubscriptionRepository = EngineContextExperimental.Current.Resolve<IRepository<NewsLetterSubscription>>();
             _newslettersubscriptionRepository.Collection.Indexes.DropAll();
             _newslettersubscriptionRepository.Collection.Indexes.CreateOneAsync(Builders<NewsLetterSubscription>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _newslettersubscriptionRepository.Collection.Indexes.CreateOneAsync(Builders<NewsLetterSubscription>.IndexKeys.Ascending(x => x.CustomerId), new CreateIndexOptions() { Name = "CustomerId", Unique = false });
@@ -471,25 +471,25 @@ namespace Grand.Services.Installation
 
 
             //Log
-            var _logRepository = EngineContext.Current.Resolve<IRepository<Log>>();
+            var _logRepository = EngineContextExperimental.Current.Resolve<IRepository<Log>>();
             _logRepository.Collection.Indexes.DropAll();
             _logRepository.Collection.Indexes.CreateOneAsync(Builders<Log>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _logRepository.Collection.Indexes.CreateOneAsync(Builders<Log>.IndexKeys.Descending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "CreatedOnUtc", Unique = false });
 
             //search term
-            var _searchtermRepository = EngineContext.Current.Resolve<IRepository<SearchTerm>>();
+            var _searchtermRepository = EngineContextExperimental.Current.Resolve<IRepository<SearchTerm>>();
             _searchtermRepository.Collection.Indexes.DropAll();
             _searchtermRepository.Collection.Indexes.CreateOneAsync(Builders<SearchTerm>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _searchtermRepository.Collection.Indexes.CreateOneAsync(Builders<SearchTerm>.IndexKeys.Descending(x => x.Count), new CreateIndexOptions() { Name = "Count", Unique = false });
 
             //setting
-            var _searchtermsRepository = EngineContext.Current.Resolve<IRepository<Setting>>();
+            var _searchtermsRepository = EngineContextExperimental.Current.Resolve<IRepository<Setting>>();
             _searchtermsRepository.Collection.Indexes.DropAll();
             _searchtermsRepository.Collection.Indexes.CreateOneAsync(Builders<Setting>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _searchtermsRepository.Collection.Indexes.CreateOneAsync(Builders<Setting>.IndexKeys.Ascending(x => x.Name), new CreateIndexOptions() { Name = "Name", Unique = false });
 
             //order
-            var _orderRepository = EngineContext.Current.Resolve<IRepository<Order>>();
+            var _orderRepository = EngineContextExperimental.Current.Resolve<IRepository<Order>>();
             _orderRepository.Collection.Indexes.DropAll();
             _orderRepository.Collection.Indexes.CreateOneAsync(Builders<Order>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _orderRepository.Collection.Indexes.CreateOneAsync(Builders<Order>.IndexKeys.Ascending(x => x.CustomerId).Descending(x => x.CreatedOnUtc), new CreateIndexOptions() { Name = "CustomerId_1_CreatedOnUtc_-1", Unique = false });
@@ -500,7 +500,7 @@ namespace Grand.Services.Installation
 
 
             //url record
-            var _urlRecordRepository = EngineContext.Current.Resolve<IRepository<UrlRecord>>();
+            var _urlRecordRepository = EngineContextExperimental.Current.Resolve<IRepository<UrlRecord>>();
             _urlRecordRepository.Collection.Indexes.DropAll();
             _urlRecordRepository.Collection.Indexes.CreateOneAsync(Builders<UrlRecord>.IndexKeys.Ascending(x => x.Id), new CreateIndexOptions() { Name = "Id", Unique = true });
             _urlRecordRepository.Collection.Indexes.CreateOneAsync(Builders<UrlRecord>.IndexKeys.Ascending(x => x.Slug).Ascending(x => x.IsActive), new CreateIndexOptions() { Name = "Slug" });
@@ -510,13 +510,13 @@ namespace Grand.Services.Installation
 
             #region Settings
 
-            var settingService = EngineContext.Current.Resolve<ISettingService>();
+            var settingService = EngineContextExperimental.Current.Resolve<ISettingService>();
 
-            var catalogSettings = EngineContext.Current.Resolve<CatalogSettings>();
+            var catalogSettings = EngineContextExperimental.Current.Resolve<CatalogSettings>();
             catalogSettings.LimitOfFeaturedProducts = 30;
             settingService.SaveSetting(catalogSettings, x => x.LimitOfFeaturedProducts, "", false);
 
-            var adminAreaSettings = EngineContext.Current.Resolve<AdminAreaSettings>();
+            var adminAreaSettings = EngineContextExperimental.Current.Resolve<AdminAreaSettings>();
             adminAreaSettings.UseIsoDateTimeConverterInJson = true;
             settingService.SaveSetting(adminAreaSettings, x => x.UseIsoDateTimeConverterInJson, "", false);
 
@@ -536,7 +536,7 @@ namespace Grand.Services.Installation
 
             #region ActivityLog
 
-            var _activityLogTypeRepository = EngineContext.Current.Resolve<IRepository<ActivityLogType>>();
+            var _activityLogTypeRepository = EngineContextExperimental.Current.Resolve<IRepository<ActivityLogType>>();
             _activityLogTypeRepository.Insert(new ActivityLogType()
             {
                 SystemKeyword = "PublicStore.Url",
@@ -568,7 +568,7 @@ namespace Grand.Services.Installation
             #region Permisions
 
             IPermissionProvider provider = new StandardPermissionProvider();
-            EngineContext.Current.Resolve<IPermissionService>().InstallPermissions(provider);
+            EngineContextExperimental.Current.Resolve<IPermissionService>().InstallPermissions(provider);
              
             #endregion
         }
@@ -581,7 +581,7 @@ namespace Grand.Services.Installation
 
             #region MessageTemplates
 
-            var emailAccount = EngineContext.Current.Resolve<IRepository<EmailAccount>>().Table.FirstOrDefault();
+            var emailAccount = EngineContextExperimental.Current.Resolve<IRepository<EmailAccount>>().Table.FirstOrDefault();
             if (emailAccount == null)
                 throw new Exception("Default email account cannot be loaded");
             var messageTemplates = new List<MessageTemplate>
@@ -596,7 +596,7 @@ namespace Grand.Services.Installation
                                 },
                             };
 
-            EngineContext.Current.Resolve<IRepository<MessageTemplate>>().Insert(messageTemplates);
+            EngineContextExperimental.Current.Resolve<IRepository<MessageTemplate>>().Insert(messageTemplates);
 
 
             #endregion
@@ -607,7 +607,7 @@ namespace Grand.Services.Installation
             var filter = FilterDefinition<Product>.Empty;
             filter = filter & builder.Where(x => x.ManageInventoryMethodId == (int)ManageInventoryMethod.ManageStock);
             filter = filter & builder.Where(x => x.StockQuantity < 0 || x.MinStockQuantity > 0);
-            var productRepository = EngineContext.Current.Resolve<IRepository<Product>>();
+            var productRepository = EngineContextExperimental.Current.Resolve<IRepository<Product>>();
             var products = productRepository.Collection.Find(filter).ToList();
             foreach (var product in products)
             {
@@ -627,13 +627,13 @@ namespace Grand.Services.Installation
         private void InstallStringResources(string filenames)
         {
             //'English' language            
-            var language = EngineContext.Current.Resolve<IRepository<Language>>().Table.Single(l => l.Name == "English");
+            var language = EngineContextExperimental.Current.Resolve<IRepository<Language>>().Table.Single(l => l.Name == "English");
 
             //save resources
             foreach (var filePath in System.IO.Directory.EnumerateFiles(CommonHelper.MapPath("~/App_Data/Localization/Upgrade"), "*" + filenames , SearchOption.TopDirectoryOnly))
             {
                 var localesXml = File.ReadAllText(filePath);
-                var localizationService = EngineContext.Current.Resolve<ILocalizationService>();
+                var localizationService = EngineContextExperimental.Current.Resolve<ILocalizationService>();
                 localizationService.ImportResourcesFromXmlInstall(language, localesXml);
             }
 

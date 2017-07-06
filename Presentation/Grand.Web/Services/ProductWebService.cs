@@ -470,42 +470,48 @@ namespace Grand.Web.Services
                 throw new ArgumentNullException("product");
 
             string cacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_SPECS_MODEL_KEY, product.Id, _workContext.WorkingLanguage.Id);
-            return _cacheManager.Get(cacheKey, () =>
-                //specificationAttributeService.GetProductSpecificationAttributes(product.Id, 0, null, true)
-                product.ProductSpecificationAttributes.Where(x => x.ShowOnProductPage)
-                .Select(psa =>
-                {
-                    var specificationAttribute = _specificationAttributeService.GetSpecificationAttributeById(psa.SpecificationAttributeId);
-                    var m = new ProductSpecificationModel
-                    {
-                        SpecificationAttributeId = psa.SpecificationAttributeId,
-                        SpecificationAttributeName = specificationAttribute.GetLocalized(x => x.Name),
-                        ColorSquaresRgb = specificationAttribute.SpecificationAttributeOptions.Where(x => x.Id == psa.SpecificationAttributeOptionId).FirstOrDefault() != null ? specificationAttribute.SpecificationAttributeOptions.Where(x => x.Id == psa.SpecificationAttributeOptionId).FirstOrDefault().ColorSquaresRgb : "",
-                    };
+            //return _cacheManager.Get(cacheKey, () =>
+            //specificationAttributeService.GetProductSpecificationAttributes(product.Id, 0, null, true)
 
-                    switch (psa.AttributeType)
-                    {
+
+            var test =
+            product.ProductSpecificationAttributes.Where(x => x.ShowOnProductPage)
+            .Select(psa =>
+            {
+                var specificationAttribute = _specificationAttributeService.GetSpecificationAttributeById(psa.SpecificationAttributeId);
+                var m = new ProductSpecificationModel
+                {
+                    SpecificationAttributeId = psa.SpecificationAttributeId,
+                    SpecificationAttributeName = specificationAttribute.GetLocalized(x => x.Name),
+                    ColorSquaresRgb = specificationAttribute.SpecificationAttributeOptions.Where(x => x.Id == psa.SpecificationAttributeOptionId).FirstOrDefault() != null ? specificationAttribute.SpecificationAttributeOptions.Where(x => x.Id == psa.SpecificationAttributeOptionId).FirstOrDefault().ColorSquaresRgb : "",
+                };
+
+                switch (psa.AttributeType)
+                {
 
                         //tbh HtmlEncode
 
                         case SpecificationAttributeType.Option:
-                            m.ValueRaw = /*HttpUtility.HtmlEncode*/System.Net.WebUtility.HtmlEncode(specificationAttribute.SpecificationAttributeOptions.Where(x => x.Id == psa.SpecificationAttributeOptionId).FirstOrDefault().GetLocalized(x => x.Name));
-                            break;
-                        case SpecificationAttributeType.CustomText:
-                            m.ValueRaw = /*HttpUtility.HtmlEncode*/System.Net.WebUtility.HtmlEncode(psa.CustomValue);
-                            break;
-                        case SpecificationAttributeType.CustomHtmlText:
-                            m.ValueRaw = psa.CustomValue;
-                            break;
-                        case SpecificationAttributeType.Hyperlink:
-                            m.ValueRaw = string.Format("<a href='{0}' target='_blank'>{0}</a>", psa.CustomValue);
-                            break;
-                        default:
-                            break;
-                    }
-                    return m;
-                }).ToList()
-            );
+                        m.ValueRaw = /*HttpUtility.HtmlEncode*/System.Net.WebUtility.HtmlEncode(specificationAttribute.SpecificationAttributeOptions.Where(x => x.Id == psa.SpecificationAttributeOptionId).FirstOrDefault().GetLocalized(x => x.Name));
+                        break;
+                    case SpecificationAttributeType.CustomText:
+                        m.ValueRaw = /*HttpUtility.HtmlEncode*/System.Net.WebUtility.HtmlEncode(psa.CustomValue);
+                        break;
+                    case SpecificationAttributeType.CustomHtmlText:
+                        m.ValueRaw = psa.CustomValue;
+                        break;
+                    case SpecificationAttributeType.Hyperlink:
+                        m.ValueRaw = string.Format("<a href='{0}' target='_blank'>{0}</a>", psa.CustomValue);
+                        break;
+                    default:
+                        break;
+                }
+                return m;
+            }).ToList();
+
+
+            return test;
+            //);
         }
 
         public virtual ProductReviewOverviewModel PrepareProductReviewOverviewModel(
@@ -548,15 +554,17 @@ namespace Grand.Web.Services
                 throw new ArgumentNullException("product");
 
             var templateCacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_TEMPLATE_MODEL_KEY, productTemplateId);
-            var productTemplateViewPath = _cacheManager.Get(templateCacheKey, () =>
-            {
+            //var productTemplateViewPath = _cacheManager.Get(templateCacheKey, () =>
+            //{
                 var template = _productTemplateService.GetProductTemplateById(productTemplateId);
                 if (template == null)
                     template = _productTemplateService.GetAllProductTemplates().FirstOrDefault();
                 if (template == null)
                     throw new Exception("No default template could be loaded");
-                return template.ViewPath;
-            });
+                //return template.ViewPath;
+            var productTemplateViewPath = template.ViewPath;
+
+            //});
 
             return productTemplateViewPath;
         }
@@ -683,35 +691,36 @@ namespace Grand.Web.Services
                     _workContext.WorkingLanguage.Id,
                     string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                     _storeContext.CurrentStore.Id);
-                model.Breadcrumb = _cacheManager.Get(breadcrumbCacheKey, () =>
+                //model.Breadcrumb = _cacheManager.Get(breadcrumbCacheKey, () =>
+                //{
+                var breadcrumbModel = new ProductDetailsModel.ProductBreadcrumbModel
                 {
-                    var breadcrumbModel = new ProductDetailsModel.ProductBreadcrumbModel
+                    Enabled = _catalogSettings.CategoryBreadcrumbEnabled,
+                    ProductId = product.Id,
+                    ProductName = product.GetLocalized(x => x.Name),
+                    ProductSeName = product.GetSeName()
+                };
+                var productCategories = product.ProductCategories;
+                if (productCategories.Any())
+                {
+                    var category = _categoryService.GetCategoryById(productCategories.FirstOrDefault().CategoryId);
+                    if (category != null)
                     {
-                        Enabled = _catalogSettings.CategoryBreadcrumbEnabled,
-                        ProductId = product.Id,
-                        ProductName = product.GetLocalized(x => x.Name),
-                        ProductSeName = product.GetSeName()
-                    };
-                    var productCategories = product.ProductCategories;
-                    if (productCategories.Any())
-                    {
-                        var category = _categoryService.GetCategoryById(productCategories.FirstOrDefault().CategoryId);
-                        if (category != null)
+                        foreach (var catBr in category.GetCategoryBreadCrumb(_categoryService, _aclService, _storeMappingService))
                         {
-                            foreach (var catBr in category.GetCategoryBreadCrumb(_categoryService, _aclService, _storeMappingService))
+                            breadcrumbModel.CategoryBreadcrumb.Add(new CategorySimpleModel
                             {
-                                breadcrumbModel.CategoryBreadcrumb.Add(new CategorySimpleModel
-                                {
-                                    Id = catBr.Id,
-                                    Name = catBr.GetLocalized(x => x.Name),
-                                    SeName = catBr.GetSeName(),
-                                    IncludeInTopMenu = catBr.IncludeInTopMenu
-                                });
-                            }
+                                Id = catBr.Id,
+                                Name = catBr.GetLocalized(x => x.Name),
+                                SeName = catBr.GetSeName(),
+                                IncludeInTopMenu = catBr.IncludeInTopMenu
+                            });
                         }
                     }
-                    return breadcrumbModel;
-                });
+                }
+                //return breadcrumbModel;
+                model.Breadcrumb = breadcrumbModel;
+                //});
             }
 
             #endregion
@@ -722,25 +731,26 @@ namespace Grand.Web.Services
             if (!isAssociatedProduct)
             {
                 var productTagsCacheKey = string.Format(ModelCacheEventConsumer.PRODUCTTAG_BY_PRODUCT_MODEL_KEY, product.Id, _workContext.WorkingLanguage.Id, _storeContext.CurrentStore.Id);
-                model.ProductTags = _cacheManager.Get(productTagsCacheKey, () =>
+                //model.ProductTags = _cacheManager.Get(productTagsCacheKey, () =>
+                //{
+                List<ProductTagModel> tags = new List<ProductTagModel>();
+                foreach (var item in product.ProductTags)
                 {
-                    List<ProductTagModel> tags = new List<ProductTagModel>();
-                    foreach (var item in product.ProductTags)
+                    var tag = _productTagService.GetProductTagById(item);
+                    if (tag != null)
                     {
-                        var tag = _productTagService.GetProductTagById(item);
-                        if (tag != null)
+                        tags.Add(new ProductTagModel()
                         {
-                            tags.Add(new ProductTagModel()
-                            {
-                                Id = tag.Id,
-                                Name = tag.GetLocalized(y => y.Name),
-                                SeName = tag.GetSeName(),
-                                ProductCount = _productTagService.GetProductCount(tag.Id, _storeContext.CurrentStore.Id)
-                            });
-                        }
+                            Id = tag.Id,
+                            Name = tag.GetLocalized(y => y.Name),
+                            SeName = tag.GetSeName(),
+                            ProductCount = _productTagService.GetProductCount(tag.Id, _storeContext.CurrentStore.Id)
+                        });
                     }
-                    return tags;
-                });
+                }
+                //return tags;
+                model.ProductTags = tags;
+                //});
 
             }
 
@@ -755,52 +765,76 @@ namespace Grand.Web.Services
                 _mediaSettings.ProductDetailsPictureSize;
             //prepare picture models
             var productPicturesCacheKey = string.Format(ModelCacheEventConsumer.PRODUCT_DETAILS_PICTURES_MODEL_KEY, product.Id, defaultPictureSize, isAssociatedProduct, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured(), _storeContext.CurrentStore.Id);
-            var cachedPictures = _cacheManager.Get(productPicturesCacheKey, () =>
-            {
-                //_pictureService.GetPicturesByProductId(product.Id);
-                var defaultPicture = product.ProductPictures.FirstOrDefault();
-                if (defaultPicture == null)
-                    defaultPicture = new ProductPicture();
+            
+            
+            
 
-                var defaultPictureModel = new PictureModel
+
+
+
+
+
+
+            
+            //var cachedPictures = _cacheManager.Get(productPicturesCacheKey, () =>
+            //{
+            //_pictureService.GetPicturesByProductId(product.Id);
+            var defaultPicture = product.ProductPictures.FirstOrDefault();
+            if (defaultPicture == null)
+                defaultPicture = new ProductPicture();
+
+            var defaultPictureModel = new PictureModel
+            {
+                ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, defaultPictureSize, !isAssociatedProduct),
+                FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, 0, !isAssociatedProduct),
+            };
+            //"title" attribute
+            defaultPictureModel.Title = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.TitleAttribute)) ?
+                defaultPicture.TitleAttribute :
+                string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat.Details"), model.Name);
+            //"alt" attribute
+            defaultPictureModel.AlternateText = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.AltAttribute)) ?
+                defaultPicture.AltAttribute :
+                string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat.Details"), model.Name);
+
+            //all pictures
+            var pictureModels = new List<PictureModel>();
+            foreach (var picture in product.ProductPictures)
+            {
+                var pictureModel = new PictureModel
                 {
-                    ImageUrl = _pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, defaultPictureSize, !isAssociatedProduct),
-                    FullSizeImageUrl = _pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, 0, !isAssociatedProduct),
+                    ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct, _mediaSettings.ProductThumbPictureSizeOnProductDetailsPage),
+                    FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct),
+                    Title = string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat.Details"), model.Name),
+                    AlternateText = string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat.Details"), model.Name),
                 };
                 //"title" attribute
-                defaultPictureModel.Title = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.TitleAttribute)) ?
-                    defaultPicture.TitleAttribute :
+                pictureModel.Title = !string.IsNullOrEmpty(picture.TitleAttribute) ?
+                    picture.TitleAttribute :
                     string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat.Details"), model.Name);
                 //"alt" attribute
-                defaultPictureModel.AlternateText = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.AltAttribute)) ?
-                    defaultPicture.AltAttribute :
+                pictureModel.AlternateText = !string.IsNullOrEmpty(picture.AltAttribute) ?
+                    picture.AltAttribute :
                     string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat.Details"), model.Name);
 
-                //all pictures
-                var pictureModels = new List<PictureModel>();
-                foreach (var picture in product.ProductPictures)
-                {
-                    var pictureModel = new PictureModel
-                    {
-                        ImageUrl = _pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct, _mediaSettings.ProductThumbPictureSizeOnProductDetailsPage),
-                        FullSizeImageUrl = _pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct),
-                        Title = string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat.Details"), model.Name),
-                        AlternateText = string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat.Details"), model.Name),
-                    };
-                    //"title" attribute
-                    pictureModel.Title = !string.IsNullOrEmpty(picture.TitleAttribute) ?
-                        picture.TitleAttribute :
-                        string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat.Details"), model.Name);
-                    //"alt" attribute
-                    pictureModel.AlternateText = !string.IsNullOrEmpty(picture.AltAttribute) ?
-                        picture.AltAttribute :
-                        string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat.Details"), model.Name);
+                pictureModels.Add(pictureModel);
+            }
 
-                    pictureModels.Add(pictureModel);
-                }
+            //return new { DefaultPictureModel = defaultPictureModel, PictureModels = pictureModels };
+            var cachedPictures = new { DefaultPictureModel = defaultPictureModel, PictureModels = pictureModels };
+            //});
 
-                return new { DefaultPictureModel = defaultPictureModel, PictureModels = pictureModels };
-            });
+
+
+
+
+
+
+
+
+
+
+
             model.DefaultPictureModel = cachedPictures.DefaultPictureModel;
             model.PictureModels = cachedPictures.PictureModels;
 
@@ -1209,9 +1243,9 @@ namespace Grand.Web.Services
                     _workContext.WorkingLanguage.Id,
                     string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                     _storeContext.CurrentStore.Id);
-                model.ProductManufacturers = _cacheManager.Get(manufacturersCacheKey, () =>
-                    product.ProductManufacturers.Select(x => _manufacturerService.GetManufacturerById(x.ManufacturerId).ToModel()).ToList()
-                    );
+                model.ProductManufacturers = /*_cacheManager.Get(manufacturersCacheKey, () =>*/
+                    product.ProductManufacturers.Select(x => _manufacturerService.GetManufacturerById(x.ManufacturerId).ToModel()).ToList();
+                    //);
             }
             #endregion
 
@@ -1323,7 +1357,7 @@ namespace Grand.Web.Services
             //notify store owner
             if (_catalogSettings.NotifyStoreOwnerAboutNewProductReviews)
                 _workflowMessageService.SendProductReviewNotificationMessage(productReview, _localizationSettings.DefaultAdminLanguageId);
-            
+
             return productReview;
         }
 

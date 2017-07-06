@@ -87,13 +87,13 @@
                         @Html.Partial("_DownloadSample", Model)
                         <!--attributes-->
                         @{
-                            var dataDictAttributes = new ViewDataDictionary();
+                            var dataDictAttributes = new ViewDataDictionary(this.ViewData);
                             dataDictAttributes.TemplateInfo.HtmlFieldPrefix = string.Format("attributes_{0}", Model.Id);
                             @Html.Partial("_ProductAttributes", Model.ProductAttributes, dataDictAttributes)
                         }
                         <!--gift card-->
                         @{
-                            var dataDictGiftCard = new ViewDataDictionary();
+                            var dataDictGiftCard = new ViewDataDictionary(this.ViewData);
                             dataDictGiftCard.TemplateInfo.HtmlFieldPrefix = string.Format("giftcard_{0}", Model.Id);
                             @Html.Partial("_GiftCardInfo", Model.GiftCard, dataDictGiftCard)
                         }
@@ -101,7 +101,7 @@
 
                         @{
 
-                            var dataDictRental = new ViewDataDictionary();
+                            var dataDictRental = new ViewDataDictionary(this.ViewData);
                             dataDictRental.TemplateInfo.HtmlFieldPrefix = string.Format("rental_{0}", Model.Id);
                             @Html.Partial("_RentalInfo", Model, dataDictRental)
                         }
@@ -110,12 +110,12 @@
                             <div class="row">
                                 <div class="col-lg-12 px-0">
                                         @{
-                                            var dataDictPrice = new ViewDataDictionary();
+                                            var dataDictPrice = new ViewDataDictionary(this.ViewData);
                                             dataDictPrice.TemplateInfo.HtmlFieldPrefix = string.Format("price_{0}", Model.Id);
 
                                             @Html.Partial("_ProductTierPrices", Model.TierPrices)
 
-                                            var dataDictAddToCart = new ViewDataDictionary();
+                                            var dataDictAddToCart = new ViewDataDictionary(this.ViewData);
                                             dataDictAddToCart.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
                                         }
                                 </div>
@@ -127,7 +127,7 @@
                                         @Html.Widget("productdetails_inside_overview_buttons_before", Model.Id)
 
                                         @{
-                                            var dataDictAddToWishlist = new ViewDataDictionary();
+                                            var dataDictAddToWishlist = new ViewDataDictionary(this.ViewData);
                                             dataDictAddToWishlist.TemplateInfo.HtmlFieldPrefix = string.Format("addtocart_{0}", Model.Id);
                                         }
                                     <div class="d-md-inline-flex d-sm-flex product-simple-share my-2">

@@ -295,8 +295,8 @@ namespace Grand.Web.Models.Catalog
                     ? string.Join(",", filterableSpecificationAttributeOptionIds.Union(alreadyFilteredSpecOptionIds)) : string.Empty;
                 var cacheKey = string.Format(ModelCacheEventConsumer.SPECS_FILTER_MODEL_KEY, optionIds, workContext.WorkingLanguage.Id);
 
-                var allFilters = cacheManager.Get(cacheKey, () =>
-                {
+                //var allFilters = cacheManager.Get(cacheKey, () =>
+                //{
                     var _allFilters = new List<SpecificationAttributeOptionFilter>();
                     foreach (var sao in filterableSpecificationAttributeOptionIds.Union(alreadyFilteredSpecOptionIds))
                     {
@@ -315,8 +315,9 @@ namespace Grand.Web.Models.Catalog
                             });
                         }
                     }
-                    return _allFilters.ToList();
-                });
+                    //return _allFilters.ToList();
+                var allFilters= _allFilters.ToList();
+            //});
                 if (!allFilters.Any())
                     return;
 

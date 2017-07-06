@@ -2,10 +2,11 @@
 
 @Html.TextBoxFor(model => model)
 <script>
-    $(document).ready(function() {
-        $("#@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)").kendoNumericTextBox({
+    $(document).ready(function () {
+        //missing System.Web.Mvc.TemplateInfo.GetFullHtmlFieldId
+        @*$("#@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)").kendoNumericTextBox({
             format: "#",
             decimals: 0
-        });
+        });*@
     });
 </script>

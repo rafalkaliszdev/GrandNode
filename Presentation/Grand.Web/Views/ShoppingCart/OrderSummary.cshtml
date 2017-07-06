@@ -248,7 +248,7 @@
             @if (Model.IsEditable)
             {
                 <div class="col-12 col-md-6 checkoutAttributes">
-                    @*Html.Partial("_CheckoutAttributes", Model.CheckoutAttributes, new ViewDataDictionary())*@
+                    @*Html.Partial("_CheckoutAttributes", Model.CheckoutAttributes, new ViewDataDictionary(this.ViewData))*@
                 </div>
             }
             @if (!String.IsNullOrEmpty(Model.CheckoutAttributeInfo))

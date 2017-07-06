@@ -25,7 +25,7 @@
             </div>
         }
         @{
-            var dataDictAddress = new ViewDataDictionary();
+            var dataDictAddress = new ViewDataDictionary(this.ViewData);
             //Merge ModelState (required for validation)
             dataDictAddress.ModelState.Merge(ViewData.ModelState);
             dataDictAddress.TemplateInfo.HtmlFieldPrefix = "Address";
