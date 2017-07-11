@@ -352,6 +352,11 @@ namespace Grand.Core
 
             if (!result.EndsWith("/"))
                 result += "/";
+
+
+            //temporary workaround, remember to change this later
+            result=result.Replace("15540", "33781");
+
             return result.ToLowerInvariant();
         }
 

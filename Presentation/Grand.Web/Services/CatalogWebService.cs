@@ -79,7 +79,7 @@ namespace Grand.Web.Services
             IManufacturerService manufacturerService,
             IProductService productService,
             ITopicService topicService,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             IVendorService vendorService,
             IProductTagService productTagService,
             ICurrencyService currencyService,
@@ -112,7 +112,7 @@ namespace Grand.Web.Services
             this._manufacturerService = manufacturerService;
             this._productService = productService;
             this._topicService = topicService;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._vendorService = vendorService;
             this._productTagService = productTagService;
             this._currencyService = currencyService;
@@ -591,8 +591,10 @@ namespace Grand.Web.Services
 
         private void TemporaryWorkaround(Category category, CategoryModel model)
         {
+            //i have suspiction this linq is causing problems.. firsly comment it out
+            //then use plain foreach instead
 
-
+            return;
 
             model.SubCategories = _categoryService.GetAllCategoriesByParentCategoryId(category.Id)
                 .Select(x =>
@@ -609,11 +611,11 @@ namespace Grand.Web.Services
                     int pictureSize = _mediaSettings.CategoryThumbPictureSize;
 
 
-                    //var picture = _pictureService.GetPictureById(x.PictureId);
+                    var picture = _pictureService.GetPictureById(x.PictureId);
                     var pictureModel = new PictureModel
                     {
-                        FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",// _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
-                        ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
+                        FullSizeImageUrl =  _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
+                        ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
                         Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), subCatModel.Name),
                         AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), subCatModel.Name)
                     };
@@ -651,26 +653,17 @@ namespace Grand.Web.Services
                     //uncomment later
                     //catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
                     //{
-                    //    var picture = _pictureService.GetPictureById(x.PictureId);
-                    //    var pictureModel = new PictureModel
-                    //    {
-                    //        FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
-                    //        ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
-                    //        Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
-                    //        AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
-                    //    };
-                    //    return pictureModel;
+                        var picture = _pictureService.GetPictureById(x.PictureId);
+                        var pictureModel = new PictureModel
+                        {
+                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
+                            ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
+                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
+                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
+                        };
+                    //return pictureModel;
+                    catModel.PictureModel = pictureModel;
                     //});
-
-
-                    //var picture = _pictureService.GetPictureById(x.PictureId);
-                    catModel.PictureModel = new PictureModel
-                    {
-                        FullSizeImageUrl = "http://czerwonyobcas.pl/wp-content/uploads/2015/08/pude%C5%82ko.png",// _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
-                        ImageUrl = "http://czerwonyobcas.pl/wp-content/uploads/2015/08/pude%C5%82ko.png",// _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
-                        Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
-                        AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
-                    };
 
                     return catModel;
                 })

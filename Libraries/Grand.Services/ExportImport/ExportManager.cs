@@ -51,7 +51,7 @@ namespace Grand.Services.ExportImport
             ICategoryService categoryService,
             IManufacturerService manufacturerService,
             IProductAttributeService productAttributeService,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             INewsLetterSubscriptionService newsLetterSubscriptionService,
             IStoreService storeService,
             IProductService productService,
@@ -61,7 +61,7 @@ namespace Grand.Services.ExportImport
             this._categoryService = categoryService;
             this._manufacturerService = manufacturerService;
             this._productAttributeService = productAttributeService;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._newsLetterSubscriptionService = newsLetterSubscriptionService;
             this._storeService = storeService;
             this._productService = productService;

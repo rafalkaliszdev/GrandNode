@@ -303,9 +303,9 @@ namespace Grand.Services.Catalog
             var categories = query.ToList();
             if (!showHidden)
             {
-                //categories = categories
-                //    .Where(c => _aclService.Authorize(c) && _storeMappingService.Authorize(c))
-                //    .ToList();
+                categories = categories
+                    .Where(c => _aclService.Authorize(c) && _storeMappingService.Authorize(c))
+                    .ToList();
             }
 
             return categories;

@@ -88,7 +88,7 @@ namespace Grand.Web.Services
             IPriceFormatter priceFormatter,
             IMeasureService measureService,
             //ICacheManager cacheManager,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             ISpecificationAttributeService specificationAttributeService,
             IWebHelper webHelper,
             IProductTemplateService productTemplateService,
@@ -125,7 +125,7 @@ namespace Grand.Web.Services
             this._priceFormatter = priceFormatter;
             this._measureService = measureService;
             //this._cacheManager = cacheManager;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._specificationAttributeService = specificationAttributeService;
             this._webHelper = webHelper;
             this._productTemplateService = productTemplateService;
@@ -429,8 +429,8 @@ namespace Grand.Web.Services
 
                     var pictureModel = new PictureModel
                     {
-                        ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct, pictureSize),
-                        FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct)
+                        ImageUrl = _pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct, pictureSize),
+                        FullSizeImageUrl = _pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct)
                     };
 
 
@@ -785,8 +785,8 @@ namespace Grand.Web.Services
 
             var defaultPictureModel = new PictureModel
             {
-                ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, defaultPictureSize, !isAssociatedProduct),
-                FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, 0, !isAssociatedProduct),
+                ImageUrl = _pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, defaultPictureSize, !isAssociatedProduct),
+                FullSizeImageUrl = _pictureService.GetPictureUrl(defaultPicture.PictureId, _mediaSettings.ApplyWatermarkForProduct, 0, !isAssociatedProduct),
             };
             //"title" attribute
             defaultPictureModel.Title = (defaultPicture != null && !string.IsNullOrEmpty(defaultPicture.TitleAttribute)) ?
@@ -803,8 +803,8 @@ namespace Grand.Web.Services
             {
                 var pictureModel = new PictureModel
                 {
-                    ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct, _mediaSettings.ProductThumbPictureSizeOnProductDetailsPage),
-                    FullSizeImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg",//_pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct),
+                    ImageUrl = _pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct, _mediaSettings.ProductThumbPictureSizeOnProductDetailsPage),
+                    FullSizeImageUrl = _pictureService.GetPictureUrl(picture.PictureId, _mediaSettings.ApplyWatermarkForProduct),
                     Title = string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat.Details"), model.Name),
                     AlternateText = string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat.Details"), model.Name),
                 };

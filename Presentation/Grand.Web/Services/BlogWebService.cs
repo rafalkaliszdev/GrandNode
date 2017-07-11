@@ -50,7 +50,7 @@ namespace Grand.Web.Services
         public BlogWebService(IBlogService blogService,
             IWorkContext workContext,
             IStoreContext storeContext,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             ILocalizationService localizationService,
             IDateTimeHelper dateTimeHelper,
             IWorkflowMessageService workflowMessageService,
@@ -68,7 +68,7 @@ namespace Grand.Web.Services
             this._blogService = blogService;
             this._workContext = workContext;
             this._storeContext = storeContext;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._localizationService = localizationService;
             this._dateTimeHelper = dateTimeHelper;
             this._workflowMessageService = workflowMessageService;

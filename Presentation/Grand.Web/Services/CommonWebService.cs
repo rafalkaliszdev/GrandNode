@@ -84,7 +84,7 @@ namespace Grand.Web.Services
             //ICacheManager cacheManager, 
             IStoreContext storeContext,
             IThemeContext themeContext,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             IWebHelper webHelper,
             ILanguageService languageService,
             IWorkContext workContext,
@@ -118,7 +118,7 @@ namespace Grand.Web.Services
             //this._cacheManager = cacheManager;
             this._storeContext = storeContext;
             this._themeContext = themeContext;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._webHelper = webHelper;
             this._languageService = languageService;
             this._workContext = workContext;

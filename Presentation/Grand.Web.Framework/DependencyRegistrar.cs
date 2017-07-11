@@ -257,7 +257,7 @@ namespace Grand.Web.Framework
             else
             {
                 //standard file system
-                //builder.RegisterType<PictureService>().As<IPictureService>().InstancePerLifetimeScope();
+                builder.RegisterType<PictureService>().As<IPictureService>().InstancePerLifetimeScope();
             }
 
             builder.RegisterType<MessageTemplateService>().As<IMessageTemplateService>().InstancePerLifetimeScope();

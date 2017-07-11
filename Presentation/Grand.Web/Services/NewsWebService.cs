@@ -39,7 +39,7 @@ namespace Grand.Web.Services
         private readonly LocalizationSettings _localizationSettings;
 
         public NewsWebService(INewsService newsService, IWorkContext workContext, IStoreContext storeContext,
-            //IPictureService pictureService, 
+            IPictureService pictureService,
             IDateTimeHelper dateTimeHelper, 
             //ICacheManager cacheManager,
             IWorkflowMessageService workflowMessageService,
@@ -49,7 +49,7 @@ namespace Grand.Web.Services
             this._newsService = newsService;
             this._workContext = workContext;
             this._storeContext = storeContext;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._dateTimeHelper = dateTimeHelper;
             //this._cacheManager = cacheManager;
             this._workflowMessageService = workflowMessageService;

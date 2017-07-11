@@ -1,7 +1,7 @@
 ﻿using Grand.Core.Configuration;
-//using System.Drawing;
-//using System.Drawing.Text;
-//using imagesh
+using ImageSharp;
+using SixLabors.Fonts;
+using System;
 
 namespace Grand.Core.Domain.Media
 {
@@ -26,6 +26,7 @@ namespace Grand.Core.Domain.Media
         /// <summary>
         /// Geta or sets a default quality used for image generation
         /// </summary>
+        [Obsolete("not supported in ImageSharp")]
         public int DefaultImageQuality { get; set; }
 
         /// <summary>
@@ -40,25 +41,25 @@ namespace Grand.Core.Domain.Media
 
         #region Watermark Text
         public string WatermarkText { get; set; }
-
-
-        //tbh
-        //nah ll it
-        //public FontStyle WatermarkStyle { get; set; }
-        //public Color WatermarkFontColor { get; set; }
-        //public GenericFontFamilies WatermarkFontFamily { get; set; }
+        [Obsolete("not supported in ImageSharp", true)]
+        public FontStyle WatermarkStyle { get; set; }
+        public Rgba32 WatermarkFontColor { get; set; }
+        public Font WatermarkFontFamily { get; set; }
         public int WatermarkPositionXPercent { get; set; }
         public int WatermarkPositionYPercent { get; set; }
         public int WatermarkFontSizePercent { get; set; }
         public int WatermarkOpacityPercent { get; set; }
+        [Obsolete("not supported in ImageSharp")]
         public bool WatermarkDropShadow { get; set; }
+        [Obsolete("not supported in ImageSharp")]
         public bool WatermarkVertical { get; set; }
+        [Obsolete("not supported in ImageSharp")]
         public bool WatermarkRightToLeft { get; set; }
 
         #endregion
 
-
         #region Watermark Misc Options
+
         public int WatermarkForPicturesAboveSize { get; set; }
         public bool ApplyWatermarkOnPicturesWithOriginalSize { get; set; }
         public bool ApplyWatermarkForProduct { get; set; }
@@ -67,14 +68,15 @@ namespace Grand.Core.Domain.Media
 
         #endregion
 
-
         #region Watermark Overlay
+
         public string WatermarkOverlayID { get; set; }
         public int WatermarkOverlayPositionXPercent { get; set; }
         public int WatermarkOverlayPositionYPercent { get; set; }
         public int WatermarkOverlaySizePercent { get; set; }
         public int WatermarkOverlayOpacityPercent { get; set; }
-        #endregion
+        public Rgba32 WatermarkOverlayColor { get; set; }
 
+        #endregion
     }
 }

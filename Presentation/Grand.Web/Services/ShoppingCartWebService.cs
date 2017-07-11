@@ -92,7 +92,7 @@ namespace Grand.Web.Services
             IWebHelper webHelper,
             IPaymentService paymentService,
             IProductService productService,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             IProductAttributeParser productAttributeParser,
             ILocalizationService localizationService,
             ICheckoutAttributeFormatter checkoutAttributeFormatter,
@@ -131,7 +131,7 @@ namespace Grand.Web.Services
             this._webHelper = webHelper;
             this._paymentService = paymentService;
             this._productService = productService;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._productAttributeParser = productAttributeParser;
             this._localizationService = localizationService;
             this._checkoutAttributeFormatter = checkoutAttributeFormatter;

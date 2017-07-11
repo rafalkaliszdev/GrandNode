@@ -84,7 +84,7 @@ namespace Grand.Web.Services
                     IAddressWebService addressWebService,
                     IOrderService orderService,
                     IDownloadService downloadService,
-                    //IPictureService pictureService,
+                    IPictureService pictureService,
 
                     CustomerSettings customerSettings,
                     DateTimeSettings dateTimeSettings,
@@ -115,7 +115,7 @@ namespace Grand.Web.Services
             this._addressWebService = addressWebService;
             this._orderService = orderService;
             this._downloadService = downloadService;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
 
             this._customerSettings = customerSettings;
             this._dateTimeSettings = dateTimeSettings;

@@ -73,7 +73,7 @@ namespace Grand.Services.Common
             IPriceFormatter priceFormatter,
             ICurrencyService currencyService,
             IMeasureService measureService,
-            //IPictureService pictureService,
+            IPictureService pictureService,
             IProductService productService,
             IProductAttributeParser productAttributeParser,
             IStoreService storeService,
@@ -96,7 +96,7 @@ namespace Grand.Services.Common
             this._priceFormatter = priceFormatter;
             this._currencyService = currencyService;
             this._measureService = measureService;
-            //this._pictureService = pictureService;
+            this._pictureService = pictureService;
             this._productService = productService;
             this._productAttributeParser = productAttributeParser;
             this._storeService = storeService;

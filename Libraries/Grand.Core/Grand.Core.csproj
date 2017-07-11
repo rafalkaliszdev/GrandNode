@@ -15,7 +15,8 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.1.0" />
     <PackageReference Include="AutoMapper" Version="6.0.2" />
     <PackageReference Include="CoreCompat.System.Configuration" Version="4.2.3-r4" />
-    <PackageReference Include="ImageSharp" Version="0.0.0" />
+    <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00171" />
+    <PackageReference Include="ImageSharp.Drawing" Version="1.0.0-alpha9-00166" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.4.3" />
