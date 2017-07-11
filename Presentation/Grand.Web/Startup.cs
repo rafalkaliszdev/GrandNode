@@ -69,9 +69,6 @@
 //            AutofacServiceProvider autofacServiceProvider = null;
 //            var asd = EngineContextExperimental.Initialize(false, services, /*out*/ applicationContainer, /*out *//*routePublisher,*/ /*out AutofacServiceProvider */autofacServiceProvider);
 
-//            //applicationContainer = asd.Item1;
-//            //_routePublisher = qqqqqalanalna.Item2;
-//            //autofacServiceProvider = asd.Item2;
 
 
 

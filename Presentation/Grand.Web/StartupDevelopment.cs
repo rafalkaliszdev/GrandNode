@@ -37,6 +37,8 @@ using Grand.Core.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Grand.Core.Plugins;
 using System.Reflection;
+using System.Security.Authentication;
+using System.Net.Http;
 
 namespace Grand.Web
 {
@@ -94,6 +96,10 @@ namespace Grand.Web
             if (false)//!config.IgnoreStartupTasks)
                 this.RunStartupTasks();
 
+            //Install-Package System.Net.Http.WinHttpHandler -Version 4.3.1
+            WinHttpHandler httpHandler = new WinHttpHandler() { SslProtocols = SslProtocols.Tls12 };
+            HttpClient client = new HttpClient(httpHandler);
+
             //new
             //return new AutofacServiceProvider(applicationContainer);
             //return autofacServiceProvider;
@@ -143,7 +149,8 @@ namespace Grand.Web
 
             builder.Populate(services);
             /*this.*/
-            /*var*/ _container = builder.Build();
+            /*var*/
+            _container = builder.Build();
 
             //so it is done here, because i really only need this EngineContextExperimental and GrandEngine for IContainer
             EngineContextExperimental.Initialize(new ContainerManager(_container));

@@ -7,6 +7,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" />
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.3.8.2" />
     <PackageReference Include="FluentScheduler" Version="5.1.4" />
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00170" />
     <PackageReference Include="ImageSharp.Drawing" Version="1.0.0-alpha9-00165" />

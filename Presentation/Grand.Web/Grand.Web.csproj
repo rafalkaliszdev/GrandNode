@@ -2658,6 +2658,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0-preview1-final" />
+    <PackageReference Include="System.Net.Http.WinHttpHandler" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Grand.Core\Grand.Core.csproj" />
