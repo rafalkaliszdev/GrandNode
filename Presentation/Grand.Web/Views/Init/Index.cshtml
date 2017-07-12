@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @{
+        Layout = "/Views/Shared/_Root.cshtml";
+    }
+</head>
+<body>
+
+    <style>
+        div.proFrontEndDeveloperKrw {
+            border-style: dashed;
+            border-color: lightgreen;
+            border-width: 1px;
+            padding: 4px;
+            margin: 64px;
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <div class="proFrontEndDeveloperKrw">
+        @*@await Component.InvokeAsync("Catalog", new { actionName = "TopMenu" })*@
+        vc:catalog action-name="TopMenu" />
+        <vc:catalog action-name="TopMenu" />
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+        vc:catalog action-name="HomepageCategories" />
+        <vc:catalog action-name="HomepageCategories" />
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+        vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data = "dwqd" } )" />
+        <vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data="dwqd" } )" />
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

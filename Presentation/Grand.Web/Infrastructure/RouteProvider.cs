@@ -27,8 +27,10 @@ namespace Grand.Web.Infrastructure
             routes.MapLocalizedRoute("HomePage",
                             "",
                             new { controller = "Home", action = "Index" });
-                            
 
+            routes.MapLocalizedRoute("qdwdwdqwdqwdw",
+                "qdwdwdqwdqwdw",
+                new { controller = "Init", action = "Index" });
 
 
             //widgets

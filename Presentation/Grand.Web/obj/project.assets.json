@@ -58,7 +58,7 @@
           "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
-      "AWSSDK.Core/3.3.17": {
+      "AWSSDK.Core/3.3.17.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -4493,6 +4493,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
+          "AWSSDK.Core": "3.3.17.2",
           "AWSSDK.S3": "3.3.8.2",
           "FluentScheduler": "5.1.4",
           "Grand.Core": "1.0.0",
@@ -4558,12 +4559,12 @@
         "lib/netstandard1.3/AutoMapper.xml"
       ]
     },
-    "AWSSDK.Core/3.3.17": {
-      "sha512": "NTE47l/BVjbelMxYKCAMaPM+OsnDY3t5nTFXYHEJeV+EFvSHsFNLCt2pbu4YBKWRhgvYmGCJzykdngkfwgjeog==",
+    "AWSSDK.Core/3.3.17.2": {
+      "sha512": "ECMn8RsGB9GR7HRQvy2hltjBNZFEX2FTbySlCStHCFEBcK329bablTDy5OcxBQdceqc/PTXt70SytDMHHyWj4Q==",
       "type": "package",
-      "path": "awssdk.core/3.3.17",
+      "path": "awssdk.core/3.3.17.2",
       "files": [
-        "awssdk.core.3.3.17.nupkg.sha512",
+        "awssdk.core.3.3.17.2.nupkg.sha512",
         "awssdk.core.nuspec",
         "lib/MonoAndroid10/AWSSDK.Core.XML",
         "lib/MonoAndroid10/AWSSDK.Core.dll",

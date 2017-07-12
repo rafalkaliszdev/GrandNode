@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "0bed36fed13c3f058958ad6660ada6c77031b195"
+    "signature": "b8fd73e0acc9440f7e2999d8be5f6dc02a5b0b6d"
   },
   "compilationOptions": {},
   "targets": {
@@ -39,6 +39,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/AutoMapper.dll": {}
+        }
+      },
+      "awssdk.core/3.3.17.2": {
+        "runtime": {
+          "lib/netstandard1.3/AWSSDK.Core.dll": {}
+        }
+      },
+      "awssdk.s3/3.3.8.2": {
+        "dependencies": {
+          "AWSSDK.Core": "3.3.17.2"
+        },
+        "runtime": {
+          "lib/netstandard1.3/AWSSDK.S3.dll": {}
         }
       },
       "corecompat.system.configuration/4.2.3-r4": {
@@ -1133,6 +1146,8 @@
       },
       "grand.services/1.0.0": {
         "dependencies": {
+          "AWSSDK.Core": "3.3.17.2",
+          "AWSSDK.S3": "3.3.8.2",
           "FluentScheduler": "5.1.4",
           "Grand.Core": "1.0.0",
           "Grand.Data": "1.0.0",
@@ -1172,6 +1187,20 @@
       "sha512": "sha512-uI4uPyibgP4+2zn21fVqy0ep+eYeB5IcfjanyUESj+F0qcrOYpAW4iH2+xKET0vfhgJn4U1c4xN3stKUhygTmQ==",
       "path": "automapper/6.0.2",
       "hashPath": "automapper.6.0.2.nupkg.sha512"
+    },
+    "awssdk.core/3.3.17.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ECMn8RsGB9GR7HRQvy2hltjBNZFEX2FTbySlCStHCFEBcK329bablTDy5OcxBQdceqc/PTXt70SytDMHHyWj4Q==",
+      "path": "awssdk.core/3.3.17.2",
+      "hashPath": "awssdk.core.3.3.17.2.nupkg.sha512"
+    },
+    "awssdk.s3/3.3.8.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-umNWWae0RFyt6mtt8FBwXYb466V5x78+1lRTGyIiVprXH4lyAmTkePkANinLYkijGKQCt3cKzJNOSdetc/lXTw==",
+      "path": "awssdk.s3/3.3.8.2",
+      "hashPath": "awssdk.s3.3.3.8.2.nupkg.sha512"
     },
     "corecompat.system.configuration/4.2.3-r4": {
       "type": "package",

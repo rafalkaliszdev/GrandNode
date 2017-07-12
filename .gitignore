@@ -34,3 +34,7 @@
 *.txt
 *.dll
 .vs/GrandNode/v15/.suo
+*.cache
+*.json
+*.dll
+*.pdb

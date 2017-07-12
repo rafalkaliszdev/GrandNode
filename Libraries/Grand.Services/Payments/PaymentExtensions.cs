@@ -34,11 +34,6 @@ namespace Grand.Services.Payments
             if (paymentSettings.ActivePaymentMethodSystemNames == null)
                 return false;
 
-            //ctl
-            return true;
-
-
-
             foreach (string activeMethodSystemName in paymentSettings.ActivePaymentMethodSystemNames)
                 if (paymentMethod.PluginDescriptor.SystemName.Equals(activeMethodSystemName, StringComparison.OrdinalIgnoreCase))
                     return true;
@@ -54,7 +49,7 @@ namespace Grand.Services.Payments
         /// <param name="fee">Fee value</param>
         /// <param name="usePercentage">Is fee amount specified as percentage or fixed value?</param>
         /// <returns>Result</returns>
-        public static decimal CalculateAdditionalFee(this IPaymentMethod paymentMethod, 
+        public static decimal CalculateAdditionalFee(this IPaymentMethod paymentMethod,
             IOrderTotalCalculationService orderTotalCalculationService, IList<ShoppingCartItem> cart,
             decimal fee, bool usePercentage)
         {
@@ -97,7 +92,7 @@ namespace Grand.Services.Payments
 
             //also see http://ropox.ru/tag/ixmlserializable/ (Russian language)
 
-            var ds = new DictionarySerializer(request.CustomValues); 
+            var ds = new DictionarySerializer(request.CustomValues);
             var xs = new XmlSerializer(typeof(DictionarySerializer));
 
             using (var textWriter = new StringWriter())
@@ -197,9 +192,10 @@ namespace Grand.Services.Payments
                 {
                     //tbh
                     reader.ReadStartElement("item");
-                    string key = "qqqqq";// reader.ReadElementString("key");
-                    string value = "analna";// reader.ReadElementString("value");
-                    this.Dictionary.Add(key, value);
+                    //string key = reader.ReadElementString("key");
+                    //string value = reader.ReadElementString("value");
+                    //see nuget 
+                    //this.Dictionary.Add(key, value);
                     reader.ReadEndElement();
                     reader.MoveToContent();
                 }

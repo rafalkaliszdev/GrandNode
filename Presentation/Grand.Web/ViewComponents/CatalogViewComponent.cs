@@ -32,74 +32,39 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Grand.Web.ViewComponents
 {
-    public class /*Experimental*/CatalogViewComponent : ViewComponent
+    public class CatalogViewComponent : ViewComponent
     {
         private readonly ICatalogWebService _catalogWebService;
 
-        public /*Experimental*/CatalogViewComponent(
+        public CatalogViewComponent(
             ICatalogWebService catalogWebService
-            /*ToDoContext context*/)
+            )
         {
             this._catalogWebService = catalogWebService;
-
-            //db = context;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(string actionName)
         {
-            //no use of Controller inside ViewComponent, this will be misunderstood of concept
-            //var qq = this.HttpContext.RequestServices.GetService(typeof(Grand.Web.Controllers.CatalogController));// as Controllers.CatalogController;
-
-
-
-            //just try
-            //var items = new List<string> { "one", "two", "three", "four", "fajv" };
-            //return View("TopMenu", items);
-
-
-
-            if (actionName == nameof(this.TopMenu))
-               return await TopMenu();
-            if (actionName == nameof(this.HomepageCategories))
-                return await HomepageCategories();
-
-
-
-            //previous working
-            //if (actionName == "TopMenu")
-            //{
-            //    var model = _catalogWebService.PrepareTopMenu();
-            //    return View("TopMenu", model);
-            //}
-
-            return Content("sometimes you run so fast, you lose your aim out of sight");
-
-
-            //var qqqq = this.View("TopMenu");
-            //return qqqq;
-
-            ////var result = qq.TopMenu();
-
-
-            //var items = new List<string> { "one", "two", "three", "four", "fajv" };// await GetItemsAsync(maxPriority, isDone);
-            //return View(qqqq);
+            switch (actionName)
+            {
+                case nameof(this.TopMenu):
+                    return await TopMenu();
+                case nameof(this.HomepageCategories):
+                    return await HomepageCategories();
+                default:
+                    throw new InvalidOperationException(nameof(this.InvokeAsync));
+            }
         }
 
-        public virtual async Task<IViewComponentResult>/*IActionResult*/ TopMenu()
+        public virtual async Task<IViewComponentResult> TopMenu()
         {
-            var model = _catalogWebService.PrepareTopMenu();
+            var model = /*await*/ _catalogWebService.PrepareTopMenu();
             return View("TopMenu", model);
-
-            
-
-            //var model = _catalogWebService.PrepareTopMenu();
-            //return PartialView(model);
         }
 
-
-        public virtual async Task<IViewComponentResult>/*IActionResult*/ HomepageCategories()
+        public virtual async Task<IViewComponentResult> HomepageCategories()
         {
-            var model = _catalogWebService.PrepareHomepageCategory();
+            var model = /*await*/ _catalogWebService.PrepareHomepageCategory();
             if (!model.Any())
                 return Content("");
 

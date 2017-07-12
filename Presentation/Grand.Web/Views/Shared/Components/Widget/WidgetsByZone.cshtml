@@ -1,0 +1,6 @@
+﻿@model List<Grand.Web.Models.Cms.RenderWidgetModel>
+
+@foreach (var widget in Model)
+{
+    await Component.InvokeAsync(widget.ControllerName, new { actionName = widget.ActionName, additionalData = widget.RouteValues });
+}
