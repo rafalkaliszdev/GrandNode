@@ -2,7 +2,7 @@
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.ServiceModel.Syndication;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Domain.Customers;
 //using Grand.Core.Domain.Forums;
@@ -25,7 +25,7 @@
 
 //namespace Grand.Web.Controllers
 //{
-//    [GrandHttpsRequirement(SslRequirement.No)]
+//    //[GrandHttpsRequirement(SslRequirement.No)]
 //    public partial class BoardsController : BasePublicController
 //    {
 //        #region Fields
@@ -651,7 +651,7 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        public virtual IActionResult TopicMove(TopicMoveModel model)
 //        {
 //            if (!_forumSettings.ForumsEnabled)
@@ -678,8 +678,8 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[PublicAntiForgery]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult TopicDelete(string id)
 //        {
 //            if (!_forumSettings.ForumsEnabled)
@@ -695,7 +695,7 @@
 //            {
 //                if (!_forumService.IsCustomerAllowedToDeleteTopic(_workContext.CurrentCustomer, forumTopic))
 //                {
-//                    return new HttpUnauthorizedResult();
+//                    return new UnauthorizedResult();
 //                }
 //                var forum = _forumService.GetForumById(forumTopic.ForumId);
 
@@ -733,7 +733,7 @@
 
 //            if (_forumService.IsCustomerAllowedToCreateTopic(_workContext.CurrentCustomer, forum) == false)
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var model = new EditForumTopicModel();
@@ -751,7 +751,7 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        [ValidateInput(false)]
 //        public virtual IActionResult TopicCreate(EditForumTopicModel model)
 //        {
@@ -773,7 +773,7 @@
 //                {
 //                    if (!_forumService.IsCustomerAllowedToCreateTopic(_workContext.CurrentCustomer, forum))
 //                    {
-//                        return new HttpUnauthorizedResult();
+//                        return new UnauthorizedResult();
 //                    }
 
 //                    string subject = model.Subject;
@@ -895,7 +895,7 @@
 
 //            if (!_forumService.IsCustomerAllowedToEditTopic(_workContext.CurrentCustomer, forumTopic))
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var forum = _forumService.GetForumById(forumTopic.ForumId);
@@ -932,7 +932,7 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        [ValidateInput(false)]
 //        public virtual IActionResult TopicEdit(EditForumTopicModel model)
 //        {
@@ -959,7 +959,7 @@
 //                {
 //                    if (!_forumService.IsCustomerAllowedToEditTopic(_workContext.CurrentCustomer, forumTopic))
 //                    {
-//                        return new HttpUnauthorizedResult();
+//                        return new UnauthorizedResult();
 //                    }
 
 //                    string subject = model.Subject;
@@ -1071,8 +1071,8 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[PublicAntiForgery]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult PostDelete(string id)
 //        {
 //            if (!_forumSettings.ForumsEnabled)
@@ -1089,7 +1089,7 @@
 //            {
 //                if (!_forumService.IsCustomerAllowedToDeletePost(_workContext.CurrentCustomer, forumPost))
 //                {
-//                    return new HttpUnauthorizedResult();
+//                    return new UnauthorizedResult();
 //                }
 
 //                var forumTopic = _forumService.GetTopicById(forumPost.TopicId);
@@ -1135,7 +1135,7 @@
 
 //            if (!_forumService.IsCustomerAllowedToCreatePost(_workContext.CurrentCustomer, forumTopic))
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var forum = _forumService.GetForumById(forumTopic.ForumId);
@@ -1156,7 +1156,7 @@
 //                IsCustomerAllowedToSubscribe = _forumService.IsCustomerAllowedToSubscribe(_workContext.CurrentCustomer),
 //                Subscribed = false,
 //            };
-            
+
 //            //subscription            
 //            if (model.IsCustomerAllowedToSubscribe)
 //            {
@@ -1191,7 +1191,7 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        [ValidateInput(false)]
 //        public virtual IActionResult PostCreate(EditForumPostModel model)
 //        {
@@ -1211,7 +1211,7 @@
 //                try
 //                {
 //                    if (!_forumService.IsCustomerAllowedToCreatePost(_workContext.CurrentCustomer, forumTopic))
-//                        return new HttpUnauthorizedResult();
+//                        return new UnauthorizedResult();
 
 //                    var text = model.Text;
 //                    var maxPostLength = _forumSettings.PostMaxLength;
@@ -1304,7 +1304,7 @@
 //            model.Id = "";
 //            model.IsCustomerAllowedToSubscribe = _forumService.IsCustomerAllowedToSubscribe(_workContext.CurrentCustomer);
 //            model.ForumEditor = _forumSettings.ForumEditor;
-            
+
 //            return View(model);
 //        }
 
@@ -1323,7 +1323,7 @@
 //            }
 //            if (!_forumService.IsCustomerAllowedToEditPost(_workContext.CurrentCustomer, forumPost))
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 //            var forumTopic = _forumService.GetTopicById(forumPost.TopicId);
 //            if (forumTopic == null)
@@ -1363,7 +1363,7 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        [ValidateInput(false)]
 //        public virtual IActionResult PostEdit(EditForumPostModel model)
 //        {
@@ -1380,7 +1380,7 @@
 
 //            if (!_forumService.IsCustomerAllowedToEditPost(_workContext.CurrentCustomer, forumPost))
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var forumTopic = _forumService.GetTopicById(forumPost.TopicId);
@@ -1469,7 +1469,7 @@
 //            model.Id = forumPost.Id;
 //            model.IsCustomerAllowedToSubscribe = _forumService.IsCustomerAllowedToSubscribe(_workContext.CurrentCustomer);
 //            model.ForumEditor = _forumSettings.ForumEditor;
-            
+
 //            return View(model);
 //        }
 
@@ -1639,7 +1639,7 @@
 
 //                    model.SearchResultsVisible = (topics.Any());
 //                    model.NoResultsVisisble = !(model.SearchResultsVisible);
-                    
+
 //                    return View(model);
 //                }
 //                model.SearchResultsVisible = false;

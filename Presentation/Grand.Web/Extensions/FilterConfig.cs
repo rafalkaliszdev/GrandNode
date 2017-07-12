@@ -1,4 +1,4 @@
-﻿/*using System.Web.Mvc;*/
+﻿
 //using WebMarkupMin.AspNet4.Mvc;
 
 namespace Grand.Web.Extensions

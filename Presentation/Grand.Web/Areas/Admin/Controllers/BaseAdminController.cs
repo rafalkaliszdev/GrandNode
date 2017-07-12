@@ -15,7 +15,7 @@ namespace Grand.Web.Areas.Admin.Controllers
 //namespace Grand.Admin.Controllers
 //namespace Grand.Admin.Areas.Admin.Controllers
 {
-    //[GrandHttpsRequirement(SslRequirement.Yes)]
+    ////[GrandHttpsRequirement(SslRequirement.Yes)]
     //[AdminValidateIpAddress]
     //[AdminAuthorize]
     //[AdminAntiForgery]
@@ -55,7 +55,7 @@ namespace Grand.Web.Areas.Admin.Controllers
         /// <returns>Access denied view</returns>
         protected ActionResult AccessDeniedView()
         {
-            //return new HttpUnauthorizedResult();
+            //return new UnauthorizedResult();
             //return RedirectToAction("AccessDenied", "Security", new { pageUrl = this.Request/*.RawUrl*/ });
             return Content("see action AccessDeniedView()");
         }

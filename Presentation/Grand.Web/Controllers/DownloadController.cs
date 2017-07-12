@@ -1,6 +1,6 @@
 ﻿//using System;
 //using System.Linq;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Domain.Customers;
 //using Grand.Services.Catalog;
@@ -33,7 +33,7 @@
 //            this._localizationService = localizationService;
 //            this._customerSettings = customerSettings;
 //        }
-        
+
 //        public virtual IActionResult Sample(string productId)
 //        {
 //            var product = _productService.GetProductById(productId);
@@ -49,10 +49,10 @@
 
 //            if (download.UseDownloadUrl)
 //                return new RedirectResult(download.DownloadUrl);
-            
+
 //            if (download.DownloadBinary == null)
 //                return Content("Download data is not available any more.");
-            
+
 //            string fileName = !String.IsNullOrWhiteSpace(download.Filename) ? download.Filename : product.Id.ToString();
 //            string contentType = !String.IsNullOrWhiteSpace(download.ContentType) ? download.ContentType : "application/octet-stream";
 //            return new FileContentResult(download.DownloadBinary, contentType) { FileDownloadName = fileName + download.Extension }; 
@@ -72,7 +72,7 @@
 //            if (_customerSettings.DownloadableProductsValidateUser)
 //            {
 //                if (_workContext.CurrentCustomer == null)
-//                    return new HttpUnauthorizedResult();
+//                    return new UnauthorizedResult();
 
 //                if (order.CustomerId != _workContext.CurrentCustomer.Id)
 //                    return Content("This is not your order");
@@ -91,7 +91,7 @@
 
 //            if (!product.UnlimitedDownloads && orderItem.DownloadCount >= product.MaxNumberOfDownloads)
 //                return Content(string.Format(_localizationService.GetResource("DownloadableProducts.ReachedMaximumNumber"), product.MaxNumberOfDownloads));
-            
+
 
 //            if (download.UseDownloadUrl)
 //            {
@@ -102,7 +102,7 @@
 //                //return result
 //                return new RedirectResult(download.DownloadUrl);
 //            }
-            
+
 //            //binary download
 //            if (download.DownloadBinary == null)
 //                    return Content("Download data is not available any more.");
@@ -131,20 +131,20 @@
 //            if (_customerSettings.DownloadableProductsValidateUser)
 //            {
 //                if (_workContext.CurrentCustomer == null || order.CustomerId != _workContext.CurrentCustomer.Id)
-//                    return new HttpUnauthorizedResult();
+//                    return new UnauthorizedResult();
 //            }
 
 //            var download = _downloadService.GetDownloadById(!String.IsNullOrEmpty(orderItem.LicenseDownloadId) ? orderItem.LicenseDownloadId : "");
 //            if (download == null)
 //                return Content("Download is not available any more.");
-            
+
 //            if (download.UseDownloadUrl)
 //                return new RedirectResult(download.DownloadUrl);
 
 //            //binary download
 //            if (download.DownloadBinary == null)
 //                return Content("Download data is not available any more.");
-                
+
 //            //return result
 //            string fileName = !String.IsNullOrWhiteSpace(download.Filename) ? download.Filename : product.Id.ToString();
 //            string contentType = !String.IsNullOrWhiteSpace(download.ContentType) ? download.ContentType : "application/octet-stream";
@@ -179,7 +179,7 @@
 //                return InvokeHttp404();
 
 //            if (_workContext.CurrentCustomer == null || order.CustomerId != _workContext.CurrentCustomer.Id)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var download = _downloadService.GetDownloadById(orderNote.DownloadId);
 //            if (download == null)

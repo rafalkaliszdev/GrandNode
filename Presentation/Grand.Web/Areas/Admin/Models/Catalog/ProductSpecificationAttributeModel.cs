@@ -1,4 +1,4 @@
-﻿/*using System.Web.Mvc;*/using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Grand.Web.Framework.Mvc;
 
 namespace Grand.Web.Areas.Admin.Models.Catalog

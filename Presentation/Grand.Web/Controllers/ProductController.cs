@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 //using System.ServiceModel.Syndication;
-/*using System.Web.Mvc;*/
+using Microsoft.AspNetCore.Mvc;
 using Grand.Core;
 using Grand.Core.Caching;
 using Grand.Core.Domain.Catalog;
@@ -111,7 +111,7 @@ namespace Grand.Web.Controllers
 
         #region Product details page
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ProductDetails(string productId, string updatecartitemid = "")
         {
             var product = _productService.GetProductById(productId);
@@ -284,7 +284,7 @@ namespace Grand.Web.Controllers
 
         #region Recently viewed products
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult RecentlyViewedProducts()
         {
             if (!_catalogSettings.RecentlyViewedProductsEnabled)
@@ -329,7 +329,7 @@ namespace Grand.Web.Controllers
 
         #region Recently added products
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult NewProducts()
         {
             if (!_catalogSettings.NewProductsEnabled)
@@ -458,7 +458,7 @@ namespace Grand.Web.Controllers
 
         #region Product reviews
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ProductReviews(string productId)
         {
             var product = _productService.GetProductById(productId);
@@ -477,8 +477,8 @@ namespace Grand.Web.Controllers
 
         [HttpPost, ActionName("ProductReviews")]
         [FormValueRequired("add-review")]
-        //[PublicAntiForgery]
-        //[CaptchaValidator]
+        ////[PublicAntiForgery]
+        ////[CaptchaValidator]
         public virtual IActionResult ProductReviewsAdd(string productId, ProductReviewsModel model, bool captchaValid)
         {
             var product = _productService.GetProductById(productId);
@@ -600,7 +600,7 @@ namespace Grand.Web.Controllers
 
         #region Email a friend
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ProductEmailAFriend(string productId)
         {
             var product = _productService.GetProductById(productId);
@@ -618,8 +618,8 @@ namespace Grand.Web.Controllers
 
         [HttpPost, ActionName("ProductEmailAFriend")]
         [FormValueRequired("send-email")]
-        //[PublicAntiForgery]
-        //[CaptchaValidator]
+        ////[PublicAntiForgery]
+        ////[CaptchaValidator]
         public virtual IActionResult ProductEmailAFriendSend(ProductEmailAFriendModel model, bool captchaValid)
         {
             var product = _productService.GetProductById(model.ProductId);
@@ -665,7 +665,7 @@ namespace Grand.Web.Controllers
 
         #region Ask question
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult AskQuestion(string productId)
         {
             var product = _productService.GetProductById(productId);
@@ -690,8 +690,8 @@ namespace Grand.Web.Controllers
 
         [HttpPost, ActionName("AskQuestion")]
         [FormValueRequired("send-email")]
-        //[PublicAntiForgery]
-        //[CaptchaValidator]
+        ////[PublicAntiForgery]
+        ////[CaptchaValidator]
         public virtual IActionResult AskQuestion(ProductAskQuestionModel model, bool captchaValid)
         {
             var product = _productService.GetProductById(model.ProductId);
@@ -779,7 +779,7 @@ namespace Grand.Web.Controllers
             return RedirectToRoute("CompareProducts");
         }
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult CompareProducts()
         {
             if (!_catalogSettings.CompareProductsEnabled)

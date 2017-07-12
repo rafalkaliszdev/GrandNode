@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Grand.Web.Services;
-using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Web.ViewComponents
 {
@@ -23,6 +20,10 @@ namespace Grand.Web.ViewComponents
             this._widgetWebService = widgetWebService;
         }
 
+        #endregion
+
+        #region Invoker
+
         public async Task<IViewComponentResult> InvokeAsync(string actionName, string widgetZone, object additionalData = null)
         {
             switch (actionName)
@@ -40,17 +41,7 @@ namespace Grand.Web.ViewComponents
 
         public virtual async Task<IViewComponentResult> WidgetsByZone(string widgetZone, object additionalData = null)
         {
-            //var model =  /*await*/ _widgetWebService.PrepareRenderWidget(widgetZone, additionalData);            
-            //temporary workaround
-            var model = new List<Models.Cms.RenderWidgetModel>
-            {
-                new  Models.Cms.RenderWidgetModel
-                {
-                    ActionName = "HomepageCategories",
-                    ControllerName = "Catalog",//this should be actually 'ViewComponentName'
-                    RouteValues = new RouteValueDictionary(new { qq = "dqwdqw"})
-                }
-            };
+            var model =  /*await*/ _widgetWebService.PrepareRenderWidget(widgetZone, additionalData);
 
             if (model == null)
                 return Content("");

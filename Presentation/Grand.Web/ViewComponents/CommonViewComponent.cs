@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-/*using System.Web.Mvc;*/
+
 using Grand.Core;
 using Grand.Core.Caching;
 using Grand.Core.Domain;
@@ -50,7 +50,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-/*using System.Web.Mvc;*/
+
 using Grand.Core;
 using Grand.Core.Caching;
 using Grand.Core.Domain.Catalog;
@@ -88,7 +88,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-/*using System.Web.Mvc;*/
+
 using Grand.Core;
 using Grand.Core.Caching;
 using Grand.Core.Domain.Catalog;
@@ -359,7 +359,7 @@ namespace Grand.Web.ViewComponents
 
 
         ////contact us page
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         ////available even when a store is closed
         //[StoreClosed(true)]
         //public virtual Task<IViewComponentResult> ContactUs()
@@ -369,8 +369,8 @@ namespace Grand.Web.ViewComponents
         //}
 
         //[HttpPost, ActionName("ContactUs")]
-        //[PublicAntiForgery]
-        //[CaptchaValidator]
+        ////[PublicAntiForgery]
+        ////[CaptchaValidator]
         ////available even when a store is closed
         //[StoreClosed(true)]
         //public virtual Task<IViewComponentResult> ContactUsSend(ContactUsModel model, bool captchaValid)
@@ -392,7 +392,7 @@ namespace Grand.Web.ViewComponents
         //    return View(model);
         //}
         ////contact vendor page
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual Task<IViewComponentResult> ContactVendor(string vendorId)
         //{
         //    if (!_vendorSettings.AllowCustomersToContactVendors)
@@ -407,8 +407,8 @@ namespace Grand.Web.ViewComponents
         //    return View(model);
         //}
         //[HttpPost, ActionName("ContactVendor")]
-        //[PublicAntiForgery]
-        //[CaptchaValidator]
+        ////[PublicAntiForgery]
+        ////[CaptchaValidator]
         //public virtual Task<IViewComponentResult> ContactVendorSend(ContactVendorModel model, bool captchaValid)
         //{
         //    if (!_vendorSettings.AllowCustomersToContactVendors)
@@ -437,7 +437,7 @@ namespace Grand.Web.ViewComponents
         //}
 
         ////sitemap page
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         //public virtual Task<IViewComponentResult> Sitemap()
         //{
         //    if (!_commonSettings.SitemapEnabled)
@@ -448,7 +448,7 @@ namespace Grand.Web.ViewComponents
         //}
 
         ////SEO sitemap page
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         ////available even when a store is closed
         //[StoreClosed(true)]
         //public virtual Task<IViewComponentResult> SitemapXml(int? id)

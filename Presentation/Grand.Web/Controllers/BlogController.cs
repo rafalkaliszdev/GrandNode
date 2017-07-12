@@ -1,7 +1,7 @@
 ﻿//using System;
 //using System.Collections.Generic;
 //using System.ServiceModel.Syndication;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Domain.Blogs;
 //using Grand.Core.Domain.Customers;
@@ -19,7 +19,7 @@
 
 //namespace Grand.Web.Controllers
 //{
-//    [GrandHttpsRequirement(SslRequirement.No)]
+//    //[GrandHttpsRequirement(SslRequirement.No)]
 //    public partial class BlogController : BasePublicController
 //    {
 //        #region Fields
@@ -73,7 +73,7 @@
 //        {
 //            if (!_blogSettings.Enabled)
 //                return RedirectToRoute("HomePage");
-            
+
 //            var model = _blogWebService.PrepareBlogPostListModel(command);
 //            return View("List", model);
 //        }
@@ -131,7 +131,7 @@
 //            //Store mapping
 //            if (!_storeMappingService.Authorize(blogPost))
 //                return InvokeHttp404();
-            
+
 //            var model = new BlogPostModel();
 //            _blogWebService.PrepareBlogPostModel(model, blogPost, true);
 
@@ -144,9 +144,9 @@
 //        }
 
 //        [HttpPost, ActionName("BlogPost")]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        [FormValueRequired("add-comment")]
-//        [CaptchaValidator]
+//        //[CaptchaValidator]
 //        public virtual IActionResult BlogCommentAdd(string blogPostId, BlogPostModel model, bool captchaValid)
 //        {
 //            if (!_blogSettings.Enabled)

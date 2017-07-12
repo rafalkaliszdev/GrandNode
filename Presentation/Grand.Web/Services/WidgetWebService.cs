@@ -32,6 +32,17 @@ namespace Grand.Web.Services
 
         public virtual List<RenderWidgetModel> PrepareRenderWidget(string widgetZone, object additionalData = null)
         {
+            //woa
+            return new List<Models.Cms.RenderWidgetModel>
+            {
+                new  Models.Cms.RenderWidgetModel
+                {
+                    ActionName = "HomepageCategories",
+                    ControllerName = "Catalog",//this should be actually 'ViewComponentName'
+                    RouteValues = new RouteValueDictionary(new { qq = "dqwdqw"})
+                }
+            };
+
             //returns coordinates for Controllers.Actions
 
             var cacheKey = string.Format(ModelCacheEventConsumer.WIDGET_MODEL_KEY, _storeContext.CurrentStore.Id, widgetZone, _themeContext.WorkingThemeName);

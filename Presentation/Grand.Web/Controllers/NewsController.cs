@@ -1,7 +1,7 @@
 ﻿//using System;
 //using System.Collections.Generic;
 //using System.ServiceModel.Syndication;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Caching;
 //using Grand.Core.Domain.Customers;
@@ -26,7 +26,7 @@
 
 //namespace Grand.Web.Controllers
 //{
-//    [GrandHttpsRequirement(SslRequirement.No)]
+//    //[GrandHttpsRequirement(SslRequirement.No)]
 //    public partial class NewsController : BasePublicController
 //    {
 //        #region Fields
@@ -43,7 +43,7 @@
 
 //        private readonly NewsSettings _newsSettings;
 //        private readonly CaptchaSettings _captchaSettings;
-        
+
 //        #endregion
 
 //		#region Constructors
@@ -146,8 +146,8 @@
 
 //        [HttpPost, ActionName("NewsItem")]
 //        [FormValueRequired("add-comment")]
-//        [PublicAntiForgery]
-//        [CaptchaValidator]
+//        //[PublicAntiForgery]
+//        //[CaptchaValidator]
 //        public virtual IActionResult NewsCommentAdd(string newsItemId, NewsItemModel model, bool captchaValid)
 //        {
 //            if (!_newsSettings.Enabled)

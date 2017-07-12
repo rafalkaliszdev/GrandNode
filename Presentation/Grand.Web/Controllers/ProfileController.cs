@@ -1,6 +1,6 @@
 ﻿//using System;
 //using System.Collections.Generic;
-///*using System.Web.Mvc;*/
+//
 //using Grand.Core.Domain.Customers;
 //using Grand.Core.Domain.Forums;
 //using Grand.Core.Domain.Media;
@@ -17,10 +17,11 @@
 //using Grand.Web.Models.Common;
 //using Grand.Web.Models.Profile;
 //using Grand.Services.Security;
+using Microsoft.AspNetCore.Mvc;
 
 //namespace Grand.Web.Controllers
 //{
-//    [GrandHttpsRequirement(SslRequirement.No)]
+//    //[GrandHttpsRequirement(SslRequirement.No)]
 //    public partial class ProfileController : BasePublicController
 //    {
 //        private readonly IForumService _forumService;

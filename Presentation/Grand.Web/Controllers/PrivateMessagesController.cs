@@ -1,6 +1,6 @@
 ﻿//using System;
 //using System.Collections.Generic;
-///*using System.Web.Mvc;*/
+using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Domain.Customers;
 //using Grand.Core.Domain.Forums;
@@ -16,7 +16,7 @@
 
 //namespace Grand.Web.Controllers
 //{
-//    [GrandHttpsRequirement(SslRequirement.Yes)]
+//    //[GrandHttpsRequirement(SslRequirement.Yes)]
 //    public partial class PrivateMessagesController : BasePublicController
 //    {
 //        #region Fields
@@ -69,7 +69,7 @@
 
 //            if (_workContext.CurrentCustomer.IsGuest())
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            int inboxPage = 0;
@@ -219,7 +219,7 @@
 //        }
 
 //        [HttpPost, FormValueRequired("delete-inbox"), ActionName("InboxUpdate")]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        public virtual IActionResult DeleteInboxPM(IFormCollection formCollection)
 //        {
 //            foreach (var key in formCollection.AllKeys)
@@ -244,7 +244,7 @@
 //        }
 
 //        [HttpPost, FormValueRequired("mark-unread"), ActionName("InboxUpdate")]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        public virtual IActionResult MarkUnread(IFormCollection formCollection)
 //        {
 //            foreach (var key in formCollection.AllKeys)
@@ -270,7 +270,7 @@
 
 //        //updates sent items (deletes PrivateMessages)
 //        [HttpPost, FormValueRequired("delete-sent"), ActionName("SentUpdate")]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        public virtual IActionResult DeleteSentPM(IFormCollection formCollection)
 //        {
 //            foreach (var key in formCollection.AllKeys)
@@ -304,7 +304,7 @@
 
 //            if (_workContext.CurrentCustomer.IsGuest())
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var customerTo = _customerService.GetCustomerById(toCustomerId);
@@ -341,7 +341,7 @@
 //        }
 
 //        [HttpPost]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        public virtual IActionResult SendPM(SendPrivateMessageModel model)
 //        {
 //            if (!_forumSettings.AllowPrivateMessages)
@@ -351,7 +351,7 @@
 
 //            if (_workContext.CurrentCustomer.IsGuest())
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            Customer toCustomer = null;
@@ -439,7 +439,7 @@
 
 //            if (_workContext.CurrentCustomer.IsGuest())
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var pm = _forumService.GetPrivateMessageById(privateMessageId);
@@ -492,7 +492,7 @@
 
 //            if (_workContext.CurrentCustomer.IsGuest())
 //            {
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 //            }
 
 //            var pm = _forumService.GetPrivateMessageById(privateMessageId);

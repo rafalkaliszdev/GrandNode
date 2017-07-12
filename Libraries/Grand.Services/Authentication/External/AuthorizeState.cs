@@ -1,7 +1,7 @@
 //Contributor:  Nicholas Mayne
 
 using System.Collections.Generic;
-///*using System.Web.Mvc;*/
+//
 
 namespace Grand.Services.Authentication.External
 {

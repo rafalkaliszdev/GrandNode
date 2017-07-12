@@ -1,4 +1,4 @@
-﻿///*using System.Web.Mvc;*/
+﻿//
 //using Grand.Core.Infrastructure;
 
 //namespace Grand.Web.Framework.Security.Captcha

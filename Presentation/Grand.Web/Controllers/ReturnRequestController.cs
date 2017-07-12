@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-/*using System.Web.Mvc;*/
+
 using System.Linq;
 using Grand.Core;
 using Grand.Core.Caching;
@@ -21,6 +21,7 @@ using Grand.Web.Infrastructure.Cache;
 using Grand.Web.Models.Order;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Grand.Web.Controllers
 {
@@ -168,7 +169,7 @@ namespace Grand.Web.Controllers
 
         #region Methods
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         public virtual IActionResult CustomerReturnRequests()
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -207,7 +208,7 @@ namespace Grand.Web.Controllers
             return View(model);
         }
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         public virtual IActionResult ReturnRequest(string orderId)
         {
             var order = _orderService.GetOrderById(orderId);
@@ -224,7 +225,7 @@ namespace Grand.Web.Controllers
 
         [HttpPost, ActionName("ReturnRequest")]
         //[ValidateInput(false)]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         public virtual IActionResult ReturnRequestSubmit(string orderId, SubmitReturnRequestModel model, IFormCollection form)
         {
             var order = _orderService.GetOrderById(orderId);

@@ -1,7 +1,7 @@
 ﻿//using System;
 //using System.Collections.Generic;
 //using System.IO;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Domain.Customers;
 //using Grand.Core.Domain.Orders;
@@ -52,11 +52,11 @@
 //        #region Methods
 
 //        //My account / Orders
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult CustomerOrders()
 //        {
 //            if (!_workContext.CurrentCustomer.IsRegistered())
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var model = _orderWebService.PrepareCustomerOrderList();
 //            return View(model);
@@ -64,12 +64,12 @@
 
 //        //My account / Orders / Cancel recurring order
 //        [HttpPost, ActionName("CustomerOrders")]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        [FormValueRequired(FormValueRequirement.StartsWith, "cancelRecurringPayment")]
 //        public virtual IActionResult CancelRecurringPayment(IFormCollection form)
 //        {
 //            if (!_workContext.CurrentCustomer.IsRegistered())
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            //get recurring payment identifier
 //            string recurringPaymentId = "";
@@ -99,11 +99,11 @@
 //        }
 
 //        //My account / Reward points
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult CustomerRewardPoints()
 //        {
 //            if (!_workContext.CurrentCustomer.IsRegistered())
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var rewardPointsSettings = EngineContextExperimental.Current.Resolve<RewardPointsSettings>();
 //            if (!rewardPointsSettings.Enabled)
@@ -115,12 +115,12 @@
 //        }
 
 //        //My account / Order details page
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult Details(string orderId)
 //        {
 //            var order = _orderService.GetOrderById(orderId);
 //            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var model = _orderWebService.PrepareOrderDetails(order);
 
@@ -128,12 +128,12 @@
 //        }
 
 //        //My account / Order details page / Print
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult PrintOrderDetails(string orderId)
 //        {
 //            var order = _orderService.GetOrderById(orderId);
 //            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var model = _orderWebService.PrepareOrderDetails(order);
 //            model.PrintMode = true;
@@ -142,7 +142,7 @@
 //        }
 
 //        //My account / Order details page / Cancel Unpaid Order
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public IActionResult CancelOrder(string orderId)
 //        {
 //            var orderSettings = EngineContextExperimental.Current.Resolve<OrderSettings>();
@@ -153,7 +153,7 @@
 //                || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId
 //                || !orderSettings.UserCanCancelUnpaidOrder)
 
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            _orderProcessingService.CancelOrder(order, true, true);
 
@@ -165,7 +165,7 @@
 //        {
 //            var order = _orderService.GetOrderById(orderId);
 //            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var orders = new List<Order>();
 //            orders.Add(order);
@@ -183,7 +183,7 @@
 //        {
 //            var order = _orderService.GetOrderById(orderId);
 //            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            _orderProcessingService.ReOrder(order);
 //            return RedirectToRoute("ShoppingCart");
@@ -192,12 +192,12 @@
 //        //My account / Order details page / Complete payment
 //        [HttpPost, ActionName("Details")]
 //        [FormValueRequired("repost-payment")]
-//        [PublicAntiForgery]
+//        //[PublicAntiForgery]
 //        public virtual IActionResult RePostPayment(string orderId)
 //        {
 //            var order = _orderService.GetOrderById(orderId);
 //            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            if (!_paymentService.CanRePostProcessPayment(order))
 //                return RedirectToRoute("OrderDetails", new { orderId = orderId });
@@ -220,16 +220,16 @@
 //        }
 
 //        //My account / Order details page / Shipment details page
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult ShipmentDetails(string shipmentId)
 //        {
 //            var shipment = EngineContextExperimental.Current.Resolve<IShipmentService>().GetShipmentById(shipmentId);
 //            if (shipment == null)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var order = _orderService.GetOrderById(shipment.OrderId);
 //            if (order == null || order.Deleted || _workContext.CurrentCustomer.Id != order.CustomerId)
-//                return new HttpUnauthorizedResult();
+//                return new UnauthorizedResult();
 
 //            var model = _orderWebService.PrepareShipmentDetails(shipment);
 

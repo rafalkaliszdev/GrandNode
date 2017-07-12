@@ -1,13 +1,13 @@
-﻿/*using System.Web.Mvc;*/
+﻿
 using Grand.Web.Framework.Security;
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Grand.Web.Controllers
 {
     public partial class HomeController : BasePublicController
     {
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult Index()
         {
 

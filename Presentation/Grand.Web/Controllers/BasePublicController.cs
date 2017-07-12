@@ -1,11 +1,11 @@
-﻿/*using System.Web.Mvc;*/
+﻿
 //using System.Web.Routing;
 using Grand.Core.Infrastructure;
 using Grand.Web.Framework;
 using Grand.Web.Framework.Controllers;
 using Grand.Web.Framework.Security;
 //using Grand.Web.Framework.Seo;//these attributes
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Grand.Web.Controllers
@@ -14,7 +14,7 @@ namespace Grand.Web.Controllers
     //[StoreClosed]
     [PublicStoreAllowNavigation]
     //[LanguageSeoCode]
-    //[GrandHttpsRequirement(SslRequirement.NoMatter)]
+    ////[GrandHttpsRequirement(SslRequirement.NoMatter)]
     //[WwwRequirement]
     public abstract partial class BasePublicController : BaseController
     {

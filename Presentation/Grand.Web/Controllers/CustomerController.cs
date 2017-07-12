@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 //using System.Web;
-/*using System.Web.Mvc;*/
+using Microsoft.AspNetCore.Mvc;
 using Grand.Core;
 using Grand.Core.Domain.Common;
 using Grand.Core.Domain.Customers;
@@ -137,7 +137,7 @@ namespace Grand.Web.Controllers
 
         #region Login / logout
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //available even when a store is closed
         //[StoreClosed(true)]
         //available even when navigation is not allowed
@@ -153,7 +153,7 @@ namespace Grand.Web.Controllers
         //[StoreClosed(true)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
-        //[CaptchaValidator]
+        ////[CaptchaValidator]
         public virtual IActionResult Login(LoginModel model, string returnUrl, bool captchaValid)
         {
             //validate CAPTCHA
@@ -264,7 +264,7 @@ namespace Grand.Web.Controllers
 
         #region Password recovery
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         ////available even when navigation is not allowed
         //[PublicStoreAllowNavigation(true)]
         //public virtual IActionResult PasswordRecovery()
@@ -274,7 +274,7 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost, ActionName("PasswordRecovery")]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[FormValueRequired("send-email")]
         ////available even when navigation is not allowed
         //[PublicStoreAllowNavigation(true)]
@@ -301,7 +301,7 @@ namespace Grand.Web.Controllers
         //}
 
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         ////available even when navigation is not allowed
         //[PublicStoreAllowNavigation(true)]
         //public virtual IActionResult PasswordRecoveryConfirm(string token, string email)
@@ -316,7 +316,7 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost, ActionName("PasswordRecoveryConfirm")]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[FormValueRequired("set-password")]
         ////available even when navigation is not allowed
         //[PublicStoreAllowNavigation(true)]
@@ -368,7 +368,7 @@ namespace Grand.Web.Controllers
 
         #region Register
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
         public virtual IActionResult Register()
@@ -386,9 +386,9 @@ namespace Grand.Web.Controllers
         }
 
         [HttpPost]
-        //[CaptchaValidator]
+        ////[CaptchaValidator]
         //[HoneypotValidator]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[ValidateInput(false)]
         //available even when navigation is not allowed
         [PublicStoreAllowNavigation(true)]
@@ -645,7 +645,7 @@ namespace Grand.Web.Controllers
         }
 
         //[HttpPost]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[ValidateInput(false)]
         ////available even when navigation is not allowed
         //[PublicStoreAllowNavigation(true)]
@@ -676,7 +676,7 @@ namespace Grand.Web.Controllers
         //    return Json(new { Available = usernameAvailable, Text = statusText });
         //}
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         ////available even when navigation is not allowed
         //[PublicStoreAllowNavigation(true)]
         //public virtual IActionResult AccountActivation(string token, string email)
@@ -716,11 +716,11 @@ namespace Grand.Web.Controllers
         //    return PartialView(model);
         //}
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult Info()
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
 
@@ -731,12 +731,12 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[ValidateInput(false)]
         //public virtual IActionResult Info(CustomerInfoModel model, IFormCollection form)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
 
@@ -893,12 +893,12 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost]
-        //[PublicAntiForgery]
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[PublicAntiForgery]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult RemoveExternalAssociation(string id)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var openAuthenticationService = EngineContextExperimental.Current.Resolve<IOpenAuthenticationService>();
         //    //ensure it's our record
@@ -924,23 +924,23 @@ namespace Grand.Web.Controllers
 
         //#region My account / Addresses
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult Addresses()
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var model = _customerWebService.PrepareAddressList(_workContext.CurrentCustomer);
         //    return View(model);
         //}
 
         //[HttpPost]
-        //[PublicAntiForgery]
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[PublicAntiForgery]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult AddressDelete(string addressId)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
 
@@ -960,11 +960,11 @@ namespace Grand.Web.Controllers
 
         //}
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult AddressAdd()
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var model = new CustomerAddressEditModel();
         //    _addressWebService.PrepareModel(model: model.Address,
@@ -976,12 +976,12 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[ValidateInput(false)]
         //public virtual IActionResult AddressAdd(CustomerAddressEditModel model, IFormCollection form)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
 
@@ -1015,11 +1015,11 @@ namespace Grand.Web.Controllers
         //    return View(model);
         //}
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult AddressEdit(string addressId)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
         //    //find address (ensure that it belongs to the current customer)
@@ -1038,12 +1038,12 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[ValidateInput(false)]
         //public virtual IActionResult AddressEdit(CustomerAddressEditModel model, string addressId, IFormCollection form)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
         //    //find address (ensure that it belongs to the current customer)
@@ -1082,11 +1082,11 @@ namespace Grand.Web.Controllers
 
         //#region My account / Downloadable products
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult DownloadableProducts()
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    if (_customerSettings.HideDownloadableProductsTab)
         //        return RedirectToRoute("CustomerInfo");
@@ -1108,11 +1108,11 @@ namespace Grand.Web.Controllers
 
         //#region My account / Change password
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult ChangePassword()
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var model = new ChangePasswordModel();
 
@@ -1124,11 +1124,11 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //public virtual IActionResult ChangePassword(ChangePasswordModel model)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    var customer = _workContext.CurrentCustomer;
 
@@ -1157,11 +1157,11 @@ namespace Grand.Web.Controllers
 
         //#region My account / Avatar
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         //public virtual IActionResult Avatar()
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    if (!_customerSettings.AllowCustomersToUploadAvatars)
         //        return RedirectToRoute("CustomerInfo");
@@ -1172,12 +1172,12 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost, ActionName("Avatar")]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[FormValueRequired("upload-avatar")]
         //public virtual IActionResult UploadAvatar(CustomerAvatarModel model, HttpPostedFileBase uploadedFile)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    if (!_customerSettings.AllowCustomersToUploadAvatars)
         //        return RedirectToRoute("CustomerInfo");
@@ -1235,12 +1235,12 @@ namespace Grand.Web.Controllers
         //}
 
         //[HttpPost, ActionName("Avatar")]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         //[FormValueRequired("remove-avatar")]
         //public virtual IActionResult RemoveAvatar(CustomerAvatarModel model, HttpPostedFileBase uploadedFile)
         //{
         //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return new HttpUnauthorizedResult();
+        //        return new UnauthorizedResult();
 
         //    if (!_customerSettings.AllowCustomersToUploadAvatars)
         //        return RedirectToRoute("CustomerInfo");

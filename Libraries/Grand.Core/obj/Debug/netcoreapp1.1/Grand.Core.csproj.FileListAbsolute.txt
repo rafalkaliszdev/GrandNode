@@ -4,4 +4,3 @@ C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Core\bin\Debug\netcor
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Core\obj\Debug\netcoreapp1.1\Grand.Core.AssemblyInfo.cs
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Core\obj\Debug\netcoreapp1.1\Grand.Core.dll
 C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Core\obj\Debug\netcoreapp1.1\Grand.Core.pdb
-C:\DONT REMOVE\gnmigrationgithub\GrandNode\Libraries\Grand.Core\obj\Debug\netcoreapp1.1\Grand.Core.csprojResolveAssemblyReference.cache

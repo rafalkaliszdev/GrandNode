@@ -4,7 +4,7 @@
 //using System.Data.SqlClient;
 //using System.Linq;
 //using System.Security.Principal;
-///*using System.Web.Mvc;*/
+using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Data;
 //using Grand.Core.Configuration;
@@ -54,7 +54,7 @@
 //            get { return false; }
 //        }
 
-        
+
 //        /// <summary>
 //        /// Create contents of connection strings used by the SqlConnection class
 //        /// </summary>
@@ -196,7 +196,7 @@
 //            foreach (string file in filesToCheck)
 //                if (!FilePermissionHelper.CheckPermissions(file, false, true, true, true))
 //                    ModelState.AddModelError("", string.Format(_locService.GetResource("ConfigureFilePermissions"), WindowsIdentity.GetCurrent().Name, file));
-            
+
 //            if (ModelState.IsValid)
 //            {
 //                var settingsManager = new DataSettingsManager();
@@ -217,7 +217,7 @@
 
 //                    var dataSettingsManager = new DataSettingsManager();
 //                    var dataProviderSettings = dataSettingsManager.LoadSettings();
-                    
+
 //                    //now resolve installation service
 //                    var mongoDBDataProviderManager = new MongoDBDataProviderManager(dataSettingsManager.LoadSettings());
 //                    var dataProviderInstall = mongoDBDataProviderManager.LoadDataProvider();
@@ -317,7 +317,7 @@
 //        {
 //            if (DataSettingsHelper.DatabaseIsInstalled())
 //                return RedirectToRoute("HomePage");
-            
+
 //            //restart application
 //            var webHelper = EngineContextExperimental.Current.Resolve<IWebHelper>();
 //            webHelper.RestartAppDomain();

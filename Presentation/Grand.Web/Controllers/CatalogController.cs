@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-/*using System.Web.Mvc;*/
+
 using Grand.Core;
 using Grand.Core.Caching;
 using Grand.Core.Domain.Catalog;
@@ -20,7 +20,7 @@ using Grand.Web.Models.Catalog;
 using Grand.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace Grand.Web.Controllers
 {
@@ -103,7 +103,7 @@ namespace Grand.Web.Controllers
 
         #region Categories
 
-        ////[GrandHttpsRequirement(SslRequirement.No)]
+        //////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult Category(string categoryId, CatalogPagingFilteringModel command)
         {
             var category = _categoryService.GetCategoryById(categoryId);
@@ -179,7 +179,7 @@ namespace Grand.Web.Controllers
 
         #region Manufacturers
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult Manufacturer(string manufacturerId, CatalogPagingFilteringModel command)
         {
             var manufacturer = _manufacturerService.GetManufacturerById(manufacturerId);
@@ -225,7 +225,7 @@ namespace Grand.Web.Controllers
             return View(templateViewPath, model);
         }
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ManufacturerAll()
         {
             var model = _catalogWebService.PrepareManufacturerAll();
@@ -260,7 +260,7 @@ namespace Grand.Web.Controllers
 
         #region Vendors
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult Vendor(string vendorId, CatalogPagingFilteringModel command)
         {
             var vendor = _vendorService.GetVendorById(vendorId);
@@ -286,7 +286,7 @@ namespace Grand.Web.Controllers
             return View(model);
         }
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult VendorAll()
         {
             //we don't allow viewing of vendors if "vendors" block is hidden
@@ -324,7 +324,7 @@ namespace Grand.Web.Controllers
             return PartialView(model);
         }
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ProductsByTag(string productTagId, CatalogPagingFilteringModel command)
         {
             var productTag = _productTagService.GetProductTagById(productTagId);
@@ -335,7 +335,7 @@ namespace Grand.Web.Controllers
             return View(model);
         }
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ProductTagsAll()
         {
             var model = _catalogWebService.PrepareProductTagsAll();
@@ -346,7 +346,7 @@ namespace Grand.Web.Controllers
 
         #region Searching
 
-        //[GrandHttpsRequirement(SslRequirement.No)]
+        ////[GrandHttpsRequirement(SslRequirement.No)]
         //[ValidateInput(false)]
         public virtual IActionResult Search(SearchModel model, CatalogPagingFilteringModel command)
         {

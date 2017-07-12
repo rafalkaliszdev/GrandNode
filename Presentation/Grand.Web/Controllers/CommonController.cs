@@ -1,6 +1,6 @@
 ﻿//using System;
 //using System.Linq;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Caching;
 //using Grand.Core.Domain;
@@ -268,7 +268,7 @@
 
 
 //        //contact us page
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        //available even when a store is closed
 //        [StoreClosed(true)]
 //        public virtual IActionResult ContactUs()
@@ -278,8 +278,8 @@
 //        }
 
 //        [HttpPost, ActionName("ContactUs")]
-//        [PublicAntiForgery]
-//        [CaptchaValidator]
+//        //[PublicAntiForgery]
+//        //[CaptchaValidator]
 //        //available even when a store is closed
 //        [StoreClosed(true)]
 //        public virtual IActionResult ContactUsSend(ContactUsModel model, bool captchaValid)
@@ -301,7 +301,7 @@
 //            return View(model);
 //        }
 //        //contact vendor page
-//        [GrandHttpsRequirement(SslRequirement.Yes)]
+//        //[GrandHttpsRequirement(SslRequirement.Yes)]
 //        public virtual IActionResult ContactVendor(string vendorId)
 //        {
 //            if (!_vendorSettings.AllowCustomersToContactVendors)
@@ -316,8 +316,8 @@
 //            return View(model);
 //        }
 //        [HttpPost, ActionName("ContactVendor")]
-//        [PublicAntiForgery]
-//        [CaptchaValidator]
+//        //[PublicAntiForgery]
+//        //[CaptchaValidator]
 //        public virtual IActionResult ContactVendorSend(ContactVendorModel model, bool captchaValid)
 //        {
 //            if (!_vendorSettings.AllowCustomersToContactVendors)
@@ -346,7 +346,7 @@
 //        }
 
 //        //sitemap page
-//        [GrandHttpsRequirement(SslRequirement.No)]
+//        //[GrandHttpsRequirement(SslRequirement.No)]
 //        public virtual IActionResult Sitemap()
 //        {
 //            if (!_commonSettings.SitemapEnabled)
@@ -357,7 +357,7 @@
 //        }
 
 //        //SEO sitemap page
-//        [GrandHttpsRequirement(SslRequirement.No)]
+//        //[GrandHttpsRequirement(SslRequirement.No)]
 //        //available even when a store is closed
 //        [StoreClosed(true)]
 //        public virtual IActionResult SitemapXml(int? id)

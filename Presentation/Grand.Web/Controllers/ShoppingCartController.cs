@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 //using System.Web;
-/*using System.Web.Mvc;*/
+using Microsoft.AspNetCore.Mvc;
 using Grand.Core;
 using Grand.Core.Domain.Catalog;
 using Grand.Core.Domain.Common;
@@ -589,7 +589,7 @@ namespace Grand.Web.Controllers
         {
             var product = _productService.GetProductById(productId);
             if (product == null)
-                return new  NullJsonResult(null);
+                return new NullJsonResult(null);
 
             string attributeXml = _shoppingCartWebService.ParseProductAttributes(product, form);
 
@@ -862,7 +862,7 @@ namespace Grand.Web.Controllers
         }
 
 
-        ////[GrandHttpsRequirement(SslRequirement.Yes)]
+        //////[GrandHttpsRequirement(SslRequirement.Yes)]
         public virtual IActionResult Cart()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.EnableShoppingCart))
@@ -979,7 +979,7 @@ namespace Grand.Web.Controllers
         [HttpPost, ActionName("Cart")]
         [FormValueRequired("checkout")]
         public virtual IActionResult StartCheckout(IFormCollection form)
-      {
+        {
             var cart = _workContext.CurrentCustomer.ShoppingCartItems
                 .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
                 .LimitPerStore(_storeContext.CurrentStore.Id)
@@ -1125,7 +1125,7 @@ namespace Grand.Web.Controllers
         }
 
         //[ValidateInput(false)]
-        //[PublicAntiForgery]
+        ////[PublicAntiForgery]
         [HttpPost]
         public virtual IActionResult GetEstimateShipping(string countryId, string stateProvinceId, string zipPostalCode, IFormCollection form)
         {
@@ -1218,11 +1218,11 @@ namespace Grand.Web.Controllers
             return PartialView(model);
         }
 
-#endregion
+        #endregion
 
         #region Wishlist
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         public virtual IActionResult Wishlist(Guid? customerGuid)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.EnableWishlist))
@@ -1394,7 +1394,7 @@ namespace Grand.Web.Controllers
             }
         }
 
-        //[GrandHttpsRequirement(SslRequirement.Yes)]
+        ////[GrandHttpsRequirement(SslRequirement.Yes)]
         public virtual IActionResult EmailWishlist()
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.EnableWishlist) || !_shoppingCartSettings.EmailWishlistEnabled)
@@ -1418,8 +1418,8 @@ namespace Grand.Web.Controllers
 
         [HttpPost, ActionName("EmailWishlist")]
         [FormValueRequired("send-email")]
-        //[PublicAntiForgery]
-        //[CaptchaValidator]
+        ////[PublicAntiForgery]
+        ////[CaptchaValidator]
         public virtual IActionResult EmailWishlistSend(WishlistEmailAFriendModel model, bool captchaValid)
         {
             if (!_permissionService.Authorize(StandardPermissionProvider.EnableWishlist) || !_shoppingCartSettings.EmailWishlistEnabled)

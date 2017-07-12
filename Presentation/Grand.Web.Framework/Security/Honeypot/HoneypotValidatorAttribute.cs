@@ -1,5 +1,5 @@
 ﻿//using System;
-///*using System.Web.Mvc;*/
+//
 //using Grand.Core;
 //using Grand.Core.Domain.Security;
 //using Grand.Core.Infrastructure;
@@ -26,7 +26,7 @@
 //                    var logger = EngineContextExperimental.Current.Resolve<ILogger>();
 //                    logger.Warning("A bot detected. Honeypot.");
 
-//                    //filterContext.Result = new HttpUnauthorizedResult();
+//                    //filterContext.Result = new UnauthorizedResult();
 //                    var webHelper = EngineContextExperimental.Current.Resolve<IWebHelper>();
 //                    string url = webHelper.GetThisPageUrl(true);
 //                    filterContext.Result = new RedirectResult(url);

@@ -27,7 +27,7 @@
 
 //        private void HandleUnauthorizedRequest(AuthorizationContext filterContext)
 //        {
-//            filterContext.Result = new HttpUnauthorizedResult();
+//            filterContext.Result = new UnauthorizedResult();
 //        }
 
 //        private IEnumerable<AdminAuthorizeAttribute> GetAdminAuthorizeAttributes(ActionDescriptor descriptor)
@@ -59,7 +59,7 @@
 //            var workContext = EngineContextExperimental.Current.Resolve<IWorkContext>();
 //            if (workContext.CurrentCustomer.IsVendor())
 //                if (workContext.CurrentVendor == null)
-//                    filterContext.Result = new HttpUnauthorizedResult();
+//                    filterContext.Result = new UnauthorizedResult();
 
 //            if (IsAdminPageRequested(filterContext))
 //            {

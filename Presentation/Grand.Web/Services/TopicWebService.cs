@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace Grand.Web.Services
 {
-    public partial class TopicWebService: ITopicWebService
+    public partial class TopicWebService : ITopicWebService
     {
         public readonly ITopicService _topicService;
         public readonly IWorkContext _workContext;
@@ -114,6 +114,14 @@ namespace Grand.Web.Services
         }
         public virtual TopicModel TopicBlock(string systemName)
         {
+            //woa
+            return new TopicModel()
+            {
+                Body = "Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..",
+                Title = "dqwdqwdqwdqw"
+
+            };
+
             var cacheKey = string.Format(ModelCacheEventConsumer.TOPIC_MODEL_BY_SYSTEMNAME_KEY,
                 systemName,
                 _workContext.WorkingLanguage.Id, _storeContext.CurrentStore.Id,

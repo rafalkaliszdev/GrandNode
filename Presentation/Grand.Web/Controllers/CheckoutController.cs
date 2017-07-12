@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 //using System.Web;
-/*using System.Web.Mvc;*/
+using Microsoft.AspNetCore.Mvc;
 //using System.Web.Routing;
 using Grand.Core;
 using Grand.Core.Domain.Common;
@@ -37,7 +37,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Grand.Web.Controllers
 {
-    //[GrandHttpsRequirement(SslRequirement.Yes)]
+    ////[GrandHttpsRequirement(SslRequirement.Yes)]
     public partial class CheckoutController : BasePublicController
     {
         #region Fields

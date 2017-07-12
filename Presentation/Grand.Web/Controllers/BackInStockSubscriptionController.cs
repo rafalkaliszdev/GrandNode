@@ -1,5 +1,5 @@
 ﻿//using System;
-///*using System.Web.Mvc;*/
+//using Microsoft.AspNetCore.Mvc;
 //using Grand.Core;
 //using Grand.Core.Domain.Catalog;
 //using Grand.Core.Domain.Customers;
@@ -22,7 +22,7 @@
 //        private readonly IBackInStockSubscriptionService _backInStockSubscriptionService;
 //        private readonly CatalogSettings _catalogSettings;
 //        private readonly CustomerSettings _customerSettings;
-        
+
 //        #endregion
 
 //		#region Constructors
