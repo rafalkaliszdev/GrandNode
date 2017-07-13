@@ -2009,6 +2009,7 @@ namespace Grand.Services.Catalog
             //return _cacheManager.Get(string.Format(PRODUCTS_CUSTOMER_ROLE, string.Join(",", customerRoleIds)), 
             //    () =>
             //    {
+            //need to get some of these
                     var query = from cr in _customerRoleProductRepository.Table
                                 where customerRoleIds.Contains(cr.CustomerRoleId)
                                 orderby cr.DisplayOrder
@@ -2021,6 +2022,10 @@ namespace Grand.Services.Catalog
                     foreach (var product in GetProductsByIds(productIds.ToArray()))
                         if (product.Published)
                             products.Add(product);
+
+            //temp woa
+            products.Add(_productRepository.GetById("59254be361726129c896e145"));
+
 
                     return products;
                 //});
