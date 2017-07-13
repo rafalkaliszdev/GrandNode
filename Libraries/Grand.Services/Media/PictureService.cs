@@ -484,6 +484,10 @@ namespace Grand.Services.Media
             string storeLocation = null,
             PictureType defaultPictureType = PictureType.Entity)
         {
+            //temp woa
+            return "http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png";
+
+
             lock (s_lock)
             {
                 string url = string.Empty;

@@ -169,14 +169,14 @@ namespace Grand.Web.Services
         {
             var pictureCacheKey = string.Format(ModelCacheEventConsumer.CART_PICTURE_MODEL_KEY, sci.Id, sci.ProductId, pictureSize, true, _workContext.WorkingLanguage.Id, _webHelper.IsCurrentConnectionSecured(), _storeContext.CurrentStore.Id);
             //var model = _cacheManager.Get(pictureCacheKey,
-                //as we cache per user (shopping cart item identifier)
-                //let's cache just for 3 minutes
-                //3, () =>
-                //{
-                    //var sciPicture = _productService.GetProductById(sci.ProductId).GetProductPicture(sci.AttributesXml, _pictureService, _productAttributeParser);
-                    var model = /*return */new PictureModel
+            //as we cache per user (shopping cart item identifier)
+            //let's cache just for 3 minutes
+            //3, () =>
+            //{
+            var sciPicture = _productService.GetProductById(sci.ProductId).GetProductPicture(sci.AttributesXml, _pictureService, _productAttributeParser);
+            var model = /*return */new PictureModel
                     {
-                        ImageUrl = "https://img0.etsystatic.com/144/0/11767653/il_570xN.1174170726_p07o.jpg", // _pictureService.GetPictureUrl(sciPicture, _mediaSettings.ApplyWatermarkForProduct, pictureSize, showDefaultPicture),
+                        ImageUrl =  _pictureService.GetPictureUrl(sciPicture, _mediaSettings.ApplyWatermarkForProduct, pictureSize, showDefaultPicture),
                         Title = string.Format(_localizationService.GetResource("Media.Product.ImageLinkTitleFormat"), productName),
                         AlternateText = string.Format(_localizationService.GetResource("Media.Product.ImageAlternateTextFormat"), productName),
                     };
@@ -517,8 +517,8 @@ namespace Grand.Web.Services
                 //picture
                 if (_shoppingCartSettings.ShowProductImagesOnShoppingCart)
                 {
-                    //cartItemModel.Picture = PrepareCartItemPicture(sci,
-                    //    _mediaSettings.CartThumbPictureSize, true, cartItemModel.ProductName);
+                    cartItemModel.Picture = PrepareCartItemPicture(sci,
+                        _mediaSettings.CartThumbPictureSize, true, cartItemModel.ProductName);
                 }
 
                 //item warnings

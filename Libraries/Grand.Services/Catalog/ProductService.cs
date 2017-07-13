@@ -2006,9 +2006,9 @@ namespace Grand.Services.Catalog
         public virtual IList<Product> GetRecommendedProducts(string[] customerRoleIds)
         {
 
-            return _cacheManager.Get(string.Format(PRODUCTS_CUSTOMER_ROLE, string.Join(",", customerRoleIds)), 
-                () =>
-                {
+            //return _cacheManager.Get(string.Format(PRODUCTS_CUSTOMER_ROLE, string.Join(",", customerRoleIds)), 
+            //    () =>
+            //    {
                     var query = from cr in _customerRoleProductRepository.Table
                                 where customerRoleIds.Contains(cr.CustomerRoleId)
                                 orderby cr.DisplayOrder
@@ -2023,7 +2023,7 @@ namespace Grand.Services.Catalog
                             products.Add(product);
 
                     return products;
-                });
+                //});
         }
 
         #endregion

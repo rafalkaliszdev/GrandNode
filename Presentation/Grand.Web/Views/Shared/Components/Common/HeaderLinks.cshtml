@@ -61,7 +61,8 @@ else
                 <span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                @await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
+                @* temporary workaround because really it drives nuts out of me *@
+                @*@await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })*@
             </div>
         </div>
     </li>

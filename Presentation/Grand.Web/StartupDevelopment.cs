@@ -60,6 +60,13 @@ namespace Grand.Web
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            //screw this app insights
+            var aiOptions = new Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions();
+            aiOptions.EnableAdaptiveSampling = false;
+
+            services.AddApplicationInsightsTelemetry(aiOptions);
+
+
             //asp.net core mvc creates an instance of this class
             //so there is no need to make singleton
 

@@ -117,8 +117,8 @@ namespace Grand.Web.Services
             //woa
             return new TopicModel()
             {
-                Body = "Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..Does your lorem ipsum text long for something a little meatier? Give our generator a try..",
-                Title = "dqwdqwdqwdqw"
+                Body = "Proin nec sem vel nibh luctus gravida et et est. Suspendisse ut ligula non ligula tincidunt porta. Etiam purus elit, accumsan at consequat tempus, sollicitudin ac ex. Donec efficitur dolor sit amet mauris placerat ullamcorper. Aliquam erat volutpat. Suspendisse potenti. Cras tristique eros elit, et sagittis tortor auctor in. Maecenas volutpat ornare maximus. Aenean a tristique libero.Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin varius tristique nulla, in ultrices nunc pellentesque eu. Cras tortor augue, pretium a lectus eu, pretium viverra leo. Etiam molestie eget mi ac dictum. Praesent ac euismod ipsum. Aenean commodo turpis mauris, in gravida justo euismod egestas. Quisque euismod ipsum eget ornare luctus. Proin congue lectus id orci pellentesque, vel suscipit eros feugiat.",
+                Title = "custom title"
 
             };
 

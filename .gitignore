@@ -38,3 +38,5 @@
 *.json
 *.dll
 *.pdb
+*.jpeg
+*.jpg

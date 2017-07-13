@@ -2,7 +2,6 @@
 using System.Linq;
 
 using Grand.Core;
-using Grand.Core.Caching;
 using Grand.Core.Domain.Catalog;
 using Grand.Core.Domain.Customers;
 using Grand.Core.Domain.Media;
@@ -15,11 +14,8 @@ using Grand.Services.Logging;
 using Grand.Services.Security;
 using Grand.Services.Stores;
 using Grand.Services.Vendors;
-using Grand.Web.Framework.Security;
 using Grand.Web.Models.Catalog;
 using Grand.Web.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Grand.Web.Controllers

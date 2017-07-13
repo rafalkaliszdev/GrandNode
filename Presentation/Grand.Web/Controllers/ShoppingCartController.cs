@@ -877,21 +877,6 @@ namespace Grand.Web.Controllers
             return View(model);
         }
 
-        //[ChildActionOnly]
-        public virtual IActionResult OrderSummary(bool? prepareAndDisplayOrderReviewData)
-        {
-            var cart = _workContext.CurrentCustomer.ShoppingCartItems
-                .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-                .LimitPerStore(_storeContext.CurrentStore.Id)
-                .ToList();
-            var model = new ShoppingCartModel();
-            _shoppingCartWebService.PrepareShoppingCart(model, cart,
-                isEditable: false,
-                prepareEstimateShippingIfEnabled: false,
-                prepareAndDisplayOrderReviewData: prepareAndDisplayOrderReviewData.GetValueOrDefault());
-            return PartialView(model);
-        }
-
         //[ValidateInput(false)]
         [HttpPost, ActionName("Cart")]
         [FormValueRequired("updatecart")]
@@ -1141,17 +1126,6 @@ namespace Grand.Web.Controllers
             return PartialView("_EstimateShippingResult", model);
         }
 
-        //[ChildActionOnly]
-        public virtual IActionResult OrderTotals(bool isEditable)
-        {
-            var cart = _workContext.CurrentCustomer.ShoppingCartItems
-                .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-                .LimitPerStore(_storeContext.CurrentStore.Id)
-                .ToList();
-            var model = _shoppingCartWebService.PrepareOrderTotals(cart, isEditable);
-            return PartialView(model);
-        }
-
         //[ValidateInput(false)]
         [HttpPost, ActionName("Cart")]
         [FormValueRequired(FormValueRequirement.StartsWith, "removediscount-")]
@@ -1203,19 +1177,6 @@ namespace Grand.Web.Controllers
                 .ToList();
             _shoppingCartWebService.PrepareShoppingCart(model, cart);
             return View(model);
-        }
-
-        //[ChildActionOnly]
-        public virtual IActionResult FlyoutShoppingCart()
-        {
-            if (!_shoppingCartSettings.MiniShoppingCartEnabled)
-                return Content("");
-
-            if (!_permissionService.Authorize(StandardPermissionProvider.EnableShoppingCart))
-                return Content("");
-
-            var model = _shoppingCartWebService.PrepareMiniShoppingCart();
-            return PartialView(model);
         }
 
         #endregion

@@ -26,13 +26,14 @@ namespace Grand.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(string actionName, string widgetZone, object additionalData = null)
         {
-            switch (actionName)
-            {
-                case nameof(this.WidgetsByZone):
-                    return await WidgetsByZone(widgetZone, additionalData);
-                default:
-                    throw new InvalidOperationException(nameof(this.InvokeAsync));
-            }
+            return await WidgetsByZone(widgetZone, additionalData);
+
+            //switch (actionName)
+            //{
+            //    case nameof(this.WidgetsByZone):
+            //    default:
+            //        throw new InvalidOperationException(nameof(this.InvokeAsync));
+            //}
         }
 
         #endregion

@@ -73,7 +73,7 @@ namespace Grand.Web.Infrastructure
             routes.MapLocalizedRoute("Wishlist",
                             "wishlist/{customerGuid}",
                             new { controller = "ShoppingCart", action = "Wishlist"/*, customerGuid = UrlParameter.Optional*/ });
-                            
+
 
             ////customer account links
             //routes.MapLocalizedRoute("CustomerInfo",
@@ -190,18 +190,18 @@ namespace Grand.Web.Infrastructure
             //                
 
 
-            ////add product to cart (without any attributes and options). used on catalog pages.
-            //routes.MapLocalizedRoute("AddProductToCart-Catalog",
-            //                "addproducttocart/catalog/{productId}/{shoppingCartTypeId}/{quantity}",
-            //                new { controller = "ShoppingCart", action = "AddProductToCart_Catalog" });
-            //                new { productId = @"\w+", shoppingCartTypeId = @"\d+", quantity = @"\d+" });
-            //                
-            ////add product to cart (with attributes and options). used on the product details pages.
-            //routes.MapLocalizedRoute("AddProductToCart-Details",
-            //                "addproducttocart/details/{productId}/{shoppingCartTypeId}",
-            //                new { controller = "ShoppingCart", action = "AddProductToCart_Details" });
-            //                new { productId = @"\w+", shoppingCartTypeId = @"\d+" });
-            //                
+            //add product to cart (without any attributes and options). used on catalog pages.
+            routes.MapLocalizedRoute("AddProductToCart-Catalog",
+                            "addproducttocart/catalog/{productId}/{shoppingCartTypeId}/{quantity}",
+                            new { controller = "ShoppingCart", action = "AddProductToCart_Catalog" });
+            //new { productId = @"\w+", shoppingCartTypeId = @"\d+", quantity = @"\d+" });
+
+            //add product to cart (with attributes and options). used on the product details pages.
+            routes.MapLocalizedRoute("AddProductToCart-Details",
+                            "addproducttocart/details/{productId}/{shoppingCartTypeId}",
+                            new { controller = "ShoppingCart", action = "AddProductToCart_Details" });
+            //new { productId = @"\w+", shoppingCartTypeId = @"\d+" });
+
 
             ////product tags
             //routes.MapLocalizedRoute("ProductsByTag",

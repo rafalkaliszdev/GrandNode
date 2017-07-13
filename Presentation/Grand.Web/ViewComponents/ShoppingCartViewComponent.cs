@@ -131,45 +131,47 @@ namespace Grand.Web.ViewComponents
 
         #endregion
 
-        public async Task<IViewComponentResult> InvokeAsync(string actionName)
+        public async Task<IViewComponentResult> InvokeAsync(string actionName, bool? prepareAndDisplayOrderReviewData, bool isEditable)
         {
-            if (actionName == nameof(this.FlyoutShoppingCart))
-                return await FlyoutShoppingCart();
-
-            return Content("sometimes you run so fast, you lose your aim out of sight");
+            switch (actionName)
+            {
+                case nameof(this.OrderSummary):
+                    return await OrderSummary(prepareAndDisplayOrderReviewData);
+                case nameof(this.OrderTotals):
+                    return await OrderTotals(isEditable);
+                case nameof(this.FlyoutShoppingCart):
+                    return await FlyoutShoppingCart();
+                default:
+                    throw new InvalidOperationException(nameof(this.InvokeAsync));
+            }
         }
 
-        #region Shopping cart
+        #region Methods
 
+        public virtual async Task<IViewComponentResult> OrderSummary(bool? prepareAndDisplayOrderReviewData)
+        {
+            var cart = _workContext.CurrentCustomer.ShoppingCartItems
+                .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+                .LimitPerStore(_storeContext.CurrentStore.Id)
+                .ToList();
+            var model = new ShoppingCartModel();
+            _shoppingCartWebService.PrepareShoppingCart(model, cart,
+                isEditable: false,
+                prepareEstimateShippingIfEnabled: false,
+                prepareAndDisplayOrderReviewData: prepareAndDisplayOrderReviewData.GetValueOrDefault());
+            return View(nameof(this.OrderSummary), model);
+        }
 
-        ////[ChildActionOnly]
-        //public virtual IActionResult OrderSummary(bool? prepareAndDisplayOrderReviewData)
-        //{
-        //    var cart = _workContext.CurrentCustomer.ShoppingCartItems
-        //        .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-        //        .LimitPerStore(_storeContext.CurrentStore.Id)
-        //        .ToList();
-        //    var model = new ShoppingCartModel();
-        //    _shoppingCartWebService.PrepareShoppingCart(model, cart,
-        //        isEditable: false,
-        //        prepareEstimateShippingIfEnabled: false,
-        //        prepareAndDisplayOrderReviewData: prepareAndDisplayOrderReviewData.GetValueOrDefault());
-        //    return PartialView(model);
-        //}
+        public virtual async Task<IViewComponentResult> OrderTotals(bool isEditable)
+        {
+            var cart = _workContext.CurrentCustomer.ShoppingCartItems
+                .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+                .LimitPerStore(_storeContext.CurrentStore.Id)
+                .ToList();
+            var model = _shoppingCartWebService.PrepareOrderTotals(cart, isEditable);
+            return View(nameof(this.OrderTotals), model);
+        }
 
-
-        ////[ChildActionOnly]
-        //public virtual IActionResult OrderTotals(bool isEditable)
-        //{
-        //    var cart = _workContext.CurrentCustomer.ShoppingCartItems
-        //        .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-        //        .LimitPerStore(_storeContext.CurrentStore.Id)
-        //        .ToList();
-        //    var model = _shoppingCartWebService.PrepareOrderTotals(cart, isEditable);
-        //    return PartialView(model);
-        //}
-
-        //[ChildActionOnly]
         public virtual async Task<IViewComponentResult> FlyoutShoppingCart()
         {
             var _shoppingCartSettings = new ShoppingCartSettings()
@@ -185,17 +187,10 @@ namespace Grand.Web.ViewComponents
 
             var model = _shoppingCartWebService.PrepareMiniShoppingCart();
 
-            return View("/Views/Shared/Components/ShoppingCart/FlyoutShoppingCart.cshtml", model);
+            //return View("/Views/Shared/Components/ShoppingCart/FlyoutShoppingCart.cshtml", model);
+            return View(nameof(this.FlyoutShoppingCart), model);
         }
 
         #endregion
-
-        //#region Wishlist
-
-
-
-
-
-        //#endregion
     }
 }

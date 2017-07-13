@@ -14,6 +14,8 @@
             border-width: 1px;
             padding: 4px;
             margin: 64px;
+            border-top-color: red;
+            border-top-width: 4px;
         }
     </style>
 
@@ -22,45 +24,85 @@
 
 
 
-
-
     <div class="proFrontEndDeveloperKrw">
-        @*@await Component.InvokeAsync("Catalog", new { actionName = "TopMenu" })*@
-        vc:catalog action-name="TopMenu" />
-        <vc:catalog action-name="TopMenu" />
+        <div class="proFrontEndDeveloperKrw">
+            @*@await Component.InvokeAsync("Catalog", new { actionName = "TopMenu" })*@
+            vc:catalog action-name="TopMenu" />
+            @*<vc:catalog action-name="TopMenu" />*@
+        </div>
     </div>
 
     <div class="proFrontEndDeveloperKrw">
+        <div class="proFrontEndDeveloperKrw">
+            vc:catalog action-name="HomepageCategories" />
+            @*<vc:catalog action-name="HomepageCategories" />*@
+        </div>
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+        <div class="proFrontEndDeveloperKrw">
+            vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data = "dwqd" } )" />
+            @*<vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data="dwqd" } )" />*@
+        </div>
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+        <div class="proFrontEndDeveloperKrw">
+            vc:topic action-name="TopicBlock" system-name="wtf" />
+            @*<vc:topic action-name="TopicBlock" system-name="wtf"/>*@
+        </div>
+    </div>
+
+    <div class="proFrontEndDeveloperKrw">
+        @*<div class="proFrontEndDeveloperKrw">
+            await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary" })
+            @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary", prepareAndDisplayOrderReviewData = true })
+        </div>
+        <div class="proFrontEndDeveloperKrw">
+            await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderTotals" })
+            @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderTotals", isEditable = true }) 
+        </div>
+        <div class="proFrontEndDeveloperKrw">
+            await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
+            @await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
+        </div>*@
+    </div>
+
+    <h1>above all works, now testing this below </h1>
+
+    <div class="proFrontEndDeveloperKrw">
+        <div class="proFrontEndDeveloperKrw">
+            await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers", productThumbPictureSize = 100 })
+            @await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers", productThumbPictureSize = 100 })
+        </div>
+        <div class="proFrontEndDeveloperKrw">
+            await Component.InvokeAsync("Product", new { actionName = "HomepageProducts", productThumbPictureSize = 100 })
+            @await Component.InvokeAsync("Product", new { actionName = "HomepageProducts", productThumbPictureSize = 100 })
+        </div>
+        <div class="proFrontEndDeveloperKrw">
+            await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts", productThumbPictureSize = 100 })
+            @await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts", productThumbPictureSize = 100 })
+        </div>
+    </div>
+
+
+
+
+    @* somehow it doesnt work *@
+    @*<div class="proFrontEndDeveloperKrw">
+
+        <hr />
+        await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary" })
+        @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary" })
+
+        <hr />
+
+        vc:ShoppingCart action-name="OrderSummary" />
+        <vc:shoppingcart action-name="OrderSummary" />
+
         vc:catalog action-name="HomepageCategories" />
-        <vc:catalog action-name="HomepageCategories" />
-    </div>
-
-    <div class="proFrontEndDeveloperKrw">
-        vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data = "dwqd" } )" />
-        <vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data="dwqd" } )" />
-    </div>
-
-    <div class="proFrontEndDeveloperKrw">
-        vc:topic action-name="TopicBlock" system-name="wtf" />
-        <vc:topic action-name="TopicBlock" system-name="wtf"/>
-    </div>
-
-    <div class="proFrontEndDeveloperKrw">
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        @*<vc:catalog action-name="HomepageCategories" />*@
+    @*<vc:catalog action-name="HomepageCategories" />
+        </div>*@
 </body>
 </html>

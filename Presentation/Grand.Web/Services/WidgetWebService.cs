@@ -37,9 +37,9 @@ namespace Grand.Web.Services
             {
                 new  Models.Cms.RenderWidgetModel
                 {
-                    ActionName = "HomepageCategories",
-                    ControllerName = "Catalog",//this should be actually 'ViewComponentName'
-                    RouteValues = new RouteValueDictionary(new { qq = "dqwdqw"})
+                    ActionName = "doesntmatter",
+                    ControllerName = "Experimental",//this should be actually 'ViewComponentName'
+                    RouteValues = new RouteValueDictionary(new { doesntmatter2 = "doesntmatter3"})
                 }
             };
 
