@@ -21,7 +21,7 @@ using System.Linq;
 
 namespace Grand.Web.Services
 {
-    public partial class NewsWebService: INewsWebService
+    public partial class NewsWebService : INewsWebService
     {
 
         private readonly INewsService _newsService;
@@ -40,7 +40,7 @@ namespace Grand.Web.Services
 
         public NewsWebService(INewsService newsService, IWorkContext workContext, IStoreContext storeContext,
             IPictureService pictureService,
-            IDateTimeHelper dateTimeHelper, 
+            IDateTimeHelper dateTimeHelper,
             //ICacheManager cacheManager,
             IWorkflowMessageService workflowMessageService,
             CaptchaSettings captchaSettings, NewsSettings newsSettings,
@@ -109,10 +109,28 @@ namespace Grand.Web.Services
                     model.Comments.Add(commentModel);
                 }
             }
-
         }
+
         public virtual HomePageNewsItemsModel PrepareHomePageNewsItems()
         {
+            //temp workaround
+            return new HomePageNewsItemsModel()
+            {
+
+                NewsItems =
+                _newsService.GetAllNews().Select(x =>
+                {
+                    var qwq = new NewsItemModel();
+                    var newsModel = new NewsItemModel();
+                    PrepareNewsItemModel(newsModel, x, false);
+                    return newsModel;
+                }).ToList()
+            };
+
+
+
+
+
             var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_NEWSMODEL_KEY, _workContext.WorkingLanguage.Id, _storeContext.CurrentStore.Id);
             var cachedModel = _cacheManager.Get(cacheKey, () =>
             {

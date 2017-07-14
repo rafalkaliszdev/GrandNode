@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Grand.Core;
@@ -8,12 +7,10 @@ using Grand.Core.Domain.Customers;
 using Grand.Core.Domain.Polls;
 using Grand.Services.Localization;
 using Grand.Services.Polls;
-using Grand.Web.Infrastructure.Cache;
-using Grand.Web.Models.Polls;
 using Grand.Core.Infrastructure;
 using Grand.Services.Customers;
 using Grand.Services.Security;
-using Microsoft.AspNetCore.Mvc;
+using Grand.Web.Services;
 
 namespace Grand.Web.Controllers
 {
@@ -27,6 +24,8 @@ namespace Grand.Web.Controllers
         private readonly ICacheManager _cacheManager;
         private readonly IStoreContext _storeContext;
         private readonly IAclService _aclService;
+        private readonly IPollWebService _pollWebService;
+
         #endregion
 
         #region Constructors
@@ -36,7 +35,8 @@ namespace Grand.Web.Controllers
             IPollService pollService,
             //ICacheManager cacheManager,
             IStoreContext storeContext,
-            IAclService aclService)
+            IAclService aclService,
+            IPollWebService pollWebService)
         {
             this._localizationService = localizationService;
             this._workContext = workContext;
@@ -44,76 +44,12 @@ namespace Grand.Web.Controllers
             //this._cacheManager = cacheManager;
             this._storeContext = storeContext;
             this._aclService = aclService;
-        }
-
-        #endregion
-
-        #region Utilities
-
-        [NonAction]
-        protected virtual PollModel PreparePollModel(Poll poll, bool setAlreadyVotedProperty)
-        {
-            var model = new PollModel
-            {
-                Id = poll.Id,
-                AlreadyVoted = setAlreadyVotedProperty && _pollService.AlreadyVoted(poll.Id, _workContext.CurrentCustomer.Id),
-                Name = poll.GetLocalized(x => x.Name)
-            };
-            var answers = poll.PollAnswers.OrderBy(x => x.DisplayOrder);
-            foreach (var answer in answers)
-                model.TotalVotes += answer.NumberOfVotes;
-            foreach (var pa in answers)
-            {
-                model.Answers.Add(new PollAnswerModel
-                {
-                    Id = pa.Id,
-                    PollId = poll.Id,
-                    Name = pa.GetLocalized(x => x.Name),
-                    NumberOfVotes = pa.NumberOfVotes,
-                    PercentOfTotalVotes = model.TotalVotes > 0 ? ((Convert.ToDouble(pa.NumberOfVotes) / Convert.ToDouble(model.TotalVotes)) * Convert.ToDouble(100)) : 0,
-                });
-            }
-
-            return model;
+            this._pollWebService = pollWebService;
         }
 
         #endregion
 
         #region Methods
-
-        //[ChildActionOnly]
-        public virtual IActionResult PollBlock(string systemKeyword)
-        {
-            if (String.IsNullOrWhiteSpace(systemKeyword))
-                return Content("");
-
-            var cacheKey = string.Format(ModelCacheEventConsumer.POLL_BY_SYSTEMNAME__MODEL_KEY, systemKeyword, _storeContext.CurrentStore.Id);
-            var cachedModel = _cacheManager.Get(cacheKey, () =>
-            {
-                Poll poll = _pollService.GetPollBySystemKeyword(systemKeyword, _storeContext.CurrentStore.Id);
-                //ACL (access control list)
-                if (!_aclService.Authorize(poll))
-                    return new PollModel { Id = "" };
-
-                if (poll == null ||
-                    !poll.Published ||
-                    (poll.StartDateUtc.HasValue && poll.StartDateUtc.Value > DateTime.UtcNow) ||
-                    (poll.EndDateUtc.HasValue && poll.EndDateUtc.Value < DateTime.UtcNow))
-                    //we do not cache nulls. that's why let's return an empty record (ID = 0)
-                    return new PollModel { Id = "" };
-
-                return PreparePollModel(poll, false);
-            });
-            if (cachedModel == null || cachedModel.Id == "")
-                return Content("");
-
-            //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
-            //But first we need to clone the cached model (the updated one should not be cached)
-            var model = (PollModel)cachedModel.Clone();
-            model.AlreadyVoted = _pollService.AlreadyVoted(model.Id, _workContext.CurrentCustomer.Id);
-
-            return PartialView(model);
-        }
 
         [HttpPost]
         //[ValidateInput(false)]
@@ -164,35 +100,10 @@ namespace Grand.Web.Controllers
 
             return Json(new
             {
-                html = this.RenderPartialViewToString("_Poll", PreparePollModel(poll, true)),
+                html = this.RenderPartialViewToString("_Poll", _pollWebService.PreparePollModel(poll, true)),
             });
         }
 
-        //[ChildActionOnly]
-        public virtual IActionResult HomePagePolls()
-        {
-            var cacheKey = string.Format(ModelCacheEventConsumer.HOMEPAGE_POLLS_MODEL_KEY, _workContext.WorkingLanguage.Id);
-            var cachedModel = _cacheManager.Get(cacheKey, () =>
-                _pollService.GetPolls(_storeContext.CurrentStore.Id, true)
-                .Select(x => PreparePollModel(x, false))
-                .ToList());
-            //"AlreadyVoted" property of "PollModel" object depends on the current customer. Let's update it.
-            //But first we need to clone the cached model (the updated one should not be cached)
-            var model = new List<PollModel>();
-            foreach (var p in cachedModel)
-            {
-                var pollModel = (PollModel)p.Clone();
-                pollModel.AlreadyVoted = _pollService.AlreadyVoted(pollModel.Id, _workContext.CurrentCustomer.Id);
-                model.Add(pollModel);
-            }
-
-            if (!model.Any())
-                Content("");
-
-            return PartialView(model);
-        }
-
         #endregion
-
     }
 }

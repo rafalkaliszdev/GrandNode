@@ -1,26 +1,25 @@
 ﻿
 @{
-//Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
 }
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@*@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers*@
 
 <div class="page home-page">
-
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })
     @await Component.InvokeAsync("Topic", new { actionName = "TopicBlock", systemName = "HomePageText" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_categories" })
-    @await Component.InvokeAsync("Catalog", new { actionName =  "HomepageCategories"})
+    @await Component.InvokeAsync("Catalog", new { actionName = "HomepageCategories" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_products" })
-    @await Component.InvokeAsync("Product", new {actionName = "RecommendedProducts" })
-    @*@await Component.InvokeAsync("Product", new {actionName = "SuggestedProducts" })*@
+    @await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts" })
+    @await Component.InvokeAsync("Product", new {actionName = "SuggestedProducts" })
     @await Component.InvokeAsync("Product", new { actionName = "HomepageProducts" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_best_sellers" })
-    @await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers"})
+    @await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_manufacturers" })
-    @*@await Component.InvokeAsync("Catalog", new { actionName = "HomepageManufacturers" })*@
+    @await Component.InvokeAsync("Catalog", new { actionName = "HomepageManufacturers" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_news" })
-    @*@await Component.InvokeAsync("News", new {actionName = "HomePageNews" })*@
+    @await Component.InvokeAsync("News", new { actionName = "HomePageNews" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_poll" })
-    @*@await Component.InvokeAsync("Poll", new { actionName = "HomePagePolls" })*@
+    @await Component.InvokeAsync("Poll", new { actionName = "HomePagePolls" })
     @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_bottom" })
 </div>

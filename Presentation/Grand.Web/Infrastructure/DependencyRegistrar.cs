@@ -1,17 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-
-//namespace Grand.Web.Infrastructure
-//{
-//    public class DependencyRegistrar
-//    {
-//    }
-//}
-
-
-using Autofac;
+﻿using Autofac;
 using Grand.Core.Configuration;
 using Grand.Core.Infrastructure;
 using Grand.Core.Infrastructure.DependencyManagement;
@@ -25,7 +12,7 @@ namespace Grand.Web.Infrastructure
         public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder, GrandConfig config)
         {
             //installation localization service
-            //builder.RegisterType<InstallationLocalizationService>().As<IInstallationLocalizationService>().InstancePerLifetimeScope();
+            builder.RegisterType<InstallationLocalizationService>().As<IInstallationLocalizationService>().InstancePerLifetimeScope();
 
             //blog service
             builder.RegisterType<BlogWebService>().As<IBlogWebService>().InstancePerLifetimeScope();
@@ -62,6 +49,9 @@ namespace Grand.Web.Infrastructure
 
             //order service
             builder.RegisterType<OrderWebService>().As<IOrderWebService>().InstancePerLifetimeScope();
+
+            //poll service
+            builder.RegisterType<PollWebService>().As<IPollWebService>().InstancePerLifetimeScope();
         }
 
         public int Order

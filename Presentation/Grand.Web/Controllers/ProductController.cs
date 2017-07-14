@@ -199,87 +199,6 @@ namespace Grand.Web.Controllers
             return View(productTemplateViewPath, model);
         }
 
-        //[ChildActionOnly]
-        public virtual IActionResult RelatedProducts(string productId, int? productThumbPictureSize)
-        {
-            //load and cache report
-            var productIds = _cacheManager.Get(string.Format(ModelCacheEventConsumer.PRODUCTS_RELATED_IDS_KEY, productId, _storeContext.CurrentStore.Id),
-                () =>
-                    _productService.GetProductById(productId).RelatedProducts.Select(x => x.ProductId2).ToArray()
-                    );
-
-            //load products
-            var products = _productService.GetProductsByIds(productIds);
-            //ACL and store mapping
-            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
-            //availability dates
-            products = products.Where(p => p.IsAvailable()).ToList();
-
-            if (!products.Any())
-                return Content("");
-
-            var model = _productWebService.PrepareProductOverviewModels(products, true, true, productThumbPictureSize).ToList();
-            return PartialView(model);
-        }
-
-        //[ChildActionOnly]
-        public virtual IActionResult ProductsAlsoPurchased(string productId, int? productThumbPictureSize)
-        {
-            if (!_catalogSettings.ProductsAlsoPurchasedEnabled)
-                return Content("");
-
-            //load and cache report
-            var productIds = _cacheManager.Get(string.Format(ModelCacheEventConsumer.PRODUCTS_ALSO_PURCHASED_IDS_KEY, productId, _storeContext.CurrentStore.Id),
-                () =>
-                    _orderReportService
-                    .GetAlsoPurchasedProductsIds(_storeContext.CurrentStore.Id, productId, _catalogSettings.ProductsAlsoPurchasedNumber)
-                    );
-
-            //load products
-            var products = _productService.GetProductsByIds(productIds);
-            //ACL and store mapping
-            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
-            //availability dates
-            products = products.Where(p => p.IsAvailable()).ToList();
-
-            if (!products.Any())
-                return Content("");
-
-            //prepare model
-            var model = _productWebService.PrepareProductOverviewModels(products, true, true, productThumbPictureSize).ToList();
-
-            return PartialView(model);
-        }
-
-        //[ChildActionOnly]
-        public virtual IActionResult CrossSellProducts(int? productThumbPictureSize)
-        {
-            var cart = _workContext.CurrentCustomer.ShoppingCartItems
-                .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
-                .LimitPerStore(_storeContext.CurrentStore.Id)
-                .ToList();
-
-            var products = _productService.GetCrosssellProductsByShoppingCart(cart, _shoppingCartSettings.CrossSellsNumber);
-            //ACL and store mapping
-            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
-            //availability dates
-            products = products.Where(p => p.IsAvailable()).ToList();
-
-            if (!products.Any())
-                return Content("");
-
-
-            //Cross-sell products are dispalyed on the shopping cart page.
-            //We know that the entire shopping cart page is not refresh
-            //even if "ShoppingCartSettings.DisplayCartAfterAddingProduct" setting  is enabled.
-            //That's why we force page refresh (redirect) in this case
-            var model = _productWebService.PrepareProductOverviewModels(products,
-                productThumbPictureSize: productThumbPictureSize, forceRedirectionAfterAddingToCart: true)
-                .ToList();
-
-            return PartialView(model);
-        }
-
         #endregion
 
         #region Recently viewed products
@@ -296,33 +215,6 @@ namespace Grand.Web.Controllers
             model.AddRange(_productWebService.PrepareProductOverviewModels(products));
 
             return View(model);
-        }
-
-        //[ChildActionOnly]
-        public virtual IActionResult RecentlyViewedProductsBlock(int? productThumbPictureSize, bool? preparePriceModel)
-        {
-            if (!_catalogSettings.RecentlyViewedProductsEnabled)
-                return Content("");
-
-            var preparePictureModel = productThumbPictureSize.HasValue;
-            var products = _recentlyViewedProductsService.GetRecentlyViewedProducts(_workContext.CurrentCustomer.Id, _catalogSettings.RecentlyViewedProductsNumber);
-
-            //ACL and store mapping
-            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
-            //availability dates
-            products = products.Where(p => p.IsAvailable()).ToList();
-
-            if (!products.Any())
-                return Content("");
-
-            //prepare model
-            var model = new List<ProductOverviewModel>();
-            model.AddRange(_productWebService.PrepareProductOverviewModels(products,
-                preparePriceModel.GetValueOrDefault(),
-                preparePictureModel,
-                productThumbPictureSize));
-
-            return PartialView(model);
         }
 
         #endregion

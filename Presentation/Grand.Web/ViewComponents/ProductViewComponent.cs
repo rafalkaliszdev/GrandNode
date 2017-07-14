@@ -20,6 +20,8 @@ using Grand.Services.Orders;
 using Grand.Web.Framework.Security.Captcha;
 using Grand.Web.Infrastructure.Cache;
 using System;
+using Grand.Web.Models.Catalog;
+using System.Collections.Generic;
 
 namespace Grand.Web.ViewComponents
 {
@@ -105,6 +107,9 @@ namespace Grand.Web.ViewComponents
                     return await HomepageProducts(productThumbPictureSize);
                 case nameof(this.RecommendedProducts):
                     return await RecommendedProducts(productThumbPictureSize);
+                case nameof(this.SuggestedProducts):
+                    return await SuggestedProducts(productThumbPictureSize);
+
                 default:
                     throw new InvalidOperationException(nameof(this.InvokeAsync));
             }
@@ -125,7 +130,7 @@ namespace Grand.Web.ViewComponents
                         storeId: _storeContext.CurrentStore.Id,
                         pageSize: _catalogSettings.NumberOfBestsellersOnHomepage)
                         .ToList();
-                        //);
+            //);
 
 
             //load products
@@ -161,12 +166,35 @@ namespace Grand.Web.ViewComponents
 
             //return View("/Views/Shared/Components/Product/HomepageProducts.cshtml", model);
         }
+        
+        public virtual async Task<IViewComponentResult> SuggestedProducts(int? productThumbPictureSize)
+        {
+            if (!_catalogSettings.SuggestedProductsEnabled || _catalogSettings.SuggestedProductsNumber == 0)
+                return Content("");
+
+            var products = _productService.GetSuggestedProducts(_workContext.CurrentCustomer.CustomerTags.ToArray());
+
+            //ACL and store mapping
+            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
+
+            //availability dates
+            products = products.Where(p => p.IsAvailable()).ToList();
+
+            if (!products.Any())
+                return Content("");
+
+            //prepare model
+            var model = _productWebService.PrepareProductOverviewModels(products.Take(_catalogSettings.SuggestedProductsNumber), true, true, productThumbPictureSize).ToList();
+            return View(nameof(this.SuggestedProducts), model);
+
+            return View(model);
+        }
 
         #endregion
 
         public virtual async Task<IViewComponentResult> RecommendedProducts(int? productThumbPictureSize)
         {
-          if (!_catalogSettings.RecommendedProductsEnabled)
+            if (!_catalogSettings.RecommendedProductsEnabled)
                 return Content("");
 
             var products = _productService.GetRecommendedProducts(_workContext.CurrentCustomer.GetCustomerRoleIds());
@@ -186,7 +214,123 @@ namespace Grand.Web.ViewComponents
             return View(nameof(this.RecommendedProducts), model);
 
 
-            //return View(model);
+            //throw new NotImplementedException("add correct return view");
         }
+
+        #region Product details page
+
+        //[ChildActionOnly]
+        public virtual async Task<IViewComponentResult> RelatedProducts(string productId, int? productThumbPictureSize)
+        {
+            //load and cache report
+            var productIds = _cacheManager.Get(string.Format(ModelCacheEventConsumer.PRODUCTS_RELATED_IDS_KEY, productId, _storeContext.CurrentStore.Id),
+                () =>
+                    _productService.GetProductById(productId).RelatedProducts.Select(x => x.ProductId2).ToArray()
+                    );
+
+            //load products
+            var products = _productService.GetProductsByIds(productIds);
+            //ACL and store mapping
+            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
+            //availability dates
+            products = products.Where(p => p.IsAvailable()).ToList();
+
+            if (!products.Any())
+                return Content("");
+
+            var model = _productWebService.PrepareProductOverviewModels(products, true, true, productThumbPictureSize).ToList();
+            throw new NotImplementedException("add correct return view");
+        }
+
+        //[ChildActionOnly]
+        public virtual async Task<IViewComponentResult> ProductsAlsoPurchased(string productId, int? productThumbPictureSize)
+        {
+            if (!_catalogSettings.ProductsAlsoPurchasedEnabled)
+                return Content("");
+
+            //load and cache report
+            var productIds = _cacheManager.Get(string.Format(ModelCacheEventConsumer.PRODUCTS_ALSO_PURCHASED_IDS_KEY, productId, _storeContext.CurrentStore.Id),
+                () =>
+                    _orderReportService
+                    .GetAlsoPurchasedProductsIds(_storeContext.CurrentStore.Id, productId, _catalogSettings.ProductsAlsoPurchasedNumber)
+                    );
+
+            //load products
+            var products = _productService.GetProductsByIds(productIds);
+            //ACL and store mapping
+            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
+            //availability dates
+            products = products.Where(p => p.IsAvailable()).ToList();
+
+            if (!products.Any())
+                return Content("");
+
+            //prepare model
+            var model = _productWebService.PrepareProductOverviewModels(products, true, true, productThumbPictureSize).ToList();
+
+            throw new NotImplementedException("add correct return view");
+        }
+
+        //[ChildActionOnly]
+        public virtual async Task<IViewComponentResult> CrossSellProducts(int? productThumbPictureSize)
+        {
+            var cart = _workContext.CurrentCustomer.ShoppingCartItems
+                .Where(sci => sci.ShoppingCartType == ShoppingCartType.ShoppingCart)
+                .LimitPerStore(_storeContext.CurrentStore.Id)
+                .ToList();
+
+            var products = _productService.GetCrosssellProductsByShoppingCart(cart, _shoppingCartSettings.CrossSellsNumber);
+            //ACL and store mapping
+            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
+            //availability dates
+            products = products.Where(p => p.IsAvailable()).ToList();
+
+            if (!products.Any())
+                return Content("");
+
+
+            //Cross-sell products are dispalyed on the shopping cart page.
+            //We know that the entire shopping cart page is not refresh
+            //even if "ShoppingCartSettings.DisplayCartAfterAddingProduct" setting  is enabled.
+            //That's why we force page refresh (redirect) in this case
+            var model = _productWebService.PrepareProductOverviewModels(products,
+                productThumbPictureSize: productThumbPictureSize, forceRedirectionAfterAddingToCart: true)
+                .ToList();
+
+            throw new NotImplementedException("add correct return view");
+        }
+
+        #endregion
+
+        #region Recently viewed products
+
+        //[ChildActionOnly]
+        public virtual async Task<IViewComponentResult> RecentlyViewedProductsBlock(int? productThumbPictureSize, bool? preparePriceModel)
+        {
+            if (!_catalogSettings.RecentlyViewedProductsEnabled)
+                return Content("");
+
+            var preparePictureModel = productThumbPictureSize.HasValue;
+            var products = _recentlyViewedProductsService.GetRecentlyViewedProducts(_workContext.CurrentCustomer.Id, _catalogSettings.RecentlyViewedProductsNumber);
+
+            //ACL and store mapping
+            products = products.Where(p => _aclService.Authorize(p) && _storeMappingService.Authorize(p)).ToList();
+            //availability dates
+            products = products.Where(p => p.IsAvailable()).ToList();
+
+            if (!products.Any())
+                return Content("");
+
+            //prepare model
+            var model = new List<ProductOverviewModel>();
+            model.AddRange(_productWebService.PrepareProductOverviewModels(products,
+                preparePriceModel.GetValueOrDefault(),
+                preparePictureModel,
+                productThumbPictureSize));
+
+            throw new NotImplementedException("add correct return view");
+        }
+
+        #endregion
     }
 }

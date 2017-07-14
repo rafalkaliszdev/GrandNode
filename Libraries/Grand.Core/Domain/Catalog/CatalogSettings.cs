@@ -8,7 +8,7 @@ namespace Grand.Core.Domain.Catalog
         public CatalogSettings()
         {
             ProductSortingEnumDisabled = new List<int>();
-            ProductSortingEnumDisplayOrder= new Dictionary<int, int>();
+            ProductSortingEnumDisplayOrder = new Dictionary<int, int>();
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Grand.Core.Domain.Catalog
         /// Gets or sets a value indicating whether category breadcrumb is enabled
         /// </summary>
         public bool CategoryBreadcrumbEnabled { get; set; }
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether a 'Share button' is enabled
         /// </summary>
@@ -154,6 +154,16 @@ namespace Grand.Core.Domain.Catalog
         public bool RecommendedProductsEnabled { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether "Suggested products" feature is enabled
+        /// </summary>
+        public bool SuggestedProductsEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets a number of "Suggested products"
+        /// </summary>
+        public int SuggestedProductsNumber { get; set; }
+
+        /// <summary>
         /// Gets or sets a number of products on the "New products" page
         /// </summary>
         public int NewProductsNumber { get; set; }
@@ -191,7 +201,7 @@ namespace Grand.Core.Domain.Catalog
         /// Gets or sets a minimum search term length
         /// </summary>
         public int ProductSearchTermMinimumLength { get; set; }
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether to show bestsellers on home page
         /// </summary>
@@ -259,17 +269,17 @@ namespace Grand.Core.Domain.Catalog
         /// Gets or sets a value indicating whether to include "Full description" in compare products
         /// </summary>
         public bool IncludeFullDescriptionInCompareProducts { get; set; }
-        
+
         /// <summary>
         /// An option indicating whether products on category and manufacturer pages should include featured products as well
         /// </summary>
         public bool IncludeFeaturedProductsInNormalLists { get; set; }
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether tier prices should be displayed with applied discounts (if available)
         /// </summary>
         public bool DisplayTierPricesWithDiscounts { get; set; }
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether to ignore discounts (side-wide). It can significantly improve performance when enabled.
         /// </summary>

@@ -60,6 +60,14 @@ namespace Grand.Services.Catalog
         /// </remarks>
         private const string PRODUCTS_CUSTOMER_ROLE = "Grand.product.cr-{0}";
 
+        /// <summary>
+        /// Key for caching
+        /// </summary>
+        /// <remarks>
+        /// {0} : product ID
+        /// </remarks>
+        private const string PRODUCTS_CUSTOMER_TAG = "Grand.product.ct-{0}";
+
         #endregion
 
         #region Fields
@@ -71,6 +79,7 @@ namespace Grand.Services.Catalog
         private readonly IRepository<UrlRecord> _urlRecordRepository;
         private readonly IRepository<Customer> _customerRepository;
         private readonly IRepository<CustomerRoleProduct> _customerRoleProductRepository;
+        private readonly IRepository<CustomerTagProduct> _customerTagProductRepository;
         private readonly IRepository<ProductDeleted> _productDeletedRepository;
         private readonly IProductAttributeService _productAttributeService;
         private readonly IProductAttributeParser _productAttributeParser;
@@ -162,7 +171,7 @@ namespace Grand.Services.Catalog
         }
 
         #endregion
-        
+
         #region Methods
 
         #region Products
@@ -185,7 +194,7 @@ namespace Grand.Services.Catalog
             var builderRelated = Builders<Product>.Update;
             var updatefilterRelated = builderRelated.PullFilter(x => x.RelatedProducts, y => y.ProductId2 == product.Id);
             var resultRelated = _productRepository.Collection.UpdateManyAsync(new BsonDocument(), updatefilterRelated).Result;
-            
+
             //delete cross sales product
             var builderCross = Builders<Product>.Update;
             var updatefilterCross = builderCross.Pull(x => x.CrossSellProduct, product.Id);
@@ -193,7 +202,7 @@ namespace Grand.Services.Catalog
 
             //delete customer role product
             var filtersCrp = Builders<CustomerRoleProduct>.Filter;
-            var filterCrp = filtersCrp.Eq(x => x.ProductId, product.Id);            
+            var filterCrp = filtersCrp.Eq(x => x.ProductId, product.Id);
             _customerRoleProductRepository.Collection.DeleteManyAsync(filterCrp);
 
             //delete review
@@ -204,7 +213,7 @@ namespace Grand.Services.Catalog
             //delete url
             var filters = Builders<UrlRecord>.Filter;
             var filter = filters.Eq(x => x.EntityId, product.Id);
-            filter = filter & filters.Eq(x=>x.EntityName, "Product");
+            filter = filter & filters.Eq(x => x.EntityName, "Product");
             _urlRecordRepository.Collection.DeleteManyAsync(filter);
 
             //insert to deleted products
@@ -242,7 +251,7 @@ namespace Grand.Services.Catalog
         public virtual Product GetProductById(string productId)
         {
             if (String.IsNullOrEmpty(productId))
-                return null;            
+                return null;
             string key = string.Format(PRODUCTS_BY_ID_KEY, productId);
             return /*_cacheManager.Get(key, () => */_productRepository.GetById(productId);//);
         }
@@ -296,7 +305,7 @@ namespace Grand.Services.Catalog
         public virtual IList<Product> GetProductsByDiscount(string discountId)
         {
             var query = from c in _productRepository.Table
-                        where c.AppliedDiscounts.Any(x=>x == discountId)
+                        where c.AppliedDiscounts.Any(x => x == discountId)
                         select c;
 
             var products = query.ToList();
@@ -319,7 +328,7 @@ namespace Grand.Services.Catalog
 
             //clear cache
             _cacheManager.RemoveByPattern(PRODUCTS_PATTERN_KEY);
-            
+
             //event notification
             _eventPublisher.EntityInserted(product);
         }
@@ -449,8 +458,8 @@ namespace Grand.Services.Catalog
 
             var result = _productRepository.Collection.UpdateOneAsync(filter, update).Result;
 
-            if(oldProduct.AdditionalShippingCharge!=product.AdditionalShippingCharge ||
-                oldProduct.IsFreeShipping!=product.IsFreeShipping ||
+            if (oldProduct.AdditionalShippingCharge != product.AdditionalShippingCharge ||
+                oldProduct.IsFreeShipping != product.IsFreeShipping ||
                 oldProduct.IsGiftCard != product.IsGiftCard ||
                 oldProduct.IsShipEnabled != product.IsShipEnabled ||
                 oldProduct.IsTaxExempt != product.IsTaxExempt ||
@@ -483,7 +492,7 @@ namespace Grand.Services.Catalog
 
             //cache
             //_cacheManager.RemoveByPattern(PRODUCTS_PATTERN_KEY);
-                        
+
             //event notification
             _eventPublisher.EntityUpdated(product);
         }
@@ -546,7 +555,7 @@ namespace Grand.Services.Catalog
             ////category filtering
             if (categoryIds != null && categoryIds.Any())
             {
-                filter = filter & builder.Where(p => p.ProductCategories.Any(x=> categoryIds.Contains(x.CategoryId)));
+                filter = filter & builder.Where(p => p.ProductCategories.Any(x => categoryIds.Contains(x.CategoryId)));
             }
 
             if (!_catalogSettings.IgnoreAcl)
@@ -692,7 +701,7 @@ namespace Grand.Services.Catalog
             bool? overridePublished = null)
         {
             filterableSpecificationAttributeOptionIds = new List<string>();
-            
+
             //search by keyword
             bool searchLocalizedValue = false;
             if (!String.IsNullOrEmpty(languageId))
@@ -710,7 +719,7 @@ namespace Grand.Services.Catalog
             }
 
             //validate "categoryIds" parameter
-            if (categoryIds !=null && categoryIds.Contains(""))
+            if (categoryIds != null && categoryIds.Contains(""))
                 categoryIds.Remove("");
 
             //Access control list. Allowed customer roles
@@ -810,7 +819,7 @@ namespace Grand.Services.Catalog
             //searching by keyword
             if (!String.IsNullOrWhiteSpace(keywords))
             {
-                if(_commonSettings.UseFullTextSearch)
+                if (_commonSettings.UseFullTextSearch)
                 {
                     keywords = "\"" + keywords + "\"";
                     keywords = keywords.Replace("+", "\" \"");
@@ -837,7 +846,7 @@ namespace Grand.Services.Catalog
                                 (p.Locales.Any(x => x.LocaleValue != null && x.LocaleValue.ToLower().Contains(keywords.ToLower()))));
                     }
                 }
-                
+
             }
 
             if (!showHidden && !_catalogSettings.IgnoreAcl)
@@ -847,7 +856,7 @@ namespace Grand.Services.Catalog
 
             if (!String.IsNullOrEmpty(storeId) && !_catalogSettings.IgnoreStoreLimitations)
             {
-                filter = filter & builder.Where(x => x.Stores.Any(y=>y == storeId) || !x.LimitedToStores);
+                filter = filter & builder.Where(x => x.Stores.Any(y => y == storeId) || !x.LimitedToStores);
 
             }
 
@@ -869,7 +878,7 @@ namespace Grand.Services.Catalog
             //warehouse filtering
             if (!String.IsNullOrEmpty(warehouseId))
             {
-                filter = filter & (builder.Where(x => x.UseMultipleWarehouses && x.ProductWarehouseInventory.Any(y=>y.WarehouseId == warehouseId)) |
+                filter = filter & (builder.Where(x => x.UseMultipleWarehouses && x.ProductWarehouseInventory.Any(y => y.WarehouseId == warehouseId)) |
                     builder.Where(x => !x.UseMultipleWarehouses && x.WarehouseId == warehouseId));
 
             }
@@ -881,7 +890,7 @@ namespace Grand.Services.Catalog
             }
 
 
-            var builderSort = Builders<Product>.Sort.Descending(x=>x.CreatedOnUtc);
+            var builderSort = Builders<Product>.Sort.Descending(x => x.CreatedOnUtc);
 
             if (orderBy == ProductSortingEnum.Position && categoryIds != null && categoryIds.Any())
             {
@@ -954,7 +963,7 @@ namespace Grand.Services.Catalog
                     var filterSpecExists = filter &
                         builder.Where(x => x.ProductSpecificationAttributes.Count > 0);
                     var productSpec = _productRepository.Collection.Find(filterSpecExists).Limit(1);
-                    if (productSpec!=null)
+                    if (productSpec != null)
                     {
                         var qspec = _productRepository.Collection
                         .Aggregate()
@@ -986,7 +995,7 @@ namespace Grand.Services.Catalog
                             specyfication.Add(so);
                         }
                     }
-                    
+
                 });
                 taskfilterSpec.Wait();
                 filterableSpecificationAttributeOptionIds = specyfication;
@@ -998,7 +1007,7 @@ namespace Grand.Services.Catalog
             return products;
 
             #endregion
-            
+
         }
 
         /// <summary>
@@ -1097,8 +1106,19 @@ namespace Grand.Services.Catalog
                            p.ManageInventoryMethodId == (int)ManageInventoryMethod.ManageStockByAttributes &&
                            (vendorId == "" || p.VendorId == vendorId)
                            from c in p.ProductAttributeCombinations
-                           select new ProductAttributeCombination() { ProductId = p.Id, StockQuantity = c.StockQuantity, AttributesXml = c.AttributesXml, AllowOutOfStockOrders = c.AllowOutOfStockOrders,
-                            Id = c.Id, Gtin = c.Gtin, ManufacturerPartNumber = c.ManufacturerPartNumber, NotifyAdminForQuantityBelow = c.NotifyAdminForQuantityBelow, OverriddenPrice = c.OverriddenPrice, Sku = c.Sku};
+                           select new ProductAttributeCombination()
+                           {
+                               ProductId = p.Id,
+                               StockQuantity = c.StockQuantity,
+                               AttributesXml = c.AttributesXml,
+                               AllowOutOfStockOrders = c.AllowOutOfStockOrders,
+                               Id = c.Id,
+                               Gtin = c.Gtin,
+                               ManufacturerPartNumber = c.ManufacturerPartNumber,
+                               NotifyAdminForQuantityBelow = c.NotifyAdminForQuantityBelow,
+                               OverriddenPrice = c.OverriddenPrice,
+                               Sku = c.Sku
+                           };
 
             var query2_2 = from c in query2_1
                            where c.StockQuantity <= 0
@@ -1107,7 +1127,7 @@ namespace Grand.Services.Catalog
             combinations = query2_2.ToList();
         }
 
-        
+
         /// <summary>
         /// Gets a product by SKU
         /// </summary>
@@ -1140,7 +1160,7 @@ namespace Grand.Services.Catalog
             int notApprovedRatingSum = 0;
             int approvedTotalReviews = 0;
             int notApprovedTotalReviews = 0;
-            var reviews = _productReviewRepository.Table.Where(x => x.ProductId == product.Id); 
+            var reviews = _productReviewRepository.Table.Where(x => x.ProductId == product.Id);
             foreach (var pr in reviews)
             {
                 if (pr.IsApproved)
@@ -1315,10 +1335,10 @@ namespace Grand.Services.Catalog
                                     .Set(x => x.Published, product.Published)
                                     .CurrentDate("UpdateDate");
                             _productRepository.Collection.UpdateOneAsync(filter2, update2);
-                            
+
                             //cache
                             _cacheManager.RemoveByPattern(string.Format(PRODUCTS_BY_ID_KEY, product.Id));
-                            if(product.ShowOnHomePage)
+                            if (product.ShowOnHomePage)
                                 _cacheManager.RemoveByPattern(PRODUCTS_SHOWONHOMEPAGE);
 
                             //event notification
@@ -1412,7 +1432,7 @@ namespace Grand.Services.Catalog
                     }
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -1439,7 +1459,7 @@ namespace Grand.Services.Catalog
 
             Action pass = () =>
             {
-                foreach (var item in productInventory.Where(x=>x.WarehouseId == warehouseId || string.IsNullOrEmpty(warehouseId)))
+                foreach (var item in productInventory.Where(x => x.WarehouseId == warehouseId || string.IsNullOrEmpty(warehouseId)))
                 {
                     var selectQty = Math.Min(item.StockQuantity - item.ReservedQuantity, qty);
                     item.ReservedQuantity += selectQty;
@@ -1459,10 +1479,10 @@ namespace Grand.Services.Catalog
                 var pwi = productInventory[0];
                 pwi.ReservedQuantity += qty;
             }
-            
+
             var filter = Builders<Product>.Filter.Eq("Id", product.Id);
             var update = Builders<Product>.Update
-                    .Set(x => x.ProductWarehouseInventory, productInventory)                    
+                    .Set(x => x.ProductWarehouseInventory, productInventory)
                     .CurrentDate("UpdateDate");
             _productRepository.Collection.UpdateOneAsync(filter, update);
 
@@ -1583,7 +1603,7 @@ namespace Grand.Services.Catalog
 
             if (shipmentItem == null)
                 throw new ArgumentNullException("shipmentItem");
-            
+
             //only products with "use multiple warehouses" are handled this way
             if (product.ManageInventoryMethod != ManageInventoryMethod.ManageStock)
                 return 0;
@@ -1650,7 +1670,7 @@ namespace Grand.Services.Catalog
             _eventPublisher.EntityDeleted(relatedProduct);
         }
 
-        
+
         public virtual void InsertRelatedProduct(RelatedProduct relatedProduct)
         {
             if (relatedProduct == null)
@@ -1742,7 +1762,7 @@ namespace Grand.Services.Catalog
             _eventPublisher.EntityInserted(crossSellProduct);
         }
 
-       
+
         /// <summary>
         /// Gets a cross-sells
         /// </summary>
@@ -1793,9 +1813,9 @@ namespace Grand.Services.Catalog
             return result;
         }
         #endregion
-        
+
         #region Tier prices
-        
+
         /// <summary>
         /// Deletes a tier price
         /// </summary>
@@ -1827,7 +1847,7 @@ namespace Grand.Services.Catalog
                 throw new ArgumentNullException("tierPrice");
 
             //_tierPriceRepository.Insert(tierPrice);
-            
+
             var updatebuilder = Builders<Product>.Update;
             var update = updatebuilder.AddToSet(p => p.TierPrices, tierPrice);
             _productRepository.Collection.UpdateOneAsync(new BsonDocument("_id", tierPrice.ProductId), update);
@@ -1924,7 +1944,7 @@ namespace Grand.Services.Catalog
         {
             if (productTag == null)
                 throw new ArgumentNullException("productTag");
-           
+
             var updatebuilder = Builders<Product>.Update;
             var update = updatebuilder.AddToSet(p => p.ProductTags, productTag.Id);
             _productRepository.Collection.UpdateOneAsync(new BsonDocument("_id", productTag.ProductId), update);
@@ -2010,8 +2030,46 @@ namespace Grand.Services.Catalog
             //    () =>
             //    {
             //need to get some of these
-                    var query = from cr in _customerRoleProductRepository.Table
-                                where customerRoleIds.Contains(cr.CustomerRoleId)
+            var query = from cr in _customerRoleProductRepository.Table
+                        where customerRoleIds.Contains(cr.CustomerRoleId)
+                        orderby cr.DisplayOrder
+                        select cr.ProductId;
+
+            var productIds = query.ToList().Distinct();
+
+            var products = new List<Product>();
+
+            foreach (var product in GetProductsByIds(productIds.ToArray()))
+                if (product.Published)
+                    products.Add(product);
+
+            //temp woa
+            products.Add(_productRepository.GetById("59254be361726129c896e145"));
+
+
+            return products;
+            //});
+        }
+
+        #endregion
+
+        #region Suggested products
+
+        /// <summary>
+        /// Gets suggested products for customer tags
+        /// </summary>
+        /// <param name="customerTagIds">Customer role ids</param>
+        /// <returns>Products</returns>
+        public virtual IList<Product> GetSuggestedProducts(string[] customerTagIds)
+        {
+            //temp woa
+            return new List<Product> { _productRepository.GetById("59254be361726129c896e145") };
+
+            return _cacheManager.Get(string.Format(PRODUCTS_CUSTOMER_TAG, string.Join(",", customerTagIds)),
+                () =>
+                {
+                    var query = from cr in _customerTagProductRepository.Table
+                                where customerTagIds.Contains(cr.CustomerTagId)
                                 orderby cr.DisplayOrder
                                 select cr.ProductId;
 
@@ -2023,12 +2081,8 @@ namespace Grand.Services.Catalog
                         if (product.Published)
                             products.Add(product);
 
-            //temp woa
-            products.Add(_productRepository.GetById("59254be361726129c896e145"));
-
-
                     return products;
-                //});
+                });
         }
 
         #endregion
@@ -2071,14 +2125,14 @@ namespace Grand.Services.Catalog
             return content;
         }
 
-        
+
 
         public virtual int RatingSumProduct(string productId, string storeId)
         {
             var query = from p in _productReviewRepository.Table
                         where p.ProductId == productId && p.IsApproved && (p.StoreId == storeId || p.StoreId == "")
                         group p by true into g
-                        select new { Sum = g.Sum(x=>x.Rating) };
+                        select new { Sum = g.Sum(x => x.Rating) };
             var content = query.ToListAsync().Result;
             return content.Count > 0 ? content.FirstOrDefault().Sum : 0;
         }
@@ -2120,7 +2174,7 @@ namespace Grand.Services.Catalog
                 throw new ArgumentNullException("productReview");
 
             _productReviewRepository.Delete(productReview);
-            
+
             //event notification
             _eventPublisher.EntityDeleted(productReview);
         }

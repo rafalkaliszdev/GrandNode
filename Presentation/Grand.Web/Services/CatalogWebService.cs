@@ -146,14 +146,14 @@ namespace Grand.Web.Services
                 _storeContext.CurrentStore.Id);
             //return _cacheManager.Get(cacheKey, () =>
             //{
-                var categoriesIds = new List<string>();
-                var categories = _categoryService.GetAllCategoriesByParentCategoryId(parentCategoryId);
-                foreach (var category in categories)
-                {
-                    categoriesIds.Add(category.Id);
-                    categoriesIds.AddRange(GetChildCategoryIds(category.Id));
-                }
-                return categoriesIds;
+            var categoriesIds = new List<string>();
+            var categories = _categoryService.GetAllCategoriesByParentCategoryId(parentCategoryId);
+            foreach (var category in categories)
+            {
+                categoriesIds.Add(category.Id);
+                categoriesIds.AddRange(GetChildCategoryIds(category.Id));
+            }
+            return categoriesIds;
             //});
         }
 
@@ -412,11 +412,11 @@ namespace Grand.Web.Services
             var templateCacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_TEMPLATE_MODEL_KEY, templateId);
             //var templateViewPath = _cacheManager.Get(templateCacheKey, () =>
             //{
-                var template = _categoryTemplateService.GetCategoryTemplateById(templateId);
-                if (template == null)
-                    template = _categoryTemplateService.GetAllCategoryTemplates().FirstOrDefault();
-                if (template == null)
-                    throw new Exception("No default template could be loaded");
+            var template = _categoryTemplateService.GetCategoryTemplateById(templateId);
+            if (template == null)
+                template = _categoryTemplateService.GetAllCategoryTemplates().FirstOrDefault();
+            if (template == null)
+                throw new Exception("No default template could be loaded");
             //    return template.ViewPath;
             var templateViewPath = template.ViewPath;
             //});
@@ -516,7 +516,7 @@ namespace Grand.Web.Services
             //    })
             //    .ToList()
             //);
-            
+
             //featured products
             if (!_catalogSettings.IgnoreFeaturedProducts)
             {
@@ -614,7 +614,7 @@ namespace Grand.Web.Services
                     var picture = _pictureService.GetPictureById(x.PictureId);
                     var pictureModel = new PictureModel
                     {
-                        FullSizeImageUrl =  _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
+                        FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
                         ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
                         Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), subCatModel.Name),
                         AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), subCatModel.Name)
@@ -653,14 +653,14 @@ namespace Grand.Web.Services
                     //uncomment later
                     //catModel.PictureModel = _cacheManager.Get(categoryPictureCacheKey, () =>
                     //{
-                        var picture = _pictureService.GetPictureById(x.PictureId);
-                        var pictureModel = new PictureModel
-                        {
-                            FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
-                            ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
-                            Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
-                            AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
-                        };
+                    var picture = _pictureService.GetPictureById(x.PictureId);
+                    var pictureModel = new PictureModel
+                    {
+                        FullSizeImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory),
+                        ImageUrl = _pictureService.GetPictureUrl(picture, _mediaSettings.ApplyWatermarkForCategory, pictureSize),
+                        Title = string.Format(_localizationService.GetResource("Media.Category.ImageLinkTitleFormat"), catModel.Name),
+                        AlternateText = string.Format(_localizationService.GetResource("Media.Category.ImageAlternateTextFormat"), catModel.Name)
+                    };
                     //return pictureModel;
                     catModel.PictureModel = pictureModel;
                     //});
@@ -781,9 +781,31 @@ namespace Grand.Web.Services
         }
         public virtual List<ManufacturerModel> PrepareHomepageManufacturers()
         {
+            //i just need some workaround
+            List<ManufacturerModel> model1 = _manufacturerService.GetAllManufacturers().
+                Select(x =>
+                {
+                    var manufacturerModel = x.ToModel();
+                    manufacturerModel.PictureModel = new PictureModel
+                    {
+                        FullSizeImageUrl = "http://lh4.ggpht.com/_0j4bzarlOBg/TckdP_UzX0I/AAAAAAAAB_8/fcsE7-6D0dw/image%5B4%5D.png?imgmax=800",
+                        ImageUrl = "http://lh4.ggpht.com/_0j4bzarlOBg/TckdP_UzX0I/AAAAAAAAB_8/fcsE7-6D0dw/image%5B4%5D.png?imgmax=800"
+                    };
+                    return manufacturerModel;
+                })
+                .ToList();
+
+            return model1;
+
+
+
+
+
+
+
             string manufacturersCacheKey = string.Format(ModelCacheEventConsumer.MANUFACTURER_HOMEPAGE_KEY,
-                _storeContext.CurrentStore.Id,
-                _workContext.WorkingLanguage.Id);
+                  _storeContext.CurrentStore.Id,
+                  _workContext.WorkingLanguage.Id);
 
             List<ManufacturerModel> model = _cacheManager.Get(manufacturersCacheKey, () =>
                 _manufacturerService.GetAllManufacturers(storeId: _storeContext.CurrentStore.Id)

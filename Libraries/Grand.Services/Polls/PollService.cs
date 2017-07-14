@@ -8,6 +8,7 @@ using MongoDB.Driver.Linq;
 using MongoDB.Driver;
 using Grand.Core.Domain.Catalog;
 using Grand.Services.Customers;
+using Grand.Services.Localization;
 
 namespace Grand.Services.Polls
 {
@@ -190,7 +191,6 @@ namespace Grand.Services.Polls
 
             return result;
         }
-
         #endregion
     }
 }

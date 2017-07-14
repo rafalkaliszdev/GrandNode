@@ -24,66 +24,113 @@
 
 
 
-    <div class="proFrontEndDeveloperKrw">
-        <div class="proFrontEndDeveloperKrw">
-            @*@await Component.InvokeAsync("Catalog", new { actionName = "TopMenu" })*@
-            vc:catalog action-name="TopMenu" />
-            @*<vc:catalog action-name="TopMenu" />*@
+    @*<div class="proFrontEndDeveloperKrw">
+            <div class="proFrontEndDeveloperKrw">
+                vc:catalog action-name="TopMenu" />
+                @await Component.InvokeAsync("Catalog", new { actionName = "TopMenu" })
+            </div>
         </div>
-    </div>
 
-    <div class="proFrontEndDeveloperKrw">
         <div class="proFrontEndDeveloperKrw">
-            vc:catalog action-name="HomepageCategories" />
-            @*<vc:catalog action-name="HomepageCategories" />*@
+            <div class="proFrontEndDeveloperKrw">
+                vc:catalog action-name="HomepageCategories" />
+                @await Component.InvokeAsync("Catalog", new { actionName = "HomepageCategories" })
+            </div>
         </div>
-    </div>
 
-    <div class="proFrontEndDeveloperKrw">
         <div class="proFrontEndDeveloperKrw">
-            vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data = "dwqd" } )" />
-            @*<vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data="dwqd" } )" />*@
+            <div class="proFrontEndDeveloperKrw">
+                vc:widget action-name="WidgetsByZone" widget-zone="zone123" additional-data="@(new { add = "qwe", data = "dwqd" } )" />
+                @await Component.InvokeAsync("Widget", new { actionName = "WidgetsByZone", widgetZone = "zone123", additionalData = new { add = "qwe", data = "dwqd" } })
+            </div>
         </div>
-    </div>
 
-    <div class="proFrontEndDeveloperKrw">
         <div class="proFrontEndDeveloperKrw">
-            vc:topic action-name="TopicBlock" system-name="wtf" />
-            @*<vc:topic action-name="TopicBlock" system-name="wtf"/>*@
+            <div class="proFrontEndDeveloperKrw">
+                vc:topic action-name="TopicBlock" system-name="wtf" />
+                @await Component.InvokeAsync("Topic", new { actionName = "TopicBlock", systemName = "wtf" })
+            </div>
         </div>
-    </div>
 
-    <div class="proFrontEndDeveloperKrw">
-        @*<div class="proFrontEndDeveloperKrw">
-            await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary" })
-            @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary", prepareAndDisplayOrderReviewData = true })
-        </div>
         <div class="proFrontEndDeveloperKrw">
-            await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderTotals" })
-            @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderTotals", isEditable = true }) 
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary" })
+                @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderSummary", prepareAndDisplayOrderReviewData = true })
+            </div>
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderTotals" })
+                @await Component.InvokeAsync("ShoppingCart", new { actionName = "OrderTotals", isEditable = true })
+            </div>
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
+                @await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
+            </div>
         </div>
+
+
         <div class="proFrontEndDeveloperKrw">
-            await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
-            @await Component.InvokeAsync("ShoppingCart", new { actionName = "FlyoutShoppingCart" })
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers", productThumbPictureSize = 100 })
+                @await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers", productThumbPictureSize = 100 })
+            </div>
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("Product", new { actionName = "HomepageProducts", productThumbPictureSize = 100 })
+                @await Component.InvokeAsync("Product", new { actionName = "HomepageProducts", productThumbPictureSize = 100 })
+            </div>
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts", productThumbPictureSize = 100 })
+                @await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts", productThumbPictureSize = 100 })
+            </div>
+        </div>
+
+        <div class="proFrontEndDeveloperKrw">
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("Catalog", new { actionName = "HomepageManufacturers" })
+                @await Component.InvokeAsync("Catalog", new { actionName = "HomepageManufacturers" })
+            </div>
+        </div>
+
+        <div class="proFrontEndDeveloperKrw">
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("News", new { actionName = "HomePageNews" })
+                @await Component.InvokeAsync("News", new { actionName = "HomePageNews" })
+            </div>
+        </div>
+
+        <div class="proFrontEndDeveloperKrw">
+            <div class="proFrontEndDeveloperKrw">
+                await Component.InvokeAsync("Poll", new { actionName = "HomePagePolls" })
+                @await Component.InvokeAsync("Poll", new { actionName = "HomePagePolls" })
+                await Component.InvokeAsync("Poll", new { actionName = "PollBlock" })
+                @await Component.InvokeAsync("Poll", new { actionName = "PollBlock", systemKeyword = "r832v83hrv9" })
+            </div>
         </div>*@
-    </div>
 
     <h1>above all works, now testing this below </h1>
 
     <div class="proFrontEndDeveloperKrw">
         <div class="proFrontEndDeveloperKrw">
-            await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers", productThumbPictureSize = 100 })
-            @await Component.InvokeAsync("Product", new { actionName = "HomepageBestSellers", productThumbPictureSize = 100 })
-        </div>
-        <div class="proFrontEndDeveloperKrw">
-            await Component.InvokeAsync("Product", new { actionName = "HomepageProducts", productThumbPictureSize = 100 })
-            @await Component.InvokeAsync("Product", new { actionName = "HomepageProducts", productThumbPictureSize = 100 })
-        </div>
-        <div class="proFrontEndDeveloperKrw">
-            await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts", productThumbPictureSize = 100 })
-            @await Component.InvokeAsync("Product", new { actionName = "RecommendedProducts", productThumbPictureSize = 100 })
+            await Component.InvokeAsync("Poll", new { actionName = "HomePagePolls" })
+            @await Component.InvokeAsync("Poll", new { actionName = "HomePagePolls" })
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

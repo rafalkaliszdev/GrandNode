@@ -6,7 +6,7 @@
             <h2 class="generalTitle text-center">@T("Polls.Title")</h2>
             @foreach (var poll in Model)
             {
-                @Html.Partial("_Poll", poll)
+                @Html.Partial("_Poll.cshtml", poll)
             }
     </div>
 }

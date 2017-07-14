@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-
 using Grand.Core;
 using Grand.Core.Domain.Catalog;
 using Grand.Core.Domain.Customers;
@@ -146,31 +145,6 @@ namespace Grand.Web.Controllers
             return View(templateViewPath, model);
         }
 
-        ////[ChildActionOnly]
-        public virtual IActionResult CategoryNavigation(string currentCategoryId, string currentProductId)
-        {
-            var model = _catalogWebService.PrepareCategoryNavigation(currentCategoryId, currentProductId);
-            return PartialView(model);
-        }
-
-        ////[ChildActionOnly]
-        public virtual IActionResult TopMenu()
-        {
-            
-            var model = _catalogWebService.PrepareTopMenu();
-            return PartialView(model);
-        }
-
-        ////[ChildActionOnly]
-        public virtual IActionResult HomepageCategories()
-        {
-            var model = _catalogWebService.PrepareHomepageCategory();
-            if (!model.Any())
-                return Content("");
-
-            return PartialView(model);
-        }
-
         #endregion
 
         #region Manufacturers
@@ -207,8 +181,7 @@ namespace Grand.Web.Controllers
 
             //activity log
             _customerActivityService.InsertActivity("PublicStore.ViewManufacturer", manufacturer.Id, _localizationService.GetResource("ActivityLog.PublicStore.ViewManufacturer"), manufacturer.Name);
-
-
+            
             //tbh
             //_customerActionEventService.Viewed(_workContext.CurrentCustomer, Request.Url.ToString(), Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : "");
 
@@ -226,30 +199,6 @@ namespace Grand.Web.Controllers
         {
             var model = _catalogWebService.PrepareManufacturerAll();
             return View(model);
-        }
-
-        //[ChildActionOnly]
-        public virtual IActionResult HomepageManufacturers()
-        {
-            var model = _catalogWebService.PrepareHomepageManufacturers();
-            if (!model.Any())
-                return Content("");
-
-            return PartialView(model);
-        }
-
-
-        //[ChildActionOnly]
-        public virtual IActionResult ManufacturerNavigation(string currentManufacturerId)
-        {
-            if (_catalogSettings.ManufacturersBlockItemsToDisplay == 0)
-                return Content("");
-
-            var model = _catalogWebService.PrepareManufacturerNavigation(currentManufacturerId);
-            if (!model.Manufacturers.Any())
-                return Content("");
-
-            return PartialView(model);
         }
 
         #endregion
@@ -293,32 +242,9 @@ namespace Grand.Web.Controllers
             return View(model);
         }
 
-        //[ChildActionOnly]
-        public virtual IActionResult VendorNavigation()
-        {
-            if (_vendorSettings.VendorsBlockItemsToDisplay == 0)
-                return Content("");
-
-            var model = _catalogWebService.PrepareVendorNavigation();
-            if (!model.Vendors.Any())
-                return Content("");
-
-            return PartialView(model);
-        }
-
         #endregion
 
         #region Product tags
-
-        //[ChildActionOnly]
-        public virtual IActionResult PopularProductTags()
-        {
-            var model = _catalogWebService.PreparePopularProductTags();
-            if (!model.Tags.Any())
-                return Content("");
-
-            return PartialView(model);
-        }
 
         ////[GrandHttpsRequirement(SslRequirement.No)]
         public virtual IActionResult ProductsByTag(string productTagId, CatalogPagingFilteringModel command)
@@ -355,13 +281,6 @@ namespace Grand.Web.Controllers
             var searchmodel = _catalogWebService.PrepareSearch(model, command);
 
             return View(searchmodel);
-        }
-
-        //[ChildActionOnly]
-        public virtual IActionResult SearchBox()
-        {
-            var model = _catalogWebService.PrepareSearchBox();
-            return PartialView(model);
         }
 
         //[ValidateInput(false)]
