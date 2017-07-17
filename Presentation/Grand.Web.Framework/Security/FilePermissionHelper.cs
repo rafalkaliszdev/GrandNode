@@ -22,8 +22,6 @@ namespace Grand.Web.Framework.Security
         /// <returns>Result</returns>
         public static bool CheckPermissions(string path, bool checkRead, bool checkWrite, bool checkModify, bool checkDelete)
         {
-
-            //tbh
             bool flag = false;
             bool flag2 = false;
             bool flag3 = false;
@@ -33,10 +31,10 @@ namespace Grand.Web.Framework.Security
             bool flag7 = false;
             bool flag8 = false;
             WindowsIdentity current = WindowsIdentity.GetCurrent();
-            //AuthorizationRuleCollection rules;
+            AuthorizationRuleCollection rules;
             try
             {
-                //rules = Directory.GetAccessControl(path).GetAccessRules(true, true, typeof(SecurityIdentifier));
+                rules = new DirectorySecurity(path, AccessControlSections.Access).GetAccessRules(true, true, typeof(SecurityIdentifier));
             }
             catch
             {
@@ -44,80 +42,80 @@ namespace Grand.Web.Framework.Security
             }
             try
             {
-                //foreach (FileSystemAccessRule rule in rules)
-                //{
-                //    if (!current.User.Equals(rule.IdentityReference))
-                //    {
-                //        continue;
-                //    }
-                //    if (AccessControlType.Deny.Equals(rule.AccessControlType))
-                //    {
-                //        if ((FileSystemRights.Delete & rule.FileSystemRights) == FileSystemRights.Delete)
-                //            flag4 = true;
-                //        if ((FileSystemRights.Modify & rule.FileSystemRights) == FileSystemRights.Modify)
-                //            flag3 = true;
+                foreach (FileSystemAccessRule rule in rules)
+                {
+                    if (!current.User.Equals(rule.IdentityReference))
+                    {
+                        continue;
+                    }
+                    if (AccessControlType.Deny.Equals(rule.AccessControlType))
+                    {
+                        if ((FileSystemRights.Delete & rule.FileSystemRights) == FileSystemRights.Delete)
+                            flag4 = true;
+                        if ((FileSystemRights.Modify & rule.FileSystemRights) == FileSystemRights.Modify)
+                            flag3 = true;
 
-                //        if ((FileSystemRights.Read & rule.FileSystemRights) == FileSystemRights.Read)
-                //            flag = true;
+                        if ((FileSystemRights.Read & rule.FileSystemRights) == FileSystemRights.Read)
+                            flag = true;
 
-                //        if ((FileSystemRights.Write & rule.FileSystemRights) == FileSystemRights.Write)
-                //            flag2 = true;
+                        if ((FileSystemRights.Write & rule.FileSystemRights) == FileSystemRights.Write)
+                            flag2 = true;
 
-                //        continue;
-                //    }
-                //    if (AccessControlType.Allow.Equals(rule.AccessControlType))
-                //    {
-                //        if ((FileSystemRights.Delete & rule.FileSystemRights) == FileSystemRights.Delete)
-                //        {
-                //            flag8 = true;
-                //        }
-                //        if ((FileSystemRights.Modify & rule.FileSystemRights) == FileSystemRights.Modify)
-                //        {
-                //            flag7 = true;
-                //        }
-                //        if ((FileSystemRights.Read & rule.FileSystemRights) == FileSystemRights.Read)
-                //        {
-                //            flag5 = true;
-                //        }
-                //        if ((FileSystemRights.Write & rule.FileSystemRights) == FileSystemRights.Write)
-                //        {
-                //            flag6 = true;
-                //        }
-                //    }
-                //}
-                //foreach (IdentityReference reference in current.Groups)
-                //{
-                //    foreach (FileSystemAccessRule rule2 in rules)
-                //    {
-                //        if (!reference.Equals(rule2.IdentityReference))
-                //        {
-                //            continue;
-                //        }
-                //        if (AccessControlType.Deny.Equals(rule2.AccessControlType))
-                //        {
-                //            if ((FileSystemRights.Delete & rule2.FileSystemRights) == FileSystemRights.Delete)
-                //                flag4 = true;
-                //            if ((FileSystemRights.Modify & rule2.FileSystemRights) == FileSystemRights.Modify)
-                //                flag3 = true;
-                //            if ((FileSystemRights.Read & rule2.FileSystemRights) == FileSystemRights.Read)
-                //                flag = true;
-                //            if ((FileSystemRights.Write & rule2.FileSystemRights) == FileSystemRights.Write)
-                //                flag2 = true;
-                //            continue;
-                //        }
-                //        if (AccessControlType.Allow.Equals(rule2.AccessControlType))
-                //        {
-                //            if ((FileSystemRights.Delete & rule2.FileSystemRights) == FileSystemRights.Delete)
-                //                flag8 = true;
-                //            if ((FileSystemRights.Modify & rule2.FileSystemRights) == FileSystemRights.Modify)
-                //                flag7 = true;
-                //            if ((FileSystemRights.Read & rule2.FileSystemRights) == FileSystemRights.Read)
-                //                flag5 = true;
-                //            if ((FileSystemRights.Write & rule2.FileSystemRights) == FileSystemRights.Write)
-                //                flag6 = true;
-                //        }
-                //    }
-                //}
+                        continue;
+                    }
+                    if (AccessControlType.Allow.Equals(rule.AccessControlType))
+                    {
+                        if ((FileSystemRights.Delete & rule.FileSystemRights) == FileSystemRights.Delete)
+                        {
+                            flag8 = true;
+                        }
+                        if ((FileSystemRights.Modify & rule.FileSystemRights) == FileSystemRights.Modify)
+                        {
+                            flag7 = true;
+                        }
+                        if ((FileSystemRights.Read & rule.FileSystemRights) == FileSystemRights.Read)
+                        {
+                            flag5 = true;
+                        }
+                        if ((FileSystemRights.Write & rule.FileSystemRights) == FileSystemRights.Write)
+                        {
+                            flag6 = true;
+                        }
+                    }
+                }
+                foreach (IdentityReference reference in current.Groups)
+                {
+                    foreach (FileSystemAccessRule rule2 in rules)
+                    {
+                        if (!reference.Equals(rule2.IdentityReference))
+                        {
+                            continue;
+                        }
+                        if (AccessControlType.Deny.Equals(rule2.AccessControlType))
+                        {
+                            if ((FileSystemRights.Delete & rule2.FileSystemRights) == FileSystemRights.Delete)
+                                flag4 = true;
+                            if ((FileSystemRights.Modify & rule2.FileSystemRights) == FileSystemRights.Modify)
+                                flag3 = true;
+                            if ((FileSystemRights.Read & rule2.FileSystemRights) == FileSystemRights.Read)
+                                flag = true;
+                            if ((FileSystemRights.Write & rule2.FileSystemRights) == FileSystemRights.Write)
+                                flag2 = true;
+                            continue;
+                        }
+                        if (AccessControlType.Allow.Equals(rule2.AccessControlType))
+                        {
+                            if ((FileSystemRights.Delete & rule2.FileSystemRights) == FileSystemRights.Delete)
+                                flag8 = true;
+                            if ((FileSystemRights.Modify & rule2.FileSystemRights) == FileSystemRights.Modify)
+                                flag7 = true;
+                            if ((FileSystemRights.Read & rule2.FileSystemRights) == FileSystemRights.Read)
+                                flag5 = true;
+                            if ((FileSystemRights.Write & rule2.FileSystemRights) == FileSystemRights.Write)
+                                flag6 = true;
+                        }
+                    }
+                }
                 bool flag9 = !flag4 && flag8;
                 bool flag10 = !flag3 && flag7;
                 bool flag11 = !flag && flag5;
@@ -180,7 +178,7 @@ namespace Grand.Web.Framework.Security
             var filesToCheck = new List<string>();
             filesToCheck.Add(Path.Combine(rootDir, "Global.asax"));
             filesToCheck.Add(Path.Combine(rootDir, "web.config"));
-            filesToCheck.Add(Path.Combine(rootDir,"App_Data\\InstalledPlugins.txt"));
+            filesToCheck.Add(Path.Combine(rootDir, "App_Data\\InstalledPlugins.txt"));
             filesToCheck.Add(Path.Combine(rootDir, "App_Data\\Settings.txt"));
             return filesToCheck;
         }

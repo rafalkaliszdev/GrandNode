@@ -321,6 +321,10 @@ namespace Grand.Web.ViewComponents
             if (!products.Any())
                 return Content("");
 
+            //2017_07_14 18:52
+            //boulder
+            //you can start here
+
             //prepare model
             var model = new List<ProductOverviewModel>();
             model.AddRange(_productWebService.PrepareProductOverviewModels(products,

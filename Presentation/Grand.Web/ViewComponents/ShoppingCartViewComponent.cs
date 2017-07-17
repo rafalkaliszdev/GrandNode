@@ -186,8 +186,7 @@ namespace Grand.Web.ViewComponents
                 return Content("");
 
             var model = _shoppingCartWebService.PrepareMiniShoppingCart();
-
-            //return View("/Views/Shared/Components/ShoppingCart/FlyoutShoppingCart.cshtml", model);
+            
             return View(nameof(this.FlyoutShoppingCart), model);
         }
 
